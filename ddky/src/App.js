@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import './App.css';
-import './清除默认样式.css';
+import './css/App.css';
+import './css/清除默认样式.css';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import Ddky from './pages/ddky';
 import Ddsc from './pages/ddsc';

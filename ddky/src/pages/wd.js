@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../wd.css';
+import '../css/wd.css';
 
 
 
