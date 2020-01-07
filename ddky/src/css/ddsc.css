@@ -1,0 +1,545 @@
+html {
+    font-size: 13.4vw;
+}
+
+body {
+
+    font-size: 16px;
+}
+
+html,
+body {
+
+    height: 100%;
+
+}
+
+.box {
+    width: 100%;
+    height: 100%;
+    background: #f5f5f5;
+}
+
+header {
+    /* height: 100%; */
+    height: 1.1rem;
+    display: block;
+
+}
+
+.headerb1 {
+
+    height: 1.1rem;
+    width: 7.5rem;
+    padding: 0 .3rem;
+    line-height: .9rem;
+    background-color: #e94544;
+    position: fixed;
+    top: 0;
+    z-index: 1111;
+    display: -webkit-box;
+}
+
+.addrbox {
+    width: 3rem;
+    height: .9rem;
+    text-align: left;
+    margin-top: .1rem;
+}
+
+.search {
+    position: relative;
+    height: .56rem;
+    margin-top: .3rem;
+}
+
+.position_addr {
+    max-width: 2.3rem;
+    height: .9rem;
+    line-height: .9rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: .3rem;
+    color: #fff;
+    vertical-align: middle;
+    margin-left: .08rem;
+    display: inline-block;
+    text-align: left;
+}
+
+.addrbox-img1 {
+
+    height: .3rem;
+    vertical-align: middle;
+    margin-right: .1rem;
+    text-align: left;
+    line-height: .9rem;
+}
+
+.addrbox-img2 {
+    width: .14rem;
+    height: .24rem;
+    vertical-align: middle;
+    margin-right: .1rem;
+    text-align: left;
+    line-height: .9rem;
+}
+
+.search-input1 {
+    width: 4rem;
+    height: .54rem;
+    border-radius: .4rem;
+    font-size: .24rem;
+    padding-left: .75rem;
+    vertical-align: middle;
+    background-color: #fff;
+    border: none;
+    color: #8e8e93;
+    text-align: left;
+    margin-bottom: .5rem;
+    line-height: .54rem;
+}
+
+.search-img1 {
+    width: .3rem;
+    height: .3rem;
+    vertical-align: middle;
+    position: absolute;
+    top: .12rem;
+    left: .3rem;
+}
+
+.lunbo {
+
+    width: 100%;
+    height: 2.4rem;
+    background: wheat;
+}
+
+.advicebox {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+}
+
+main {
+    background: #f5f5f5;
+}
+
+.advicebox img {
+    width: 25%;
+    /* background: yellowgreen; */
+}
+
+.main2 {
+    width: 100%;
+    height: 3.58rem;
+    /* background: yellowgreen; */
+    overflow: auto;
+}
+
+.main2-1 {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    height: 3.58rem;
+    width: 10.6rem;
+    /* background: #e94544; */
+}
+
+.main2-1 img {
+
+    width: 1.5rem;
+    height: 50%;
+    /* background: yellow; */
+}
+
+.main3 {
+    margin-top: 0.2rem;
+
+}
+
+.main3-1 {
+    width: 100%;
+    background-color: #fff;
+    position: relative;
+    margin-top: .2rem;
+}
+
+.main3-2 {
+    content: "\20";
+    display: block;
+    clear: both;
+    margin-top: .2rem;
+}
+
+.main3-3 {
+    line-height: 100%;
+    font-size: 12px;
+}
+
+.timer {
+
+    height: .75rem;
+}
+
+.countdown {
+
+    float: right;
+    font-size: .23rem;
+    color: #000;
+    position: absolute;
+    top: .13rem;
+    left: .2rem;
+    display: -webkit-inline-box;
+    line-height: .44rem;
+}
+
+.timermiaosha {
+    font-size: .32rem;
+    line-height: .44rem;
+    font-weight: 700;
+    color: #333;
+    margin-right: .1rem;
+
+}
+
+.countdown span {
+    height: .29rem;
+    line-height: .29rem;
+    text-align: center;
+    color: #fff;
+    background-color: #000;
+    font-size: .2rem;
+    margin: 0 .02rem;
+    padding: .02rem .1rem;
+    vertical-align: baseline;
+    border-radius: .04rem;
+    display: inline-block;
+}
+
+.main3-1a {
+
+    width: 100%;
+    background-color: #fff;
+    font-size: 0;
+    overflow-x: scroll;
+    display: -webkit-inline-box;
+    content: "\20";
+
+    clear: both;
+}
+
+.main3-1a1 {
+    width: 2.1rem;
+    border-top: .5px solid #efefef;
+    border-right: .5px solid #efefef;
+    background-color: #fff;
+    padding-bottom: .2rem;
+
+}
+
+.main3-1a1 img {
+    width: 1.68rem;
+    height: 1.68rem;
+    margin: .21rem;
+    float: left !important;
+}
+
+.main3-1a1m {
+
+    width: 1.6rem;
+    margin-left: .25rem;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    color: #333;
+    font-size: .24rem;
+    line-height: .3rem;
+    height: .6rem;
+    text-align: center;
+}
+
+.xianjia {
+    line-height: .44rem;
+    font-size: .32rem;
+    color: #e94544;
+    text-align: center;
+    margin-top: .1rem;
+
+}
+
+.yuanjia {
+    line-height: .3rem;
+    font-size: .24rem;
+    color: #888;
+    text-align: center;
+    text-decoration: line-through;
+
+}
+
+.xianjia span {
+    line-height: .44rem;
+    font-size: .32rem;
+    color: #e94544;
+    text-align: center;
+}
+
+.yuanjia span {
+    line-height: .3rem;
+    font-size: .24rem;
+    color: #888;
+    text-align: center;
+
+}
+
+.z1y2 {
+    position: relative;
+
+}
+
+.z1y2-1 {
+    height: 3.5rem;
+    vertical-align: middle;
+    width: 3.75rem;
+}
+
+.z1y2-2 {
+
+    height: 1.75rem;
+    vertical-align: middle;
+    position: absolute;
+    right: 0;
+    width: 3.75rem;
+}
+
+.z1y2-3 {
+
+    top: 1.75rem;
+}
+
+.pinpaititle {
+    height: .8rem;
+    line-height: .8rem;
+    color: #333;
+    font-size: .32rem;
+    text-align: center;
+    background-color: #fff;
+    font-weight: 700;
+
+}
+
+.main3-3-1 {
+    width: auto;
+    height: 2.4rem;
+
+}
+
+.main3-3-1 img {
+
+    height: 100%;
+    width: 100%;
+}
+
+.main3-3-2 {
+    width: 100%;
+    background-color: #fff;
+    font-size: 0;
+    overflow-x: scroll;
+    display: -webkit-inline-box;
+    content: "\20";
+    clear: both;
+}
+
+.brandCard {
+    width: 2.1rem;
+    border-top: .5px solid #efefef;
+    border-right: .5px solid #efefef;
+    background-color: #fff;
+    padding-bottom: .2rem;
+    position: relative;
+}
+
+.brandCard img {
+    width: 1.68rem;
+    height: 1.68rem;
+    margin: .21rem;
+    float: left !important;
+}
+
+.brandName {
+    width: 1.6rem;
+    margin-left: .25rem;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    color: #333;
+    font-size: .24rem;
+    line-height: .3rem;
+    height: .6rem;
+    text-align: center;
+}
+
+.main4 {
+
+    width: 100%;
+    background-color: #fff;
+    content: "\20";
+    clear: both;
+    margin-top: .3rem;
+}
+
+.ulDad {
+    width: 100%;
+    line-height: .85rem;
+    height: .85rem;
+    overflow: hidden;
+    border-bottom: 1px solid #eee;
+    overflow-x: auto;
+
+}
+
+.ulDadul {
+    line-height: .85rem;
+    height: .85rem;
+    padding-left: .2rem;
+    width: 646px;
+    list-style: none;
+}
+
+.ulDadul li {
+    display: block;
+    float: left;
+    padding-right: .6rem;
+    font-size: .24rem;
+    line-height: .85rem;
+}
+
+.ulDadul li span {
+
+    display: block;
+    font-size: .28rem;
+}
+
+.active {
+    color: #333;
+    font-weight: 700;
+
+}
+
+.imgList {
+    width: 100%;
+    font-size: 0;
+    background: #efeff4;
+
+}
+.b2cdrugbox{
+
+    width: 100%;
+}
+.imgListBox {
+    width: 100%;
+    height: 3.08rem;
+    background: #fff;
+    padding: .3rem;
+    margin-bottom: .2rem;
+    content: "\20";
+    clear: both;
+    box-sizing: border-box;
+}
+
+.imgPreBox {
+    margin-right: .25rem;
+    width: 3.36rem;
+    height: 2.48rem;
+    display: block;
+    float: left !important;
+}
+
+.infoBox {
+    float: right !important;
+    position: relative;
+    height: 2.48rem;
+}
+
+.name {
+    width: 3.24rem;
+    font-size: .24rem;
+    color: #333;
+    margin-bottom: .1rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-height: .32rem;
+    font-weight: 500;
+}
+
+.sign {
+    padding: 0 .1rem;
+    text-align: center;
+    line-height: .32rem;
+    color: #fff;
+    background-color: #f5a623;
+    vertical-align: middle;
+    border-radius: .04rem;
+    font-size: .2rem;
+    display: inline-block;
+}
+
+.zhuzhi_info {
+    width: 3.24rem;
+    font-size: .24rem;
+    color: #888;
+    margin-bottom: .1rem;
+    line-height: .32rem;
+    position: relative;
+    max-height: .64rem;
+    overflow: hidden;
+
+}
+
+.promotion {
+    height: .34rem;
+    padding: 0 .1rem;
+    color: #e94544;
+    border: 1px solid #e94544;
+    font-size: .2rem;
+    line-height: .3rem;
+    margin-right: .1rem;
+    margin-top: .04rem;
+    border-radius: 2px;
+    display: inline-block;
+
+}
+
+.goods_buyBox {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    content: "\20";
+    clear: both;
+}
+.f1{
+    float: left !important;
+}
+.setmeal {
+    font-size: .32rem;
+    line-height: .5rem;
+    height: .44rem;
+    color: #e94544;
+    margin-right: .2rem;
+    
+}
+.sales{
+        color: #888;
+        font-size: .2rem;
+        line-height: .5rem;
+        height: .44rem;
+        text-decoration: line-through;
+}
