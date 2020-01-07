@@ -4,7 +4,7 @@
     width: 7.5rem;
     height: 100%;
     margin: 0 auto;
-    padding-top: 1.09rem;;
+    padding-top: .8rem;;
     position: relative;
     text-align: left;
 }
@@ -20,19 +20,22 @@
     transform: translateX(-3.75rem);
     background-color: #fff;
     display: -webkit-box;
+    position: fixed;
+    top: 0;
+    z-index: 1;
 }
 
 .header_cl .home{
     width: .48rem;
 }
 
-.home .pct1{
+.pct1{
     width: 100%;
     margin-top: .05rem;
     margin-left: 25%;
 }
 
-.header_cl .headerLeft{
+.headerLeft{
     width: 5.6rem;
     height: .56rem;
     background-color: #ebebeb;
@@ -40,13 +43,13 @@
     padding-left: .3rem;
     margin-left: .25rem;
 }
-.headerLeft .serch{
+.serch{
     height: .32rem;
     vertical-align: middle;
     margin-right: .1rem;
 }
 
-.headerLeft .ipt1{
+.ipt1{
     width: 4.5rem;
     height: .56rem;
     vertical-align: middle;
@@ -56,14 +59,14 @@
     line-height: .56rem;
 }
 
-.headerLeft .qiehuan{
+.qiehuan{
     width: .44rem;
     position: absolute;
     right: .2rem;
     top: 0.2556rem;
 }
 
-.qiehuan .imgqq{
+.imgqq{
     width: 100%;
 }
 
@@ -78,14 +81,16 @@
 
 .navList_in{
     width: 100%;
+    position: fixed;
+    top: .9rem;
+    z-index: 1;
 }
 .navList_in .ol{
-    height: 100%;
     overflow: hidden;
     display: -webkit-box;
     background-color: #fff;
     width: 7.5rem;
-
+    margin-bottom: .1rem;
 }
 .ol .lio{
     text-align: center;
@@ -107,12 +112,16 @@
 }
 .items_s .cl{
     width: 100%;
-    padding: .3rem 0;
-    height: 2.8rem;
+    padding: .1rem 0;
+    height: 3.1rem;
     border-bottom: 1px solid #eee;
     content: "\20";
     display: block;
     clear: both;
+    background: #fff;
+}
+dl{
+    margin-bottom: .03rem;
 }
 .cl .fl{
     width: 2.04rem;
@@ -190,9 +199,12 @@
     content: "\20";
     display: block;
     clear: both;
+    position: relative;
 }
-.goods_buyBox .aboutLeft{
+.aboutLeft{
     float: left!important;
+    display: flex;
+    justify-content: flex-start;
 }
 .aboutLeft .setmeal{
     font-size: .32rem;

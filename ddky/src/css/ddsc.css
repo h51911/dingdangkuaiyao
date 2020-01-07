@@ -407,7 +407,7 @@ main {
     line-height: .85rem;
     height: .85rem;
     padding-left: .2rem;
-    width: 646px;
+    width: 15.2rem;
     list-style: none;
 }
 
@@ -527,6 +527,18 @@ main {
 }
 .f1{
     float: left !important;
+}
+.addCarbox{
+    width: .5rem;
+    height: .5rem;
+    float: right !important;
+    box-sizing: border-box;
+
+}
+.addCarImg{
+width: .48rem;
+height: .48rem;
+
 }
 .setmeal {
     font-size: .32rem;

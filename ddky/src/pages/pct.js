@@ -1,13 +1,32 @@
 import React,{Component} from "react";//引入库
 import "../css/pct.css";//引入css
+import axios from 'axios';
 class Pct extends Component{
     // 初始化
-    constructor(){  
-        super();
+    state = {
+        data: {
+
+        }
+
     }
 
+
+
+async componentDidMount() {
+
+    let {
+        data
+    } = await axios.get("http://localhost:1911/login/lbsuoyou");
+    //    console.log(data[0])
+    this.setState({
+        data: data[0]
+
+    })
+    console.log(this.state.data);
+}
     // 渲染
     render(){
+        let {xiagqing}=this.state.data;
         return(
             <section id="Pct">
                 {/* 头部 */}
@@ -35,31 +54,38 @@ class Pct extends Component{
                     </div>
                     <div className="item_one">
                         <div className="items_s">
-                            <dl className="cl">
+                            
+                            
+                            {
+                    // console.log(indexlb[0])
+                    xiagqing ? xiagqing.map((item, idx) => (
+                            
+                    <dl className="cl">
                                 <dt className="fl">
-                                    <img src="image/z_1.jpg" className="z_img"/>
+                                    <img src={item.xurl} className="z_img"/>
                                 </dt>
                                 <dd className="goodsInfo_fr">
                                     <h3 className="h3">
                                         <span className="sign">28分钟</span>
-                                        [仁和]感冒清热颗粒
+                                        {item.xname}
                                     </h3>
                                     <p className="zhuzhi_info">
-                    疏风散寒，解表清热。用于风寒感冒，头痛发热，恶寒身痛，鼻流清涕，咳嗽咽干。
+                                    {item.xtitle}
                                     </p>
                                     <p className="other2">
-                                    12gx8袋
+                                    {item.xliang}
                                     </p>
                                     <div className="goods_buyBox">
                                         <div className="aboutLeft">
                                             <p className="setmeal">
-                                            ￥9.90
+                                            {item.xjiage}
                                             </p>
                                             <p className="sales">
-                                            月售11510笔
+                                            {item.xxiangliang}
                                             </p>
                                         </div>
-                                        <img src="image/cart4.png" className="cars" />
+                                        < img src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAACfUExURUxpcexLS+xFRelFRelFRP9VVetGRulFROpFRelFROlFRP9MTOpFRepFROlFROtHROlFROlFRfBLS+pFRP9VVelFRP///+1nZvzr6+1qafzp6fWurulKSfCCgfrV1f319f79/fGLiupQT+tcW/jHx+tVVPnMzO93dvvd3e5vb/vh4Pa6ufzm5uxhYPSgoPe/vv3y8vSnpvOamf74+PKTkmBE4BQAAAAVdFJOUwAbN8v5A2bmXvbsCnzb8k6vjxG3CVdyowAAAAHXSURBVHjapdZpd6owEAbg1AWEKqvvtIrsouCu7f//be255jbBRDken8/MSTITZsIUU9cPJ/ZgYE9C352yDsHIsyCxvFHA7nsfO1A443emNzRMaJnGkGm89XFX/40peiYeMHvsxsjCQ9bo5nt0akX0LHSyetJ5TaCb+XfyYR/AkbI6xkP9/9k18GtFRNkaDxm8vtcNFeWKVh2butZ8DC6mFFjOVZuowD9j9itwwJVEZZGSDl/aCdolSClG8aHKifaiGB7+JHSAVkY8HR5jU6lmES2hsycqefWmzIWQ0w4Kng3OZT6EhrIFNM6UgPNZCKEg+oDGkiJwIZtAcqIYGp+Ug5swG+hKUyUtbLMBJFvaQrWWjjZoB1wogepCNUSAreRPcZTWtdnkpkIVJEU5W8eHjHKIQ4eQLDJqUOWXc3RcJbtTRlfJAiKtPmQ7ylGTkM7r1fFbqqbPXKVE+XIbHb7zdbOvoHD55VOvn4pfPua10/QVzxRiS95tD1vUpLFpdbPAgaSK6rkiAucErSbQbSy3GW49P8WQRF9JedNmmAHJhiiF0BCJn8EQrfJuwEwK6A91zbjZfcaQnNOkEs34uXb/7EB5bWR1D8XXxm73YH/y6fDS4+Tp588PcLqdUFOb62QAAAAASUVORK5CYII="
+                                        className = "cars" / >
                                     </div>
                                     <div className="prootiomBox2">
                                         <div className="fls">
@@ -87,6 +113,22 @@ class Pct extends Component{
 
                                 </dd>
                             </dl>
+
+                  )): ''
+                  }
+
+
+
+
+
+
+
+
+
+
+
+
+
                         </div>
                     </div>
 
