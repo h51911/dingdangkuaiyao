@@ -7,6 +7,7 @@ import Ddsc from './pages/ddsc';
 import Qdlb from './pages/qdlb';
 import Wd from './pages/wd';
 
+
 class App extends Component {
   state = {
     current: "/ddky",
@@ -55,6 +56,17 @@ class App extends Component {
       menu: aa
     })
   }
+   componentDidMount() {
+     let aa = this.state.menu.map(item => {
+       if (item.path === this.props.location.pathname) {
+         item.isok = true;
+       }
+       return item;
+     })
+     this.setState({
+       menu: aa
+     })
+   }
   render() {
     return (
       <>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../css/ddsc.css';
-
+import { Carousel } from 'antd';
+import 'antd/dist/antd.css';
 class Ddsc extends Component {
 
     constructor(){
@@ -29,7 +30,37 @@ class Ddsc extends Component {
                         </div>
                     </header>
                     <main>
-            <div className="lunbo"></div>
+            <div className="lunbo">
+                <Carousel autoplay>
+                    <div>
+                    < img src = "https://img.ddky.com/c/cms/temp/20191225/1577271987660_1080_345.jpg"
+                    alt = "" / >
+                    </div>
+                    <div>
+                    < img src = "https://img.ddky.com/c/cms/temp/20200106/1578276582900_1080_345.jpg" / >
+                    </div>
+                     <div>
+                    < img src = "https://img.ddky.com/c/cms/temp/20191225/1577244371624_1080_345.jpg" / >
+                    </div>
+                     <div>
+                    < img src = "https://img.ddky.com/c/cms/temp/20200103/1578028253658_1080_345.jpg" / >
+                    </div>
+                     <div>
+                    < img src = "https://img.ddky.com/c/cms/temp/20200103/1578020897997_1080_345.jpg" / >
+                    </div>
+                     <div>
+                    < img src = "https://img.ddky.com/c/cms/temp/20200102/1577959295113_1080_345.jpg" / >
+                    </div>
+                     <div>
+                    < img src = "https://img.ddky.com/c/cms/temp/20191227/1577423237571_1080_345.jpg" / >
+                    </div>
+                     <div>
+                    < img src = "https://img.ddky.com/c/cms/temp/20191231/1577781337023_1080_345.jpg" / >
+                    </div>
+                 </Carousel>
+
+                
+            </div>
             <div className="main1">
                 <div className="advicebox">
                     <img src="https://img.ddky.com/c/cms/temp/20190911/1568195178317_270_252.jpg" alt=""/>
