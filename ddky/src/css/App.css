@@ -62,7 +62,11 @@ body {
   height: 100%;
   display: block;
 }
+<<<<<<< HEAD
 
 .yingchang p {
+=======
+.yingchang p{
+>>>>>>> cb73aa0acf6e892f72437d8047b744f7cce8498e
   margin-bottom: .1rem !important;
 }

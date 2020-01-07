@@ -6,6 +6,9 @@ import Ddky from './pages/ddky';
 import Ddsc from './pages/ddsc';
 import Qdlb from './pages/qdlb';
 import Wd from './pages/wd';
+import Reg from './pages/reg';
+import Pct from './pages/pct';
+import Login from './pages/login';
 
 
 class App extends Component {
@@ -77,6 +80,9 @@ class App extends Component {
               <Route path='/ddsc' component={Ddsc} />
               <Route path='/qdlb' component={Qdlb} />
               <Route path='/wd' component={Wd} />
+              <Route path='/pct' component={Pct} />
+              <Route path='/reg' component={Reg} />
+              <Route path='/login' component={Login} />
               <Redirect to="/ddky" />
             </Switch>
           </div>
