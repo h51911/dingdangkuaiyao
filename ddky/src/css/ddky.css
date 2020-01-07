@@ -1,0 +1,109 @@
+.zong{
+    width:100%;
+    height: 100%;
+    display: flex;
+}
+.head{
+    background-color: #e94544;
+    background: -webkit-gradient(linear,0 0,0 100%,from(#f77062),to(#fe5164));
+    height: 2.6rem;
+    line-height: .9rem;
+    padding: 0 .2rem;
+    box-shadow: 0 2px 4px 0 rgba(250,69,69,.5);
+}
+.headtop{
+    height: .8rem;
+    margin-top: .2rem;
+    position: relative;
+}
+.headtop .addrBox2{
+    max-width: 3.9rem;
+    height: .9rem;
+    text-align: left;
+}
+.headtop .addrBox2 img{
+    height: .3rem;
+    vertical-align: middle;
+    margin-right: .1rem;
+}
+.headtop .addrBox2 span{
+    font-size: .4rem;
+    font-weight: 400;
+    color: #fff;
+}
+.headtop .addrBox2 span img{
+   width: .2rem;
+   height: .2rem;
+}
+.searchBox2{
+   color: #2c3e50;
+   position: relative;
+    height: .68rem;
+    margin-top: .1rem;
+    width: 100%;
+}
+.searchBox2 input {
+    width: 90%;
+    height: .68rem;
+    border-radius: .1rem;
+    font-size: .24rem;
+    padding-left: .7rem;
+    vertical-align: middle;
+    background-color: #fff;
+    border: none;
+    color: #8e8e93;
+    text-align: left;
+    margin-bottom: .5rem;
+    line-height: .68rem;
+}
+.searchBox2 span{
+    position: absolute;
+    left: .1rem;
+    top: -.13rem;
+
+}
+.searchBox2 span img{
+    width: .4rem;
+    height: .4rem;
+}
+.hotsearch{
+    height: .3rem;
+    font-size: .24rem;
+    margin-top: .3rem;
+}
+.hotsearch ul {
+    display: flex;
+    color: #fff;
+    height: .3rem;
+    line-height: .3rem;
+    overflow: hidden;
+    padding-left: .2rem;
+} 
+.hotsearch ul li{
+    margin-right: .43rem;
+}
+.drugList{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 14px;
+}
+.drugList li{
+    width: 25%;
+    text-align: center;
+    margin: .3rem 0;
+}
+.drugList li p{
+    margin-top: .1rem;
+}
+.priceBox{
+    height: .87rem;
+    line-height: .87rem;
+    background: -webkit-gradient(linear,0 0,0 100%,from(#f77062),to(#fe5164));
+    text-align: center;
+    border-radius: 5px;
+    padding: 0 .2rem;
+    color: #fff;
+    display: flex;
+}
+

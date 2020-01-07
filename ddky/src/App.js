@@ -6,7 +6,7 @@ import Ddky from './pages/ddky';
 import Ddsc from './pages/ddsc';
 import Qdlb from './pages/qdlb';
 import Wd from './pages/wd';
-
+import 'antd/dist/antd.css'
 class App extends Component {
   state = {
     current: "/ddky",
@@ -39,6 +39,17 @@ class App extends Component {
       image2: 'image/8.jpg',
       isok: false
     }]
+  }
+  componentDidMount() {
+    let aa = this.state.menu.map(item => {
+      if (item.path === this.props.location.pathname) {
+        item.isok = true;
+      }
+      return item;
+    })
+    this.setState({
+      menu: aa
+    })
   }
   qiehuan = (inx, path) => {
     this.props.history.push(path)
