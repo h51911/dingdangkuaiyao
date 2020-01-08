@@ -9,9 +9,6 @@ class Pct extends Component{
         }
 
     }
-
-
-
 async componentDidMount() {
 
     let {
@@ -60,7 +57,7 @@ async componentDidMount() {
                     // console.log(indexlb[0])
                     xiagqing ? xiagqing.map((item, idx) => (
                             
-                    <dl className="cl">
+                    <dl className="cl" key={idx}>
                                 <dt className="fl">
                                     <img src={item.xurl} className="z_img"/>
                                 </dt>
@@ -116,19 +113,6 @@ async componentDidMount() {
 
                   )): ''
                   }
-
-
-
-
-
-
-
-
-
-
-
-
-
                         </div>
                     </div>
 
