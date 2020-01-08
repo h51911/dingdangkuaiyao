@@ -133,46 +133,46 @@ class Ddsc extends Component {
             <div className="main2">
                 <div className="main2-1">
                     <img src="https://img.ddky.com/c/cms/temp/20191112/1573524106331_216_252.jpg" alt="" onClick={()=>{
-                        history.push('/pct/')
+                        history.push('/ddscxq/')
                     }}/>
                     <img src="https://img.ddky.com/c/cms/temp/20191123/1574501760060_216_252.jpg" alt="" onClick={()=>{
-                        history.push('/pct/')
+                        history.push('/ddscxq/')
                     }}/>
                     <img src="https://img.ddky.com/c/cms/temp/20191011/1570775807773_216_252.jpg" alt="" onClick={()=>{
-                        history.push('/pct/')
+                        history.push('/ddscxq/')
                     }}/>
                     <img src="https://img.ddky.com/c/cms/temp/20191011/1570775822234_216_252.jpg" alt="" onClick={()=>{
-                        history.push('/pct/')
+                        history.push('/ddscxq/')
                     }}/>
                     <img src="https://img.ddky.com/c/cms/temp/20191011/1570792013133_216_252.jpg" alt="" onClick={()=>{
-                        history.push('/pct/')
+                        history.push('/ddscxq/')
                     }}/>
                     <img src="https://img.ddky.com/c/cms/temp/20190628/1561687452768_216_252.jpg" alt="" onClick={()=>{
-                        history.push('/pct/')
+                        history.push('/ddscxq/')
                     }}/>
                     <img src="https://img.ddky.com/c/cms/temp/20190628/1561691530711_216_252.jpg" alt="" onClick={()=>{
-                        history.push('/pct/')
+                        history.push('/ddscxq/')
                     }}/>
                     <img src="https://img.ddky.com/c/cms/temp/20190813/1565680344127_216_252.jpg" alt="" onClick={()=>{
-                        history.push('/pct/')
+                        history.push('/ddscxq/')
                     }}/>
                     <img src="https://img.ddky.com/c/cms/temp/20191011/1570775840587_216_252.jpg" alt="" onClick={()=>{
-                        history.push('/pct/')
+                        history.push('/ddscxq/')
                     }}/>
                     <img src="https://img.ddky.com/c/cms/temp/20191011/1570792032169_216_252.jpg" alt="" onClick={()=>{
-                        history.push('/pct/')
+                        history.push('/ddscxq/')
                     }}/>
                     <img src="https://img.ddky.com/c/cms/temp/20191011/1570775847004_216_252.jpg" alt="" onClick={()=>{
-                        history.push('/pct/')
+                        history.push('/ddscxq/')
                     }}/>
                     <img src="https://img.ddky.com/c/cms/temp/20190813/1565680307399_216_252.jpg" alt="" onClick={()=>{
-                        history.push('/pct/')
+                        history.push('/ddscxq/')
                     }}/>
                     <img src="https://img.ddky.com/c/cms/temp/20191011/1570792021422_216_252.jpg" alt="" onClick={()=>{
-                        history.push('/pct/')
+                        history.push('/ddscxq/')
                     }}/>
                     <img src="https://img.ddky.com/c/cms/temp/20190628/1561687568434_216_252.jpg" alt="" onClick={()=>{
-                        history.push('/pct/')
+                        history.push('/ddscxq/')
                     }}/>
                 </div>
             </div>
@@ -290,7 +290,7 @@ class Ddsc extends Component {
                     indexlb ? indexlb[0].map((item, idx) => (
                             
                     <div className="b2cdrugbox" key={idx} onClick={()=>{
-                        history.push('/pct/'+item)
+                        history.push('/ddscxq/'+item)
                     }}>
                         <div className="imgListBox">
                             <img src={item.nxjkurl} alt="" className="imgPreBox"/>
