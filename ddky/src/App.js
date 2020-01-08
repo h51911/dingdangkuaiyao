@@ -45,6 +45,17 @@ class App extends Component {
       isok: false
     }]
   }
+  componentDidMount() {
+    let aa = this.state.menu.map(item => {
+      if (item.path === this.props.location.pathname) {
+        item.isok = true;
+      }
+      return item;
+    })
+    this.setState({
+      menu: aa
+    })
+  }
   qiehuan = (inx, path) => {
     this.props.history.push(path)
     let aa = this.state.menu.map((item, idx) => {
@@ -59,20 +70,18 @@ class App extends Component {
     this.setState({
       menu: aa
     })
-  };
-  componentDidMount() {
-    // console.log(this.props.location.pathname)
-    let aa = this.state.menu.map(item => {
-      if (item.path === this.props.location.pathname) {
-        item.isok = true;
-      }
-      return item;
-    })
-    this.setState({
-      menu: aa
-    })
-  };
-
+  }
+   componentDidMount() {
+     let aa = this.state.menu.map(item => {
+       if (item.path === this.props.location.pathname) {
+         item.isok = true;
+       }
+       return item;
+     })
+     this.setState({
+       menu: aa
+     })
+   }
   render() {
     return (
       <>
