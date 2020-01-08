@@ -22,9 +22,11 @@ body {
   width: 100%;
   flex: 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
   overflow: auto;
-=======
->>>>>>> bd678b3cbd934788e975fd45a18fa4361cba8ded
+
+  overflow: auto;
+
 }
 .bottom{
   height: 1rem;

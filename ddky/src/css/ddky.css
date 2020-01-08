@@ -6,10 +6,10 @@
 .head{
     background-color: #e94544;
     background: -webkit-gradient(linear,0 0,0 100%,from(#f77062),to(#fe5164));
-    height: 2.6rem;
+    height:1.2rem;
     line-height: .9rem;
     padding: 0 .2rem;
-    box-shadow: 0 2px 4px 0 rgba(250,69,69,.5);
+  
 }
 .headtop{
     height: .8rem;
@@ -21,10 +21,25 @@
     height: .9rem;
     text-align: left;
 }
+.ycss{
+    width: .5rem;
+    height: .5rem;
+    float: right;
+    margin-right: -3.1rem;
+}
+.ycss img{
+    width: 100% !important;
+    height: 100% !important;
+}
 .headtop .addrBox2 img{
     height: .3rem;
     vertical-align: middle;
     margin-right: .1rem;
+    margin-top: -.15rem;
+}
+.headtop .addrBox2 .diandian{
+    margin-top: 0rem;
+    margin-left: .1rem;
 }
 .headtop .addrBox2 span{
     font-size: .4rem;
@@ -35,15 +50,21 @@
    width: .2rem;
    height: .2rem;
 }
+.guding{
+    width: 100%;
+    padding: 0 .2rem;
+    background: #fe5164;
+    box-shadow: 0 2px 4px 0 rgba(250,69,69,.5);
+    position: fixed;
+}
 .searchBox2{
    color: #2c3e50;
    position: relative;
     height: .68rem;
-    margin-top: .1rem;
     width: 100%;
 }
 .searchBox2 input {
-    width: 90%;
+    width: 100%;
     height: .68rem;
     border-radius: .1rem;
     font-size: .24rem;
@@ -59,7 +80,7 @@
 .searchBox2 span{
     position: absolute;
     left: .1rem;
-    top: -.13rem;
+    top: .1rem;
 
 }
 .searchBox2 span img{
@@ -69,7 +90,7 @@
 .hotsearch{
     height: .3rem;
     font-size: .24rem;
-    margin-top: .3rem;
+    margin-top: .3rem;  
 }
 .hotsearch ul {
     display: flex;
@@ -87,6 +108,7 @@
     display: flex;
     flex-wrap: wrap;
     font-size: 14px;
+    margin-top: 1.4rem;
 }
 .drugList li{
     width: 25%;
@@ -106,4 +128,206 @@
     color: #fff;
     display: flex;
 }
-
+.carousel{
+    width: 100%;
+    height: 2.3rem !important;
+    padding: 0 .2rem!important;
+}
+.carousel div{
+    width: 100%;
+    height: 100%;
+}
+.carousel img{
+    width: 100%;
+    height: 100%;
+}
+.slick-dots-bottom{
+    display: none !important;
+}
+.nav{
+    flex: 1;
+    overflow: auto;
+}
+.headline{
+    width: 100%;
+    background-color: #fff;
+    padding: 0 0.2rem;
+}
+.toutiao{
+    height: .8rem;
+    background-color: #f8e9e9;
+    border-radius: 3px;
+    display: flex;
+    flex-direction: row;
+}
+.toutiao img{
+    width: 1.42rem;
+    height: .4rem;
+    margin-top: .2rem;
+    margin-left: .2rem;
+}
+.toutiao p{
+    overflow: hidden;
+    width: 4.4rem;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+    line-height: .8rem;
+    font-size: 16px;
+    margin-left: .1rem;
+    margin-right: .1rem;
+}
+.toutiao span{
+    line-height: .8rem;
+    font-size: 16px;
+}
+.cuxiao,.haohuo{
+    width: 100%;
+    padding: 0 0.2rem;
+    font-size: .44rem;
+    font-weight: 900;
+    line-height: .8rem;
+    color: #333;
+    padding: 0 .2rem;
+}
+.cuxiao div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.cuxiao div img{
+    width: 48%;
+}
+.gonggao{
+    padding: .2rem .2rem;
+    display: flex;
+    flex-direction: row;
+    height: .8rem;
+}
+.gonggao img{
+    width: .56rem;
+    height: .24rem;
+    margin: .08rem .2rem .1rem .1rem;
+}
+.lunbotu{
+    width:88%;
+    margin-top: 0.05rem;
+}
+.dblb{
+    width: 100%;
+    line-height: .85rem;
+    height: .85rem;
+    overflow: hidden;
+    border-bottom: 1px solid #eee;
+    overflow-x: auto;
+    padding: 0 .2rem;
+}
+.dblb ul{
+    display: flex;
+    width: 8.8rem;
+    overflow: hidden;
+}
+.dblb ul li{
+    font-size: .28rem;
+    padding-right: .6rem;
+    color: #333;
+}
+.dblb ul li:nth-child(1){
+ font-weight: 900;
+}
+.tupian,.tupian img{
+    width: 100%;
+    height:3rem;
+}
+.goodss{
+    width: 100%;
+    position: relative;
+    text-align: left;
+    padding: .3rem .2rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.goods{
+    width: 46%;
+    height: 2.6rem;
+}
+.goods img{
+    width: 100%;
+    height: 100%;
+}
+.goods_list{
+    width: 49%;
+    height: 2.6rem;
+}
+.goods_list .one{
+    font-size: .27rem;
+    width: 100%;
+    margin-bottom: 3px;
+    height: .68rem;
+    line-height: .34rem;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    font-weight: 900;
+    color: #000;
+}
+.goods_list .one .one_biaoqian{
+    background-color: #ff5a5f;
+    color: #fff;
+    font-size: .2rem;
+    text-align: center;
+    padding: 0 .14rem;
+    border-radius: .04rem;
+    font-weight: 400;
+    margin-right: .1rem;
+    display: inline-block;
+}
+.goods_list .tow{
+    font-size: .24rem;
+    width: 100%;
+    margin-bottom: 3px;
+    height: .68rem;
+    line-height: .34rem;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+}
+.goods_list .pages{
+font-size: .2rem;
+width: 100%;
+margin-bottom: 3px;
+height: .44rem;
+line-height: .44rem;
+overflow: hidden;
+margin-top: .1rem;
+}
+.goods_list .pages span{
+    border: 1px solid #e94544;
+    color: #e94544;
+    padding: 1px 3px;
+    border-radius: 3px;
+    margin-bottom: 3px;
+    margin-right: .1rem;
+}
+.down{
+    margin-top: .3rem;
+    position: relative;
+}
+.down .spec{
+    font-size: .32rem;
+    color: #e94544;
+    margin-right: .1rem;
+}
+.down del{
+    font-size: .2rem;
+    color: #888;
+}
+.down img{
+    width: .48rem;
+    height: .48rem;
+    position: absolute;
+    top: 0;
+    right: .3rem;
+}
