@@ -190,6 +190,7 @@
     content: "\20";
     display: block;
     clear: both;
+    position: relative;
 }
 .goods_buyBox .aboutLeft{
     float: left!important;
@@ -216,6 +217,7 @@
     height: .42rem;
     overflow: hidden;
     margin-top: .2rem;
+    position: relative;
     padding: .05rem 0;
 }
 .prootiomBox2 .fls{

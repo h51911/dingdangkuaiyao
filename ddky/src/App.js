@@ -5,10 +5,12 @@ import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import Ddky from './pages/ddky';
 import Ddsc from './pages/ddsc';
 import Qdlb from './pages/qdlb';
-import Wd from './pages/wd';
-import Reg from './pages/reg';
-import Pct from './pages/pct';
-import Login from './pages/login';
+import Wd from './pages/wd';//我的
+import Reg from './pages/reg';//注册页
+import Pct from './pages/pct';//列表页
+import Login from './pages/login';//登录页
+import Dp from './pages/dp';//详情页
+import Cart from './pages/cart';//购物车页
 
 class App extends Component {
   state = {
@@ -84,10 +86,12 @@ class App extends Component {
               <Route path='/pct' component={Pct} />
               <Route path='/reg' component={Reg} />
               <Route path='/login' component={Login} />
+              <Route path='/dp' component={Dp} />
+              <Route path='/cart' component={Cart} />
               <Redirect to="/ddky" />
             </Switch>
           </div>
-          <div className='bottom'>
+          <div className='bottom' style={this.props.location.pathname == "/dp" ? { display: 'none' } : { display: 'block' }}>
             <ul>
               {this.state.menu.map((item, inx) => {
                 return (
