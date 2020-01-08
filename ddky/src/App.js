@@ -8,6 +8,7 @@ import Qdlb from './pages/qdlb';
 import Wd from './pages/wd';//我的
 import Reg from './pages/reg';//注册页
 import Pct from './pages/pct';//列表页
+import Ddscxq from './pages/ddscxq';
 import Login from './pages/login';//登录页
 import Dp from './pages/dp';//详情页
 import Cart from './pages/cart';//购物车页
@@ -93,6 +94,7 @@ class App extends Component {
               <Route path='/qdlb' component={Qdlb} />
               <Route path='/wd' component={Wd} />
               <Route path='/pct' component={Pct} />
+              <Route path='/ddscxq' component={Ddscxq} />
               <Route path='/reg' component={Reg} />
               <Route path='/login' component={Login} />
               <Route path='/dp' component={Dp} />

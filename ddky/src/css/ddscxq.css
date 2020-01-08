@@ -1,0 +1,328 @@
+#Pct {
+    display: flex;
+    flex-direction: column;
+    /* width: 7.5rem; */
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    padding-top: .8rem;
+    ;
+    position: relative;
+    text-align: left;
+}
+
+/* 头部 */
+.header_cl {
+    width: 100%;
+    height: .9rem;
+    ;
+    padding: .23rem 0 0 0;
+    border-bottom: 1px solid #ddd;
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translateX(-3.75rem);
+    background-color: #fff;
+    display: -webkit-box;
+    position: fixed;
+    top: 0;
+    z-index: 1;
+}
+
+.header_cl .home {
+    width: .48rem;
+}
+
+.pct1 {
+    width: 100%;
+    margin-top: .05rem;
+    margin-left: 25%;
+}
+
+.headerLeft {
+    width: 5.6rem;
+    height: .56rem;
+    background-color: #ebebeb;
+    border-radius: .28rem;
+    padding-left: .3rem;
+    margin-left: .25rem;
+}
+
+.serch {
+    height: .32rem;
+    vertical-align: middle;
+    margin-right: .1rem;
+}
+
+.ipt1 {
+    width: 4.5rem;
+    height: .56rem;
+    vertical-align: middle;
+    border: none;
+    background-color: transparent;
+    font-size: .26rem;
+    line-height: .56rem;
+}
+
+.qiehuan {
+    width: .44rem;
+    position: absolute;
+    right: .2rem;
+    top: 0.2556rem;
+}
+
+.imgqq {
+    width: 100%;
+}
+
+/* 内容 */
+.boxs {
+    display: flex;
+    flex: 1;
+    height: 100%;
+    flex-direction: column;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+
+
+.navList_in .ol {
+    overflow: hidden;
+    display: -webkit-box;
+    background-color: #fff;
+    width: 7.5rem;
+    margin-bottom: .1rem;
+}
+
+.ol .lio {
+    text-align: center;
+    line-height: .88rem;
+    font-size: .28rem;
+    -webkit-box-flex: 1;
+    color: rgb(0, 0, 0);
+    ;
+    font-weight: 700;
+}
+
+.item_one {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 2rem;
+    overflow-x: hidden;
+}
+
+.item_one .items_s {
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.items_s .cl {
+    width: 100%;
+    padding: .1rem 0;
+    height: 3.1rem;
+    border-bottom: 1px solid #eee;
+    content: "\20";
+    display: block;
+    clear: both;
+    background: #fff;
+}
+
+dl {
+    margin-bottom: .03rem;
+
+}
+
+.cl .fl {
+    width: 2.04rem;
+    position: relative;
+    float: left !important;
+}
+
+.fl .z_img {
+    width: 100%;
+
+}
+
+.cl .goodsInfo_fr {
+    float: right;
+    width: 5rem;
+    padding-right: .3rem;
+}
+
+.goodsInfo_fr .h3 {
+    margin-bottom: .1rem;
+    font-weight: 400;
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    white-space: normal;
+    font-family: "\5FAE\8F6F\96C5\9ED1";
+    font-size: .28rem;
+    line-height: .35rem;
+    height: .35rem;
+}
+
+.h3 .sign {
+    height: .32rem;
+    padding: 0 .1rem;
+    text-align: center;
+    line-height: .32rem;
+    font-size: .2rem;
+    color: #fff;
+    background-color: #e94544;
+    margin-right: .05rem;
+    vertical-align: middle;
+    font-weight: 400;
+    border-radius: .04rem;
+    margin-bottom: .05rem;
+}
+
+.goodsInfo_fr .zhuzhi_info {
+    width: 100%;
+    font-size: .24rem;
+    line-height: .32rem;
+    height: .64rem;
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    margin-bottom: .1rem;
+    color: #888;
+}
+
+.goodsInfo_fr .other2 {
+    height: .24rem;
+    margin-bottom: .14rem;
+    -webkit-line-clamp: 1;
+    font-size: .2rem;
+    line-height: .24rem;
+    color: #888;
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    white-space: normal;
+
+}
+
+.goodsInfo_fr .goods_buyBox {
+    content: "\20";
+    display: block;
+    clear: both;
+    position: relative;
+}
+
+.aboutLeft {
+    float: left !important;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.aboutLeft .setmeal {
+    font-size: .32rem;
+    line-height: .5rem;
+    height: .44rem;
+    color: #e94544;
+    margin-right: .2rem;
+}
+
+.aboutLeft .sales {
+    color: #888;
+    font-size: .2rem;
+    line-height: .5rem;
+    height: .44rem;
+    text-decoration: none !important;
+}
+
+.goods_buyBox .cars {
+    height: .48rem;
+    float: right !important;
+}
+
+.goodsInfo_fr .prootiomBox2 {
+    height: .42rem;
+    overflow: hidden;
+    margin-top: .2rem;
+    padding: .05rem 0;
+}
+
+.prootiomBox2 .fls {
+    float: left !important;
+}
+
+.fls .promotion {
+    height: .34rem;
+    font-size: .2rem;
+    line-height: .24rem;
+    margin-right: .1rem;
+    position: relative;
+    top: -.04rem
+}
+
+.goodsInfo_fr .shopname {
+    position: relative;
+    margin-top: .1rem;
+    height: .24rem;
+}
+
+.shopname .ckspsan {
+    color: #888;
+    font-size: .2rem;
+    line-height: .24rem;
+    height: .24rem;
+    width: 100%;
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+}
+
+.navList_in {
+    width: 100%;
+    position: fixed;
+    top: 1.9rem;
+    z-index: 1;
+}
+
+.qie {
+    width: 100%;
+    height: 1rem;
+    background: #fff;
+    position: fixed;
+    top: .9rem;
+    z-index: 1;
+
+
+    overflow: hidden;
+    border-bottom: 1px solid #eee;
+    overflow-x: scroll;
+    box-sizing: border-box;
+    /* padding-left: .2rem; */
+
+
+}
+
+.qie1 {
+    width: 19rem;
+}
+
+.qi {
+
+    float: left;
+    padding-right: .3rem;
+    padding-left: .3rem;
+    font-size: .28rem;
+    background: #fff;
+    line-height: .85rem;
+}
+
+.aa {
+
+    color: #e94544;
+}
