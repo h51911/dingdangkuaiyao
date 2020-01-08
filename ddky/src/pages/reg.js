@@ -36,10 +36,10 @@ class Reg extends Component{
                     <img src="image/icon_search.png" className="agreeimg1"/>
                     <p className="agreeimg2">
                     我已认真阅读，理解并同意 
-                        <a href="javascript:;" className="agreeimg3">
+                        <a  className="agreeimg3">
                         《叮当快药用户协议》
                         </a>
-                        <a href="javascript:;" className="agreeimg3">
+                        <a  className="agreeimg3">
                         《叮当快药用户协议》
                         </a>
                     </p>
