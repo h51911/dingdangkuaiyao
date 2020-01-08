@@ -1,13 +1,37 @@
 import React, { Component } from 'react';
 import '../css/ddsc.css';
-
+import { Carousel } from 'antd';
+import 'antd/dist/antd.css';
+import axios from 'axios';
 class Ddsc extends Component {
 
-    constructor(){
-        super();
+    state={
+        data:{
+
+        }
+
     }
 
+   async componentDidMount(){
+
+        let {data} = await axios.get("http://localhost:1911/login/scsuoyou");
+    //    console.log(data[0])
+        this.setState({
+                data:data[0]
+
+        })
+         console.log(this.state.data);
+    }
+
+
+    // buynow(){
+
+    //     console.log(this.props);
+    // }
     render() {
+        let {miaosha,pinpaizhuanqu,indexlb}=this.state.data;
+        let {history}=this.props;
+        console.log(this.props);
         return (
             <>
                 <div className="box">
@@ -29,7 +53,37 @@ class Ddsc extends Component {
                         </div>
                     </header>
                     <main>
-            <div className="lunbo"></div>
+            <div className="lunbo">
+                <Carousel autoplay>
+                    <div>
+                    < img src = "https://img.ddky.com/c/cms/temp/20191225/1577271987660_1080_345.jpg"
+                    alt = "" / >
+                    </div>
+                    <div>
+                    < img src = "https://img.ddky.com/c/cms/temp/20200106/1578276582900_1080_345.jpg" / >
+                    </div>
+                     <div>
+                    < img src = "https://img.ddky.com/c/cms/temp/20191225/1577244371624_1080_345.jpg" / >
+                    </div>
+                     <div>
+                    < img src = "https://img.ddky.com/c/cms/temp/20200103/1578028253658_1080_345.jpg" / >
+                    </div>
+                     <div>
+                    < img src = "https://img.ddky.com/c/cms/temp/20200103/1578020897997_1080_345.jpg" / >
+                    </div>
+                     <div>
+                    < img src = "https://img.ddky.com/c/cms/temp/20200102/1577959295113_1080_345.jpg" / >
+                    </div>
+                     <div>
+                    < img src = "https://img.ddky.com/c/cms/temp/20191227/1577423237571_1080_345.jpg" / >
+                    </div>
+                     <div>
+                    < img src = "https://img.ddky.com/c/cms/temp/20191231/1577781337023_1080_345.jpg" / >
+                    </div>
+                 </Carousel>
+
+                
+            </div>
             <div className="main1">
                 <div className="advicebox">
                     <img src="https://img.ddky.com/c/cms/temp/20190911/1568195178317_270_252.jpg" alt=""/>
@@ -76,83 +130,21 @@ class Ddsc extends Component {
                             </div>
                         </div>
                         <div className="main3-1a">
-                            <div className="main3-1a1">
-                                <img src="https://imgq.ddky.com/c/product/549239/big/z_1.jpg?t=1569223203556&watermark%2F1%2Fimage%2FaHR0cHM6Ly9pbWdxLmRka3kuY29tL2Mvd2F0ZXJQaWMvMTA4MC5wbmc%3D%2Fdissolve%2F80%2Fgravity%2FCenter%2Fdx%2F0%2Fdy%2F0%7CimageMogr2%2Fauto-orient%2Fthumbnail%2F240x240%21%2Fquality%2F100"
-                                    alt=""/>
-                                <p className="main3-1a1m">医用外科口罩</p>
-                                <p className="xianjia">
-                                    <span>￥</span> 9.90
-                                </p>
-                                <p className="yuanjia">
-                                    <span>￥</span> 9.90
-                                </p>
-                            </div>
-                            <div className="main3-1a1">
-                                <img src="https://imgq.ddky.com/c/product/328315/big/z_1.jpg?t=1532401082578&watermark%2F1%2Fimage%2FaHR0cHM6Ly9pbWdxLmRka3kuY29tL2Mvd2F0ZXJQaWMvMTA4MC5wbmc%3D%2Fdissolve%2F80%2Fgravity%2FCenter%2Fdx%2F0%2Fdy%2F0%7CimageMogr2%2Fauto-orient%2Fthumbnail%2F240x240%21%2Fquality%2F100"
-                                    alt=""/>
-                                <p className="main3-1a1m">医用外科口罩</p>
-                                <p className="xianjia">
-                                    <span>￥</span> 9.90
-                                </p>
-                                <p className="yuanjia">
-                                    <span>￥</span> 9.90
-                                </p>
-                            </div>
-                            <div className="main3-1a1">
-                                <img src="https://imgq.ddky.com/c/product/551362/big/z_1.jpg?t=1576750504914&watermark%2F1%2Fimage%2FaHR0cHM6Ly9pbWdxLmRka3kuY29tL2Mvd2F0ZXJQaWMvMTA4MC5wbmc%3D%2Fdissolve%2F80%2Fgravity%2FCenter%2Fdx%2F0%2Fdy%2F0%7CimageMogr2%2Fauto-orient%2Fthumbnail%2F240x240%21%2Fquality%2F100"
-                                    alt=""/>
-                                <p className="main3-1a1m">医用外科口罩</p>
-                                <p className="xianjia">
-                                    <span>￥</span> 9.90
-                                </p>
-                                <p className="yuanjia">
-                                    <span>￥</span> 9.90
-                                </p>
-                            </div>
-                            <div className="main3-1a1">
-                                <img src="https://imgq.ddky.com/c/product/108272/big/z_1.jpg?t=999999&watermark%2F1%2Fimage%2FaHR0cHM6Ly9pbWdxLmRka3kuY29tL2Mvd2F0ZXJQaWMvMTA4MC5wbmc%3D%2Fdissolve%2F80%2Fgravity%2FCenter%2Fdx%2F0%2Fdy%2F0%7CimageMogr2%2Fauto-orient%2Fthumbnail%2F240x240%21%2Fquality%2F100"
-                                    alt=""/>
-                                <p className="main3-1a1m">医用外科口罩</p>
-                                <p className="xianjia">
-                                    <span>￥</span> 9.90
-                                </p>
-                                <p className="yuanjia">
-                                    <span>￥</span> 9.90
-                                </p>
-                            </div>
-                            <div className="main3-1a1">
-                                <img src="https://imgq.ddky.com/c/product/551362/big/z_1.jpg?t=1576750504914&watermark%2F1%2Fimage%2FaHR0cHM6Ly9pbWdxLmRka3kuY29tL2Mvd2F0ZXJQaWMvMTA4MC5wbmc%3D%2Fdissolve%2F80%2Fgravity%2FCenter%2Fdx%2F0%2Fdy%2F0%7CimageMogr2%2Fauto-orient%2Fthumbnail%2F240x240%21%2Fquality%2F100"
-                                    alt=""/>
-                                <p className="main3-1a1m">医用外科口罩</p>
-                                <p className="xianjia">
-                                    <span>￥</span> 9.90
-                                </p>
-                                <p className="yuanjia">
-                                    <span>￥</span> 9.90
-                                </p>
-                            </div>
-                            <div className="main3-1a1">
-                                <img src="https://imgq.ddky.com/c/product/551362/big/z_1.jpg?t=1576750504914&watermark%2F1%2Fimage%2FaHR0cHM6Ly9pbWdxLmRka3kuY29tL2Mvd2F0ZXJQaWMvMTA4MC5wbmc%3D%2Fdissolve%2F80%2Fgravity%2FCenter%2Fdx%2F0%2Fdy%2F0%7CimageMogr2%2Fauto-orient%2Fthumbnail%2F240x240%21%2Fquality%2F100"
-                                    alt=""/>
-                                <p className="main3-1a1m">医用外科口罩</p>
-                                <p className="xianjia">
-                                    <span>￥</span> 9.90
-                                </p>
-                                <p className="yuanjia">
-                                    <span>￥</span> 9.90
-                                </p>
-                            </div>
-                            <div className="main3-1a1">
-                                <img src="https://imgq.ddky.com/c/product/551362/big/z_1.jpg?t=1576750504914&watermark%2F1%2Fimage%2FaHR0cHM6Ly9pbWdxLmRka3kuY29tL2Mvd2F0ZXJQaWMvMTA4MC5wbmc%3D%2Fdissolve%2F80%2Fgravity%2FCenter%2Fdx%2F0%2Fdy%2F0%7CimageMogr2%2Fauto-orient%2Fthumbnail%2F240x240%21%2Fquality%2F100"
-                                    alt=""/>
-                                <p className="main3-1a1m">医用外科口罩</p>
-                                <p className="xianjia">
-                                    <span>￥</span> 9.90
-                                </p>
-                                <p className="yuanjia">
-                                    <span>￥</span> 9.90
-                                </p>
-                            </div>
+                            {
+                                miaosha ? miaosha.map((item, idx) => (
+                                    <div className="main3-1a1" key={idx}>
+                                        <img src={item.miaoshaurl}
+                                        alt="" />
+                                        <p className="main3-1a1m">{item.miaoshabiaoti}</p>
+                                        <p className="xianjia">
+                                        <span>￥</span> {item.miaoshaxianjia}
+                                        </p>
+                                        <p className="yuanjia">
+                                        <span>￥</span> {item.miaoshayuanjia}
+                                        </p>    
+                                     </div>
+                        )) : ''
+                            }
                         </div>
                     </div>
                 </div>
@@ -172,149 +164,19 @@ class Ddsc extends Component {
                             <img src="https://img.ddky.com/c/cms/temp/20200103/1578019740252_1080_345.jpg" alt=""/>
                         </div>
                         <div className="main3-3-2">
-                            <div className="brandCard">
-                                <img src="https://imgq.ddky.com/c/product/518990/big/z_1.jpg?t=1576751171395&watermark%2F1%2Fimage%2FaHR0cHM6Ly9pbWdxLmRka3kuY29tL2Mvd2F0ZXJQaWMvMTA4MC5wbmc%3D%2Fdissolve%2F80%2Fgravity%2FCenter%2Fdx%2F0%2Fdy%2F0%7CimageMogr2%2Fauto-orient%2Fthumbnail%2F240x240%21%2Fquality%2F100" alt=""/>
-                                <p className="brandName">[康维他]麦卢卡花蜂蜜(UMF5+)</p>
-                                <p className="xianjia">
-                                    <span>￥</span> 219.00
-                                </p>
-                            </div>
-                            <div className="brandCard">
-                                <img src="https://imgq.ddky.com/c/product/518990/big/z_1.jpg?t=1576751171395&watermark%2F1%2Fimage%2FaHR0cHM6Ly9pbWdxLmRka3kuY29tL2Mvd2F0ZXJQaWMvMTA4MC5wbmc%3D%2Fdissolve%2F80%2Fgravity%2FCenter%2Fdx%2F0%2Fdy%2F0%7CimageMogr2%2Fauto-orient%2Fthumbnail%2F240x240%21%2Fquality%2F100"
-                                    alt=""/>
-                                <p className="brandName">[康维他]麦卢卡花蜂蜜(UMF5+)</p>
-                                <p className="xianjia">
-                                    <span>￥</span> 219.00
-                                </p>
-                            </div>
-                            <div className="brandCard">
-                                <img src="https://imgq.ddky.com/c/product/518990/big/z_1.jpg?t=1576751171395&watermark%2F1%2Fimage%2FaHR0cHM6Ly9pbWdxLmRka3kuY29tL2Mvd2F0ZXJQaWMvMTA4MC5wbmc%3D%2Fdissolve%2F80%2Fgravity%2FCenter%2Fdx%2F0%2Fdy%2F0%7CimageMogr2%2Fauto-orient%2Fthumbnail%2F240x240%21%2Fquality%2F100"
-                                    alt=""/>
-                                <p className="brandName">[康维他]麦卢卡花蜂蜜(UMF5+)</p>
-                                <p className="xianjia">
-                                    <span>￥</span> 219.00
-                                </p>
-                            </div>
-                            <div className="brandCard">
-                                <img src="https://imgq.ddky.com/c/product/518990/big/z_1.jpg?t=1576751171395&watermark%2F1%2Fimage%2FaHR0cHM6Ly9pbWdxLmRka3kuY29tL2Mvd2F0ZXJQaWMvMTA4MC5wbmc%3D%2Fdissolve%2F80%2Fgravity%2FCenter%2Fdx%2F0%2Fdy%2F0%7CimageMogr2%2Fauto-orient%2Fthumbnail%2F240x240%21%2Fquality%2F100"
-                                    alt=""/>
-                                <p className="brandName">[康维他]麦卢卡花蜂蜜(UMF5+)</p>
-                                <p className="xianjia">
-                                    <span>￥</span> 219.00
-                                </p>
-                            </div>
-                            <div className="brandCard">
-                                <img src="https://imgq.ddky.com/c/product/518990/big/z_1.jpg?t=1576751171395&watermark%2F1%2Fimage%2FaHR0cHM6Ly9pbWdxLmRka3kuY29tL2Mvd2F0ZXJQaWMvMTA4MC5wbmc%3D%2Fdissolve%2F80%2Fgravity%2FCenter%2Fdx%2F0%2Fdy%2F0%7CimageMogr2%2Fauto-orient%2Fthumbnail%2F240x240%21%2Fquality%2F100"
-                                    alt=""/>
-                                <p className="brandName">[康维他]麦卢卡花蜂蜜(UMF5+)</p>
-                                <p className="xianjia">
-                                    <span>￥</span> 219.00
-                                </p>
-                            </div>
-                            <div className="brandCard">
-                                <img src="https://imgq.ddky.com/c/product/518990/big/z_1.jpg?t=1576751171395&watermark%2F1%2Fimage%2FaHR0cHM6Ly9pbWdxLmRka3kuY29tL2Mvd2F0ZXJQaWMvMTA4MC5wbmc%3D%2Fdissolve%2F80%2Fgravity%2FCenter%2Fdx%2F0%2Fdy%2F0%7CimageMogr2%2Fauto-orient%2Fthumbnail%2F240x240%21%2Fquality%2F100"
-                                    alt=""/>
-                                <p className="brandName">[康维他]麦卢卡花蜂蜜(UMF5+)</p>
-                                <p className="xianjia">
-                                    <span>￥</span> 219.00
-                                </p>
-                            </div>
-                            <div className="brandCard">
-                                <img src="https://imgq.ddky.com/c/product/518990/big/z_1.jpg?t=1576751171395&watermark%2F1%2Fimage%2FaHR0cHM6Ly9pbWdxLmRka3kuY29tL2Mvd2F0ZXJQaWMvMTA4MC5wbmc%3D%2Fdissolve%2F80%2Fgravity%2FCenter%2Fdx%2F0%2Fdy%2F0%7CimageMogr2%2Fauto-orient%2Fthumbnail%2F240x240%21%2Fquality%2F100"
-                                    alt=""/>
-                                <p className="brandName">[康维他]麦卢卡花蜂蜜(UMF5+)</p>
-                                <p className="xianjia">
-                                    <span>￥</span> 219.00
-                                </p>
-                            </div>
-                            <div className="brandCard">
-                                <img src="https://imgq.ddky.com/c/product/518990/big/z_1.jpg?t=1576751171395&watermark%2F1%2Fimage%2FaHR0cHM6Ly9pbWdxLmRka3kuY29tL2Mvd2F0ZXJQaWMvMTA4MC5wbmc%3D%2Fdissolve%2F80%2Fgravity%2FCenter%2Fdx%2F0%2Fdy%2F0%7CimageMogr2%2Fauto-orient%2Fthumbnail%2F240x240%21%2Fquality%2F100"
-                                    alt=""/>
-                                <p className="brandName">[康维他]麦卢卡花蜂蜜(UMF5+)</p>
-                                <p className="xianjia">
-                                    <span>￥</span> 219.00
-                                </p>
-                            </div>
-                            <div className="brandCard">
-                                <img src="https://imgq.ddky.com/c/product/518990/big/z_1.jpg?t=1576751171395&watermark%2F1%2Fimage%2FaHR0cHM6Ly9pbWdxLmRka3kuY29tL2Mvd2F0ZXJQaWMvMTA4MC5wbmc%3D%2Fdissolve%2F80%2Fgravity%2FCenter%2Fdx%2F0%2Fdy%2F0%7CimageMogr2%2Fauto-orient%2Fthumbnail%2F240x240%21%2Fquality%2F100"
-                                    alt=""/>
-                                <p className="brandName">[康维他]麦卢卡花蜂蜜(UMF5+)</p>
-                                <p className="xianjia">
-                                    <span>￥</span> 219.00
-                                </p>
-                            </div>
-                            <div className="brandCard">
-                                <img src="https://imgq.ddky.com/c/product/518990/big/z_1.jpg?t=1576751171395&watermark%2F1%2Fimage%2FaHR0cHM6Ly9pbWdxLmRka3kuY29tL2Mvd2F0ZXJQaWMvMTA4MC5wbmc%3D%2Fdissolve%2F80%2Fgravity%2FCenter%2Fdx%2F0%2Fdy%2F0%7CimageMogr2%2Fauto-orient%2Fthumbnail%2F240x240%21%2Fquality%2F100"
-                                    alt=""/>
-                                <p className="brandName">[康维他]麦卢卡花蜂蜜(UMF5+)</p>
-                                <p className="xianjia">
-                                    <span>￥</span> 219.00
-                                </p>
-                            </div>
-                            <div className="brandCard">
-                                <img src="https://imgq.ddky.com/c/product/518990/big/z_1.jpg?t=1576751171395&watermark%2F1%2Fimage%2FaHR0cHM6Ly9pbWdxLmRka3kuY29tL2Mvd2F0ZXJQaWMvMTA4MC5wbmc%3D%2Fdissolve%2F80%2Fgravity%2FCenter%2Fdx%2F0%2Fdy%2F0%7CimageMogr2%2Fauto-orient%2Fthumbnail%2F240x240%21%2Fquality%2F100"
-                                    alt=""/>
-                                <p className="brandName">[康维他]麦卢卡花蜂蜜(UMF5+)</p>
-                                <p className="xianjia">
-                                    <span>￥</span> 219.00
-                                </p>
-                            </div>
-                            <div className="brandCard">
-                                <img src="https://imgq.ddky.com/c/product/518990/big/z_1.jpg?t=1576751171395&watermark%2F1%2Fimage%2FaHR0cHM6Ly9pbWdxLmRka3kuY29tL2Mvd2F0ZXJQaWMvMTA4MC5wbmc%3D%2Fdissolve%2F80%2Fgravity%2FCenter%2Fdx%2F0%2Fdy%2F0%7CimageMogr2%2Fauto-orient%2Fthumbnail%2F240x240%21%2Fquality%2F100"
-                                    alt=""/>
-                                <p className="brandName">[康维他]麦卢卡花蜂蜜(UMF5+)</p>
-                                <p className="xianjia">
-                                    <span>￥</span> 219.00
-                                </p>
-                            </div>
-                            <div className="brandCard">
-                                <img src="https://imgq.ddky.com/c/product/518990/big/z_1.jpg?t=1576751171395&watermark%2F1%2Fimage%2FaHR0cHM6Ly9pbWdxLmRka3kuY29tL2Mvd2F0ZXJQaWMvMTA4MC5wbmc%3D%2Fdissolve%2F80%2Fgravity%2FCenter%2Fdx%2F0%2Fdy%2F0%7CimageMogr2%2Fauto-orient%2Fthumbnail%2F240x240%21%2Fquality%2F100"
-                                    alt=""/>
-                                <p className="brandName">[康维他]麦卢卡花蜂蜜(UMF5+)</p>
-                                <p className="xianjia">
-                                    <span>￥</span> 219.00
-                                </p>
-                            </div>
-                            <div className="brandCard">
-                                <img src="https://imgq.ddky.com/c/product/518990/big/z_1.jpg?t=1576751171395&watermark%2F1%2Fimage%2FaHR0cHM6Ly9pbWdxLmRka3kuY29tL2Mvd2F0ZXJQaWMvMTA4MC5wbmc%3D%2Fdissolve%2F80%2Fgravity%2FCenter%2Fdx%2F0%2Fdy%2F0%7CimageMogr2%2Fauto-orient%2Fthumbnail%2F240x240%21%2Fquality%2F100"
-                                    alt=""/>
-                                <p className="brandName">[康维他]麦卢卡花蜂蜜(UMF5+)</p>
-                                <p className="xianjia">
-                                    <span>￥</span> 219.00
-                                </p>
-                            </div>
-                            <div className="brandCard">
-                                <img src="https://imgq.ddky.com/c/product/518990/big/z_1.jpg?t=1576751171395&watermark%2F1%2Fimage%2FaHR0cHM6Ly9pbWdxLmRka3kuY29tL2Mvd2F0ZXJQaWMvMTA4MC5wbmc%3D%2Fdissolve%2F80%2Fgravity%2FCenter%2Fdx%2F0%2Fdy%2F0%7CimageMogr2%2Fauto-orient%2Fthumbnail%2F240x240%21%2Fquality%2F100"
-                                    alt=""/>
-                                <p className="brandName">[康维他]麦卢卡花蜂蜜(UMF5+)</p>
-                                <p className="xianjia">
-                                    <span>￥</span> 219.00
-                                </p>
-                            </div>
-                            <div className="brandCard">
-                                <img src="https://imgq.ddky.com/c/product/518990/big/z_1.jpg?t=1576751171395&watermark%2F1%2Fimage%2FaHR0cHM6Ly9pbWdxLmRka3kuY29tL2Mvd2F0ZXJQaWMvMTA4MC5wbmc%3D%2Fdissolve%2F80%2Fgravity%2FCenter%2Fdx%2F0%2Fdy%2F0%7CimageMogr2%2Fauto-orient%2Fthumbnail%2F240x240%21%2Fquality%2F100"
-                                    alt=""/>
-                                <p className="brandName">[康维他]麦卢卡花蜂蜜(UMF5+)</p>
-                                <p className="xianjia">
-                                    <span>￥</span> 219.00
-                                </p>
-                            </div>
-                            <div className="brandCard">
-                                <img src="https://imgq.ddky.com/c/product/518990/big/z_1.jpg?t=1576751171395&watermark%2F1%2Fimage%2FaHR0cHM6Ly9pbWdxLmRka3kuY29tL2Mvd2F0ZXJQaWMvMTA4MC5wbmc%3D%2Fdissolve%2F80%2Fgravity%2FCenter%2Fdx%2F0%2Fdy%2F0%7CimageMogr2%2Fauto-orient%2Fthumbnail%2F240x240%21%2Fquality%2F100"
-                                    alt=""/>
-                                <p className="brandName">[康维他]麦卢卡花蜂蜜(UMF5+)</p>
-                                <p className="xianjia">
-                                    <span>￥</span> 219.00
-                                </p>
-                            </div>
-                            <div className="brandCard">
-                                <img src="https://imgq.ddky.com/c/product/518990/big/z_1.jpg?t=1576751171395&watermark%2F1%2Fimage%2FaHR0cHM6Ly9pbWdxLmRka3kuY29tL2Mvd2F0ZXJQaWMvMTA4MC5wbmc%3D%2Fdissolve%2F80%2Fgravity%2FCenter%2Fdx%2F0%2Fdy%2F0%7CimageMogr2%2Fauto-orient%2Fthumbnail%2F240x240%21%2Fquality%2F100"
-                                    alt=""/>
-                                <p className="brandName">[康维他]麦卢卡花蜂蜜(UMF5+)</p>
-                                <p className="xianjia">
-                                    <span>￥</span> 219.00
-                                </p>
-                            </div>
+
+
+                            {
+                                pinpaizhuanqu ? pinpaizhuanqu.map((item, idx) => (
+                                    <div className="brandCard" key={idx}>
+                                        <img src={item.ppzqurl} alt="" />
+                                        <p className="brandName">{item.ppzqbiaoti}</p>
+                                        <p className="xianjia">
+                                            <span>￥</span> {item.ppzqjiage}
+                                        </p>
+                                    </div>
+                                )) : ''
+                            }
                         </div>
                     </div>
                 </div>
@@ -338,6 +200,12 @@ class Ddsc extends Component {
                         <li>
                             <span>避孕验孕</span>
                         </li>
+                         <li>
+                            <span>慢病调理</span>
+                        </li>
+                        <li>
+                            <span>儿童健康</span>
+                        </li>
                         <li>
                             <span>咳喘</span>
                         </li>
@@ -347,51 +215,324 @@ class Ddsc extends Component {
                     </ul>
                 </div>
                 <div className="imgList">
-                    <div className="b2cdrugbox">
+
+                <div className="nxjk">
+                {
+                    // console.log(indexlb[0])
+                    indexlb ? indexlb[0].map((item, idx) => (
+                            
+                    <div className="b2cdrugbox" key={idx} onClick={()=>{
+                        history.push('/pct/'+item)
+                    }}>
                         <div className="imgListBox">
-                            <img src="https://img.ddky.com/c/cms/temp/20181026/1540546649281_336_248.jpg" alt="" className="imgPreBox"/>
+                            <img src={item.nxjkurl} alt="" className="imgPreBox"/>
                             <div className="infoBox">
                                 <p className="name">
-                                    <span className="sign">1-3天</span> 有求必硬 壮阳舒肝解郁
+                                    <span className="sign">1-3天</span> {item.nxjkname}
                                 </p>
-                                <p className="zhuzhi_info">阳痿组包([仁和]肾宝胶囊+万艾可+[同仁堂]舒肝丸)</p>
+                                <p className="zhuzhi_info">{item.nxjktitle}</p>
                                 <div className="prootiomBox">
-                                    <span className="promotion">立省125.80元</span>
+                                    <span className="promotion">{item.nxjkjuan}</span>
                                 </div>
                                 <div className="goods_buyBox">
                                     <div className="aboutLeft f1">
-                                        <p className="setmeal fl">￥739.00</p>
-                                        <p className="sales fl">￥864.80</p>
+                                        <p className="setmeal fl">{item.nxjkxianjia}</p>
+                                        <p className="sales fl">{item.nxjkyuanjia}</p>
+                                    </div>
+                                    <div className="addCarbox">
+                                        < img className="addCarImg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAACfUExURUxpcexLS+xFRelFRelFRP9VVetGRulFROpFRelFROlFRP9MTOpFRepFROlFROtHROlFROlFRfBLS+pFRP9VVelFRP///+1nZvzr6+1qafzp6fWurulKSfCCgfrV1f319f79/fGLiupQT+tcW/jHx+tVVPnMzO93dvvd3e5vb/vh4Pa6ufzm5uxhYPSgoPe/vv3y8vSnpvOamf74+PKTkmBE4BQAAAAVdFJOUwAbN8v5A2bmXvbsCnzb8k6vjxG3CVdyowAAAAHXSURBVHjapdZpd6owEAbg1AWEKqvvtIrsouCu7f//be255jbBRDken8/MSTITZsIUU9cPJ/ZgYE9C352yDsHIsyCxvFHA7nsfO1A443emNzRMaJnGkGm89XFX/40peiYeMHvsxsjCQ9bo5nt0akX0LHSyetJ5TaCb+XfyYR/AkbI6xkP9/9k18GtFRNkaDxm8vtcNFeWKVh2butZ8DC6mFFjOVZuowD9j9itwwJVEZZGSDl/aCdolSClG8aHKifaiGB7+JHSAVkY8HR5jU6lmES2hsycqefWmzIWQ0w4Kng3OZT6EhrIFNM6UgPNZCKEg+oDGkiJwIZtAcqIYGp+Ug5swG+hKUyUtbLMBJFvaQrWWjjZoB1wogepCNUSAreRPcZTWtdnkpkIVJEU5W8eHjHKIQ4eQLDJqUOWXc3RcJbtTRlfJAiKtPmQ7ylGTkM7r1fFbqqbPXKVE+XIbHb7zdbOvoHD55VOvn4pfPua10/QVzxRiS95tD1vUpLFpdbPAgaSK6rkiAucErSbQbSy3GW49P8WQRF9JedNmmAHJhiiF0BCJn8EQrfJuwEwK6A91zbjZfcaQnNOkEs34uXb/7EB5bWR1D8XXxm73YH/y6fDS4+Tp588PcLqdUFOb62QAAAAASUVORK5CYII=" / >
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div className="b2cdrugbox">
+
+                  )): ''
+                  }
+            </div>
+
+            <div className="rxtj">
+                {
+                    indexlb ? indexlb[1].map((item, idx) => (
+                    <div className="b2cdrugbox" key={idx}>
                         <div className="imgListBox">
-                            <img src="https://img.ddky.com/c/cms/temp/20181026/1540546649281_336_248.jpg" alt="" className="imgPreBox"/>
+
+                            <img src={item.rxtjurl} alt="" className="imgPreBox"/>
                             <div className="infoBox">
                                 <p className="name">
-                                    <span className="sign">1-3天</span> 有求必硬 壮阳舒肝解郁
+
+                                    <span className="sign">1-3天</span> {item.rxtjname}
                                 </p>
-                                <p className="zhuzhi_info">阳痿组包([仁和]肾宝胶囊+万艾可+[同仁堂]舒肝丸)</p>
+
+                                <p className="zhuzhi_info">{item.rxtjtitle}</p>
                                 <div className="prootiomBox">
-                                    <span className="promotion">立省125.80元</span>
+
+                                    <span className="promotion">{item.rxtjjuan}</span>
                                 </div>
                                 <div className="goods_buyBox">
                                     <div className="aboutLeft f1">
-                                        <p className="setmeal fl">￥739.00</p>
-                                        <p className="sales fl">￥864.80</p>
+
+                                        <p className="setmeal fl">{item.rxtjxianjia}</p>
+                                        <p className="sales fl">{item.rxtjyuanjia}</p>
+                                    </div>
+                                    <div className="addCarbox">
+                                        < img className="addCarImg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAACfUExURUxpcexLS+xFRelFRelFRP9VVetGRulFROpFRelFROlFRP9MTOpFRepFROlFROtHROlFROlFRfBLS+pFRP9VVelFRP///+1nZvzr6+1qafzp6fWurulKSfCCgfrV1f319f79/fGLiupQT+tcW/jHx+tVVPnMzO93dvvd3e5vb/vh4Pa6ufzm5uxhYPSgoPe/vv3y8vSnpvOamf74+PKTkmBE4BQAAAAVdFJOUwAbN8v5A2bmXvbsCnzb8k6vjxG3CVdyowAAAAHXSURBVHjapdZpd6owEAbg1AWEKqvvtIrsouCu7f//be255jbBRDken8/MSTITZsIUU9cPJ/ZgYE9C352yDsHIsyCxvFHA7nsfO1A443emNzRMaJnGkGm89XFX/40peiYeMHvsxsjCQ9bo5nt0akX0LHSyetJ5TaCb+XfyYR/AkbI6xkP9/9k18GtFRNkaDxm8vtcNFeWKVh2butZ8DC6mFFjOVZuowD9j9itwwJVEZZGSDl/aCdolSClG8aHKifaiGB7+JHSAVkY8HR5jU6lmES2hsycqefWmzIWQ0w4Kng3OZT6EhrIFNM6UgPNZCKEg+oDGkiJwIZtAcqIYGp+Ug5swG+hKUyUtbLMBJFvaQrWWjjZoB1wogepCNUSAreRPcZTWtdnkpkIVJEU5W8eHjHKIQ4eQLDJqUOWXc3RcJbtTRlfJAiKtPmQ7ylGTkM7r1fFbqqbPXKVE+XIbHb7zdbOvoHD55VOvn4pfPua10/QVzxRiS95tD1vUpLFpdbPAgaSK6rkiAucErSbQbSy3GW49P8WQRF9JedNmmAHJhiiF0BCJn8EQrfJuwEwK6A91zbjZfcaQnNOkEs34uXb/7EB5bWR1D8XXxm73YH/y6fDS4+Tp588PcLqdUFOb62QAAAAASUVORK5CYII=" / >
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div className="b2cdrugbox"></div>
-                    <div className="b2cdrugbox"></div>
-                    <div className="b2cdrugbox"></div>
-                    <div className="b2cdrugbox"></div>
-                    <div className="b2cdrugbox"></div>
+
+                  )): ''
+                  }
+            </div>
+            <div className="qqyp">
+                {
+                    indexlb ? indexlb[2].map((item, idx) => (
+                    <div className="b2cdrugbox" key={idx}>
+                        <div className="imgListBox">
+
+                            <img src={item.qqypurl} alt="" className="imgPreBox"/>
+                            <div className="infoBox">
+                                <p className="name">
+
+                                    <span className="sign">1-3天</span> {item.qqypname}
+                                </p>
+
+                                <p className="zhuzhi_info">{item.qqyptitle}</p>
+                                <div className="prootiomBox">
+
+                                    <span className="promotion">{item.qqypjuan}</span>
+                                </div>
+                                <div className="goods_buyBox">
+                                    <div className="aboutLeft f1">
+
+                                        <p className="setmeal fl">{item.qqypxianjia}</p>
+                                        <p className="sales fl">{item.qqypyuanjia}</p>
+                                    </div>
+                                    <div className="addCarbox">
+                                        < img className="addCarImg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAACfUExURUxpcexLS+xFRelFRelFRP9VVetGRulFROpFRelFROlFRP9MTOpFRepFROlFROtHROlFROlFRfBLS+pFRP9VVelFRP///+1nZvzr6+1qafzp6fWurulKSfCCgfrV1f319f79/fGLiupQT+tcW/jHx+tVVPnMzO93dvvd3e5vb/vh4Pa6ufzm5uxhYPSgoPe/vv3y8vSnpvOamf74+PKTkmBE4BQAAAAVdFJOUwAbN8v5A2bmXvbsCnzb8k6vjxG3CVdyowAAAAHXSURBVHjapdZpd6owEAbg1AWEKqvvtIrsouCu7f//be255jbBRDken8/MSTITZsIUU9cPJ/ZgYE9C352yDsHIsyCxvFHA7nsfO1A443emNzRMaJnGkGm89XFX/40peiYeMHvsxsjCQ9bo5nt0akX0LHSyetJ5TaCb+XfyYR/AkbI6xkP9/9k18GtFRNkaDxm8vtcNFeWKVh2butZ8DC6mFFjOVZuowD9j9itwwJVEZZGSDl/aCdolSClG8aHKifaiGB7+JHSAVkY8HR5jU6lmES2hsycqefWmzIWQ0w4Kng3OZT6EhrIFNM6UgPNZCKEg+oDGkiJwIZtAcqIYGp+Ug5swG+hKUyUtbLMBJFvaQrWWjjZoB1wogepCNUSAreRPcZTWtdnkpkIVJEU5W8eHjHKIQ4eQLDJqUOWXc3RcJbtTRlfJAiKtPmQ7ylGTkM7r1fFbqqbPXKVE+XIbHb7zdbOvoHD55VOvn4pfPua10/QVzxRiS95tD1vUpLFpdbPAgaSK6rkiAucErSbQbSy3GW49P8WQRF9JedNmmAHJhiiF0BCJn8EQrfJuwEwK6A91zbjZfcaQnNOkEs34uXb/7EB5bWR1D8XXxm73YH/y6fDS4+Tp588PcLqdUFOb62QAAAAASUVORK5CYII=" / >
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                  )): ''
+                  }
+            </div>
+            <div className="yybj">
+                {
+                    indexlb ? indexlb[3].map((item, idx) => (
+                    <div className="b2cdrugbox" key={idx}>
+                        <div className="imgListBox">
+
+                            <img src={item.yybjurl} alt="" className="imgPreBox"/>
+                            <div className="infoBox">
+                                <p className="name">
+
+                                    <span className="sign">1-3天</span> {item.yybjname}
+                                </p>
+
+                                <p className="zhuzhi_info">{item.yybjtitle}</p>
+                                <div className="prootiomBox">
+
+                                    <span className="promotion">{item.yybjjuan}</span>
+                                </div>
+                                <div className="goods_buyBox">
+                                    <div className="aboutLeft f1">
+
+                                        <p className="setmeal fl">{item.yybjxianjia}</p>
+                                        <p className="sales fl">{item.yybjyuanjia}</p>
+                                    </div>
+                                    <div className="addCarbox">
+                                        < img className="addCarImg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAACfUExURUxpcexLS+xFRelFRelFRP9VVetGRulFROpFRelFROlFRP9MTOpFRepFROlFROtHROlFROlFRfBLS+pFRP9VVelFRP///+1nZvzr6+1qafzp6fWurulKSfCCgfrV1f319f79/fGLiupQT+tcW/jHx+tVVPnMzO93dvvd3e5vb/vh4Pa6ufzm5uxhYPSgoPe/vv3y8vSnpvOamf74+PKTkmBE4BQAAAAVdFJOUwAbN8v5A2bmXvbsCnzb8k6vjxG3CVdyowAAAAHXSURBVHjapdZpd6owEAbg1AWEKqvvtIrsouCu7f//be255jbBRDken8/MSTITZsIUU9cPJ/ZgYE9C352yDsHIsyCxvFHA7nsfO1A443emNzRMaJnGkGm89XFX/40peiYeMHvsxsjCQ9bo5nt0akX0LHSyetJ5TaCb+XfyYR/AkbI6xkP9/9k18GtFRNkaDxm8vtcNFeWKVh2butZ8DC6mFFjOVZuowD9j9itwwJVEZZGSDl/aCdolSClG8aHKifaiGB7+JHSAVkY8HR5jU6lmES2hsycqefWmzIWQ0w4Kng3OZT6EhrIFNM6UgPNZCKEg+oDGkiJwIZtAcqIYGp+Ug5swG+hKUyUtbLMBJFvaQrWWjjZoB1wogepCNUSAreRPcZTWtdnkpkIVJEU5W8eHjHKIQ4eQLDJqUOWXc3RcJbtTRlfJAiKtPmQ7ylGTkM7r1fFbqqbPXKVE+XIbHb7zdbOvoHD55VOvn4pfPua10/QVzxRiS95tD1vUpLFpdbPAgaSK6rkiAucErSbQbSy3GW49P8WQRF9JedNmmAHJhiiF0BCJn8EQrfJuwEwK6A91zbjZfcaQnNOkEs34uXb/7EB5bWR1D8XXxm73YH/y6fDS4+Tp588PcLqdUFOb62QAAAAASUVORK5CYII=" / >
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                  )): ''
+                  }
+            </div>
+             <div className="byyy">
+                {
+                    indexlb ? indexlb[4].map((item, idx) => (
+                    <div className="b2cdrugbox" key={idx}>
+                        <div className="imgListBox">
+
+                            <img src={item.byyyurl} alt="" className="imgPreBox"/>
+                            <div className="infoBox">
+                                <p className="name">
+
+                                    <span className="sign">1-3天</span> {item.byyyname}
+                                </p>
+
+                                <p className="zhuzhi_info">{item.byyytitle}</p>
+                                <div className="prootiomBox">
+
+                                    <span className="promotion">{item.byyyjuan}</span>
+                                </div>
+                                <div className="goods_buyBox">
+                                    <div className="aboutLeft f1">
+
+                                        <p className="setmeal fl">{item.byyyxianjia}</p>
+                                        <p className="sales fl">{item.byyyuanjia}</p>
+                                    </div>
+                                    <div className="addCarbox">
+                                        < img className="addCarImg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAACfUExURUxpcexLS+xFRelFRelFRP9VVetGRulFROpFRelFROlFRP9MTOpFRepFROlFROtHROlFROlFRfBLS+pFRP9VVelFRP///+1nZvzr6+1qafzp6fWurulKSfCCgfrV1f319f79/fGLiupQT+tcW/jHx+tVVPnMzO93dvvd3e5vb/vh4Pa6ufzm5uxhYPSgoPe/vv3y8vSnpvOamf74+PKTkmBE4BQAAAAVdFJOUwAbN8v5A2bmXvbsCnzb8k6vjxG3CVdyowAAAAHXSURBVHjapdZpd6owEAbg1AWEKqvvtIrsouCu7f//be255jbBRDken8/MSTITZsIUU9cPJ/ZgYE9C352yDsHIsyCxvFHA7nsfO1A443emNzRMaJnGkGm89XFX/40peiYeMHvsxsjCQ9bo5nt0akX0LHSyetJ5TaCb+XfyYR/AkbI6xkP9/9k18GtFRNkaDxm8vtcNFeWKVh2butZ8DC6mFFjOVZuowD9j9itwwJVEZZGSDl/aCdolSClG8aHKifaiGB7+JHSAVkY8HR5jU6lmES2hsycqefWmzIWQ0w4Kng3OZT6EhrIFNM6UgPNZCKEg+oDGkiJwIZtAcqIYGp+Ug5swG+hKUyUtbLMBJFvaQrWWjjZoB1wogepCNUSAreRPcZTWtdnkpkIVJEU5W8eHjHKIQ4eQLDJqUOWXc3RcJbtTRlfJAiKtPmQ7ylGTkM7r1fFbqqbPXKVE+XIbHb7zdbOvoHD55VOvn4pfPua10/QVzxRiS95tD1vUpLFpdbPAgaSK6rkiAucErSbQbSy3GW49P8WQRF9JedNmmAHJhiiF0BCJn8EQrfJuwEwK6A91zbjZfcaQnNOkEs34uXb/7EB5bWR1D8XXxm73YH/y6fDS4+Tp588PcLqdUFOb62QAAAAASUVORK5CYII=" / >
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                  )): ''
+                  }
+            </div>
+            <div className="mbtl">
+                {
+                    indexlb ? indexlb[5].map((item, idx) => (
+                    <div className="b2cdrugbox" key={idx}>
+                        <div className="imgListBox">
+
+                            <img src={item.mbtlurl} alt="" className="imgPreBox"/>
+                            <div className="infoBox">
+                                <p className="name">
+
+                                    <span className="sign">1-3天</span> {item.mbtlname}
+                                </p>
+
+                                <p className="zhuzhi_info">{item.mbtltitle}</p>
+                                <div className="prootiomBox">
+
+                                    <span className="promotion">{item.mbtljuan}</span>
+                                </div>
+                                <div className="goods_buyBox">
+                                    <div className="aboutLeft f1">
+
+                                        <p className="setmeal fl">{item.mbtlxianjia}</p>
+                                        <p className="sales fl">{item.mbtlyuanjia}</p>
+                                    </div>
+                                    <div className="addCarbox">
+                                        < img className="addCarImg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAACfUExURUxpcexLS+xFRelFRelFRP9VVetGRulFROpFRelFROlFRP9MTOpFRepFROlFROtHROlFROlFRfBLS+pFRP9VVelFRP///+1nZvzr6+1qafzp6fWurulKSfCCgfrV1f319f79/fGLiupQT+tcW/jHx+tVVPnMzO93dvvd3e5vb/vh4Pa6ufzm5uxhYPSgoPe/vv3y8vSnpvOamf74+PKTkmBE4BQAAAAVdFJOUwAbN8v5A2bmXvbsCnzb8k6vjxG3CVdyowAAAAHXSURBVHjapdZpd6owEAbg1AWEKqvvtIrsouCu7f//be255jbBRDken8/MSTITZsIUU9cPJ/ZgYE9C352yDsHIsyCxvFHA7nsfO1A443emNzRMaJnGkGm89XFX/40peiYeMHvsxsjCQ9bo5nt0akX0LHSyetJ5TaCb+XfyYR/AkbI6xkP9/9k18GtFRNkaDxm8vtcNFeWKVh2butZ8DC6mFFjOVZuowD9j9itwwJVEZZGSDl/aCdolSClG8aHKifaiGB7+JHSAVkY8HR5jU6lmES2hsycqefWmzIWQ0w4Kng3OZT6EhrIFNM6UgPNZCKEg+oDGkiJwIZtAcqIYGp+Ug5swG+hKUyUtbLMBJFvaQrWWjjZoB1wogepCNUSAreRPcZTWtdnkpkIVJEU5W8eHjHKIQ4eQLDJqUOWXc3RcJbtTRlfJAiKtPmQ7ylGTkM7r1fFbqqbPXKVE+XIbHb7zdbOvoHD55VOvn4pfPua10/QVzxRiS95tD1vUpLFpdbPAgaSK6rkiAucErSbQbSy3GW49P8WQRF9JedNmmAHJhiiF0BCJn8EQrfJuwEwK6A91zbjZfcaQnNOkEs34uXb/7EB5bWR1D8XXxm73YH/y6fDS4+Tp588PcLqdUFOb62QAAAAASUVORK5CYII=" / >
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                  )): ''
+                  }
+            </div>    
+            <div className="etjk">
+                {
+                    indexlb ? indexlb[6].map((item, idx) => (
+                    <div className="b2cdrugbox" key={idx}>
+                        <div className="imgListBox">
+
+                            <img src={item.etjkurl} alt="" className="imgPreBox"/>
+                            <div className="infoBox">
+                                <p className="name">
+
+                                    <span className="sign">1-3天</span> {item.etjname}
+                                </p>
+
+                                <p className="zhuzhi_info">{item.etjtitle}</p>
+                                <div className="prootiomBox">
+
+                                    <span className="promotion">{item.etjjuan}</span>
+                                </div>
+                                <div className="goods_buyBox">
+                                    <div className="aboutLeft f1">
+
+                                        <p className="setmeal fl">{item.etjxianjia}</p>
+                                        <p className="sales fl">{item.etjyuanjia}</p>
+                                    </div>
+                                    <div className="addCarbox">
+                                        < img className="addCarImg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAACfUExURUxpcexLS+xFRelFRelFRP9VVetGRulFROpFRelFROlFRP9MTOpFRepFROlFROtHROlFROlFRfBLS+pFRP9VVelFRP///+1nZvzr6+1qafzp6fWurulKSfCCgfrV1f319f79/fGLiupQT+tcW/jHx+tVVPnMzO93dvvd3e5vb/vh4Pa6ufzm5uxhYPSgoPe/vv3y8vSnpvOamf74+PKTkmBE4BQAAAAVdFJOUwAbN8v5A2bmXvbsCnzb8k6vjxG3CVdyowAAAAHXSURBVHjapdZpd6owEAbg1AWEKqvvtIrsouCu7f//be255jbBRDken8/MSTITZsIUU9cPJ/ZgYE9C352yDsHIsyCxvFHA7nsfO1A443emNzRMaJnGkGm89XFX/40peiYeMHvsxsjCQ9bo5nt0akX0LHSyetJ5TaCb+XfyYR/AkbI6xkP9/9k18GtFRNkaDxm8vtcNFeWKVh2butZ8DC6mFFjOVZuowD9j9itwwJVEZZGSDl/aCdolSClG8aHKifaiGB7+JHSAVkY8HR5jU6lmES2hsycqefWmzIWQ0w4Kng3OZT6EhrIFNM6UgPNZCKEg+oDGkiJwIZtAcqIYGp+Ug5swG+hKUyUtbLMBJFvaQrWWjjZoB1wogepCNUSAreRPcZTWtdnkpkIVJEU5W8eHjHKIQ4eQLDJqUOWXc3RcJbtTRlfJAiKtPmQ7ylGTkM7r1fFbqqbPXKVE+XIbHb7zdbOvoHD55VOvn4pfPua10/QVzxRiS95tD1vUpLFpdbPAgaSK6rkiAucErSbQbSy3GW49P8WQRF9JedNmmAHJhiiF0BCJn8EQrfJuwEwK6A91zbjZfcaQnNOkEs34uXb/7EB5bWR1D8XXxm73YH/y6fDS4+Tp588PcLqdUFOb62QAAAAASUVORK5CYII=" / >
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                  )): ''
+                  }
+            </div>    
+            <div className="hc">
+                {
+                    indexlb ? indexlb[7].map((item, idx) => (
+                    <div className="b2cdrugbox" key={idx}>
+                        <div className="imgListBox">
+
+                            <img src={item.hcurl} alt="" className="imgPreBox"/>
+                            <div className="infoBox">
+                                <p className="name">
+
+                                    <span className="sign">1-3天</span> {item.hcname}
+                                </p>
+
+                                <p className="zhuzhi_info">{item.hctitle}</p>
+                                <div className="prootiomBox">
+
+                                    <span className="promotion">{item.hcjuan}</span>
+                                </div>
+                                <div className="goods_buyBox">
+                                    <div className="aboutLeft f1">
+
+                                        <p className="setmeal fl">{item.hcxianjia}</p>
+                                        <p className="sales fl">{item.hcyuanjia}</p>
+                                    </div>
+                                    <div className="addCarbox">
+                                        < img className="addCarImg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAACfUExURUxpcexLS+xFRelFRelFRP9VVetGRulFROpFRelFROlFRP9MTOpFRepFROlFROtHROlFROlFRfBLS+pFRP9VVelFRP///+1nZvzr6+1qafzp6fWurulKSfCCgfrV1f319f79/fGLiupQT+tcW/jHx+tVVPnMzO93dvvd3e5vb/vh4Pa6ufzm5uxhYPSgoPe/vv3y8vSnpvOamf74+PKTkmBE4BQAAAAVdFJOUwAbN8v5A2bmXvbsCnzb8k6vjxG3CVdyowAAAAHXSURBVHjapdZpd6owEAbg1AWEKqvvtIrsouCu7f//be255jbBRDken8/MSTITZsIUU9cPJ/ZgYE9C352yDsHIsyCxvFHA7nsfO1A443emNzRMaJnGkGm89XFX/40peiYeMHvsxsjCQ9bo5nt0akX0LHSyetJ5TaCb+XfyYR/AkbI6xkP9/9k18GtFRNkaDxm8vtcNFeWKVh2butZ8DC6mFFjOVZuowD9j9itwwJVEZZGSDl/aCdolSClG8aHKifaiGB7+JHSAVkY8HR5jU6lmES2hsycqefWmzIWQ0w4Kng3OZT6EhrIFNM6UgPNZCKEg+oDGkiJwIZtAcqIYGp+Ug5swG+hKUyUtbLMBJFvaQrWWjjZoB1wogepCNUSAreRPcZTWtdnkpkIVJEU5W8eHjHKIQ4eQLDJqUOWXc3RcJbtTRlfJAiKtPmQ7ylGTkM7r1fFbqqbPXKVE+XIbHb7zdbOvoHD55VOvn4pfPua10/QVzxRiS95tD1vUpLFpdbPAgaSK6rkiAucErSbQbSy3GW49P8WQRF9JedNmmAHJhiiF0BCJn8EQrfJuwEwK6A91zbjZfcaQnNOkEs34uXb/7EB5bWR1D8XXxm73YH/y6fDS4+Tp588PcLqdUFOb62QAAAAASUVORK5CYII=" / >
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                  )): ''
+                  }
+            </div> 
+            <div className="qlx">
+                {
+                    indexlb ? indexlb[8].map((item, idx) => (
+                    <div className="b2cdrugbox" key={idx}>
+                        <div className="imgListBox">
+
+                            <img src={item.qlxurl} alt="" className="imgPreBox"/>
+                            <div className="infoBox">
+                                <p className="name">
+
+                                    <span className="sign">1-3天</span> {item.qlxname}
+                                </p>
+
+                                <p className="zhuzhi_info">{item.qlxtitle}</p>
+                                <div className="prootiomBox">
+
+                                    <span className="promotion">{item.qlxjuan}</span>
+                                </div>
+                                <div className="goods_buyBox">
+                                    <div className="aboutLeft f1">
+
+                                        <p className="setmeal fl">{item.qlxxianjia}</p>
+                                        <p className="sales fl">{item.qlxyuanjia}</p>
+                                    </div>
+                                    <div className="addCarbox">
+                                        < img className="addCarImg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAACfUExURUxpcexLS+xFRelFRelFRP9VVetGRulFROpFRelFROlFRP9MTOpFRepFROlFROtHROlFROlFRfBLS+pFRP9VVelFRP///+1nZvzr6+1qafzp6fWurulKSfCCgfrV1f319f79/fGLiupQT+tcW/jHx+tVVPnMzO93dvvd3e5vb/vh4Pa6ufzm5uxhYPSgoPe/vv3y8vSnpvOamf74+PKTkmBE4BQAAAAVdFJOUwAbN8v5A2bmXvbsCnzb8k6vjxG3CVdyowAAAAHXSURBVHjapdZpd6owEAbg1AWEKqvvtIrsouCu7f//be255jbBRDken8/MSTITZsIUU9cPJ/ZgYE9C352yDsHIsyCxvFHA7nsfO1A443emNzRMaJnGkGm89XFX/40peiYeMHvsxsjCQ9bo5nt0akX0LHSyetJ5TaCb+XfyYR/AkbI6xkP9/9k18GtFRNkaDxm8vtcNFeWKVh2butZ8DC6mFFjOVZuowD9j9itwwJVEZZGSDl/aCdolSClG8aHKifaiGB7+JHSAVkY8HR5jU6lmES2hsycqefWmzIWQ0w4Kng3OZT6EhrIFNM6UgPNZCKEg+oDGkiJwIZtAcqIYGp+Ug5swG+hKUyUtbLMBJFvaQrWWjjZoB1wogepCNUSAreRPcZTWtdnkpkIVJEU5W8eHjHKIQ4eQLDJqUOWXc3RcJbtTRlfJAiKtPmQ7ylGTkM7r1fFbqqbPXKVE+XIbHb7zdbOvoHD55VOvn4pfPua10/QVzxRiS95tD1vUpLFpdbPAgaSK6rkiAucErSbQbSy3GW49P8WQRF9JedNmmAHJhiiF0BCJn8EQrfJuwEwK6A91zbjZfcaQnNOkEs34uXb/7EB5bWR1D8XXxm73YH/y6fDS4+Tp588PcLqdUFOb62QAAAAASUVORK5CYII=" / >
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                  )): ''
+                  }
+            </div> 
+
+
                 </div>
             </div>
         </main>
@@ -400,4 +541,6 @@ class Ddsc extends Component {
         )
     }
 }
+
+
 export default Ddsc

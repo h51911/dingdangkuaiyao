@@ -114,7 +114,7 @@ header {
 
     width: 100%;
     height: 2.4rem;
-    background: wheat;
+    /* background: wheat; */
 }
 
 .advicebox {
@@ -407,7 +407,7 @@ main {
     line-height: .85rem;
     height: .85rem;
     padding-left: .2rem;
-    width: 646px;
+    width: 15.2rem;
     list-style: none;
 }
 
@@ -528,6 +528,18 @@ main {
 .f1{
     float: left !important;
 }
+.addCarbox{
+    width: .5rem;
+    height: .5rem;
+    float: right !important;
+    box-sizing: border-box;
+
+}
+.addCarImg{
+width: .48rem;
+height: .48rem;
+
+}
 .setmeal {
     font-size: .32rem;
     line-height: .5rem;
@@ -542,4 +554,16 @@ main {
         line-height: .5rem;
         height: .44rem;
         text-decoration: line-through;
+}
+.ant-carousel .slick-slide {
+    text-align: center;
+    height: 2.4rem !important;
+    line-height: 2.4rem;
+    overflow: hidden;
+}
+
+.ant-carousel .slick-slide img {
+    /* color: #fff; */
+    width: 100%;
+    height: 100%;
 }
