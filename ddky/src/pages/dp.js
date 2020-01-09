@@ -3,6 +3,7 @@ import React,{Component} from "react";//引入库
 import "../css/清除默认样式.css";//引入base
 import "../css/dp.css";//引入css
 import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
+import { Icon } from 'antd';
 import {connect} from 'react-redux';
 
 
@@ -49,6 +50,10 @@ async componentDidMount() {
     console.log(this.state);
 }
 
+huitui=()=>{
+
+    this.props.history.goBack();
+}
 
     render(){
 
@@ -58,6 +63,9 @@ async componentDidMount() {
                 {/* 头部 */}
                 <header className="topBox">
                     <div className="Header">
+                        <div className="houtui" onClick={this.huitui}>
+                            <Icon type="left" />
+                        </div>
                         <ul className="Tabs">
                             <li className="itemSt">商品</li>
                             <li className="itemSt">详情</li>

@@ -126,6 +126,12 @@ header {
 
 main {
     background: #f5f5f5;
+
+}
+
+.main0 {
+
+    margin-top: 1.1rem;
 }
 
 .advicebox img {
@@ -437,10 +443,12 @@ main {
     background: #efeff4;
 
 }
-.b2cdrugbox{
+
+.b2cdrugbox {
 
     width: 100%;
 }
+
 .imgListBox {
     width: 100%;
     height: 3.08rem;
@@ -525,36 +533,42 @@ main {
     content: "\20";
     clear: both;
 }
-.f1{
+
+.f1 {
     float: left !important;
 }
-.addCarbox{
+
+.addCarbox {
     width: .5rem;
     height: .5rem;
     float: right !important;
     box-sizing: border-box;
 
 }
-.addCarImg{
-width: .48rem;
-height: .48rem;
+
+.addCarImg {
+    width: .48rem;
+    height: .48rem;
 
 }
+
 .setmeal {
     font-size: .32rem;
     line-height: .5rem;
     height: .44rem;
     color: #e94544;
     margin-right: .2rem;
-    
+
 }
-.sales{
-        color: #888;
-        font-size: .2rem;
-        line-height: .5rem;
-        height: .44rem;
-        text-decoration: line-through;
+
+.sales {
+    color: #888;
+    font-size: .2rem;
+    line-height: .5rem;
+    height: .44rem;
+    text-decoration: line-through;
 }
+
 .ant-carousel .slick-slide {
     text-align: center;
     height: 2.4rem !important;

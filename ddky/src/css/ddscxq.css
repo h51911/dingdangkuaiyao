@@ -286,7 +286,7 @@ dl {
 .navList_in {
     width: 100%;
     position: fixed;
-    top: 1.9rem;
+    top: 1.9rem !important;
     z-index: 1;
 }
 
