@@ -6,22 +6,14 @@ import Ddky from './pages/ddky';
 import Ddsc from './pages/ddsc';
 import Qdlb from './pages/qdlb';
 import Wd from './pages/wd';
-<<<<<<< HEAD
-<<<<<<< HEAD
 import 'antd/dist/antd.css'
-=======
-=======
->>>>>>> laoma
 import Reg from './pages/reg';
 import Pct from './pages/pct';
 import DdkyPct from './pages/ddkypct';
 import Login from './pages/login';
 
 
-<<<<<<< HEAD
->>>>>>> 49d9c7c173d0a4379f6ddde344930d793d828711
-=======
->>>>>>> laoma
+
 class App extends Component {
   state = {
     current: "/ddky",
