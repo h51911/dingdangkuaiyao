@@ -336,7 +336,7 @@
     margin-bottom: 0;
 }
 .footer .footerBoxFl{
-    -webkit-transform: translateX(-3.75rem);
+    transform: translateX(-3.75rem);
     bottom: 0;
     text-align: center;
     color: #666;
@@ -346,6 +346,7 @@
     position: absolute;
     left: 50%;
     margin-bottom: 0;
+    z-index: 2;
 }
 .footerBoxFl>.li2{
     width: 30%;
