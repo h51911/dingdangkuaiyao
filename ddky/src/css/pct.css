@@ -1,7 +1,10 @@
 #Pct {
     display: flex;
     flex-direction: column;
+<<<<<<< HEAD
+=======
     /* width: 7.5rem; */
+>>>>>>> e1cc725f3f1bb88131a86dd36e2c93e140f311ce
     width: 100%;
     height: 100%;
     margin: 0 auto;
@@ -100,7 +103,11 @@
     margin-bottom: .1rem;
 }
 
+<<<<<<< HEAD
+.ol .lio{
+=======
 .ol .lio {
+>>>>>>> e1cc725f3f1bb88131a86dd36e2c93e140f311ce
     text-align: center;
     line-height: .88rem;
     font-size: .28rem;
@@ -110,7 +117,12 @@
     font-weight: 700;
 }
 
+<<<<<<< HEAD
+.item_one{
+    margin-top: .88rem;
+=======
 .item_one {
+>>>>>>> e1cc725f3f1bb88131a86dd36e2c93e140f311ce
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -241,6 +253,7 @@ dl {
     font-size: .2rem;
     line-height: .5rem;
     height: .44rem;
+    text-decoration: none !important;
 }
 
 .goods_buyBox .cars {
@@ -286,4 +299,17 @@ dl {
     text-overflow: ellipsis;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
+}
+.xiaolu{
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+.xiaolu img{
+    margin-top: 50%;
+}
+.xixi{
+    margin-top: 2rem;
+    line-height: 2rem;
+    text-align: center;
 }
