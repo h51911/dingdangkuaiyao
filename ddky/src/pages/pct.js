@@ -114,21 +114,8 @@ async componentDidMount() {
                                 </dd>
                             </dl>
 
-                  )): ''
+                  )):''
                   }
-
-
-
-
-
-
-
-
-
-
-
-
-
                         </div>
                     </div>
 
