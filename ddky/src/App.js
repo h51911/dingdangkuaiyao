@@ -6,15 +6,12 @@ import Ddky from './pages/ddky';
 import Ddsc from './pages/ddsc';
 import Qdlb from './pages/qdlb';
 import Wd from './pages/wd';
-<<<<<<< HEAD
-import 'antd/dist/antd.css'
-=======
 import Reg from './pages/reg';
 import Pct from './pages/pct';
+import DdkyPct from './pages/ddkypct';
 import Login from './pages/login';
 
 
->>>>>>> 49d9c7c173d0a4379f6ddde344930d793d828711
 class App extends Component {
   state = {
     current: "/ddky",
@@ -60,7 +57,8 @@ class App extends Component {
     })
   }
   qiehuan = (inx, path) => {
-    this.props.history.push(path)
+    this.props.history.push(path);
+
     let aa = this.state.menu.map((item, idx) => {
       if (inx === idx) {
         item.isok = true;
@@ -74,17 +72,24 @@ class App extends Component {
       menu: aa
     })
   }
-   componentDidMount() {
-     let aa = this.state.menu.map(item => {
-       if (item.path === this.props.location.pathname) {
-         item.isok = true;
-       }
-       return item;
-     })
-     this.setState({
-       menu: aa
-     })
-   }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.location.pathname != this.props.location.pathname) {
+      let aa = this.state.menu.map(item => {
+        if (item.path === this.props.location.pathname) {
+          item.isok = true;
+        } else {
+          item.isok = false;
+        }
+        return item;
+      })
+
+      this.setState({
+        menu: aa
+      })
+    }
+  }
+
   render() {
     return (
       <>
@@ -96,12 +101,14 @@ class App extends Component {
               <Route path='/qdlb' component={Qdlb} />
               <Route path='/wd' component={Wd} />
               <Route path='/pct' component={Pct} />
+              <Route path='/ddkypct/:name' component={DdkyPct} />
               <Route path='/reg' component={Reg} />
               <Route path='/login' component={Login} />
               <Redirect to="/ddky" />
             </Switch>
           </div>
-          <div className='bottom'>
+          <div className='bottom'
+          >
             <ul>
               {this.state.menu.map((item, inx) => {
                 return (
