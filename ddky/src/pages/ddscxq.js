@@ -1,6 +1,7 @@
 import React,{Component} from "react";//引入库
 import "../css/ddscxq.css";//引入css
 import axios from 'axios';
+import {connect} from 'react-redux'
 
 import { Spin, Alert } from 'antd';
 class ddscxq extends Component{
@@ -26,6 +27,19 @@ async componentDidMount() {
     })
     console.log(this.state.data)
     this.state.jiazai = true;
+}
+
+xqy=({item})=>{
+    // item=item.toString();
+   
+    let action={
+        type:'xqysj',
+        payload:item
+    }
+    this.props.dispatch(action);
+    // console.log(this.props)
+    this.props.history.push('/dp/');
+
 }
 componentDidUpdate(){
 this.state.jiazai = true;
@@ -138,7 +152,7 @@ ddscxqqiehuan(index){
                     // console.log(indexlb[0])
                     xiagqing ? xiagqing.map((item, idx) => (
                             
-                    <dl className="cl" key={idx}>
+                    <dl className="cl" key={idx} onClick={this.xqy.bind(this,{item})}>
                                 <dt className="fl">
                                     <img src={item.xurl} className="z_img"/>
                                 </dt>
@@ -206,6 +220,13 @@ ddscxqqiehuan(index){
 
 }
 
+const quan=function(state){
+
+    return state;
+}
+
+
+ddscxq = connect(quan)(ddscxq)
 export default ddscxq;
 
 
