@@ -20,13 +20,13 @@ class Dp extends Component{
 
 async componentDidMount() {
     
-//    if(this.props.xqysja.xqysja){
-//         let bb = await this.props.xqysja
-//         bb = JSON.stringify(bb);
-//         localStorage.setItem('xqsp', bb)
-//    }
+   if(this.props.xqysja.xurl){
+        let bb = await this.props.xqysja
+        bb = JSON.stringify(bb);
+        localStorage.setItem('xqsp', bb)
+   }
 
-    // console.log(this.props.xqysja);
+    console.log(this.props.xqysja);
     let pan=localStorage.getItem('xqsp');
     console.log(pan);
     if (!(pan =='{}')) {
