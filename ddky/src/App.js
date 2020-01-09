@@ -9,8 +9,8 @@ import Wd from './pages/wd';
 import 'antd/dist/antd.css'
 import Reg from './pages/reg';
 import Pct from './pages/pct';
+import Ddscxq from './pages/ddscxq'
 import DdkyPct from './pages/ddkypct';
-import Login from './pages/login';
 import Login from './pages/login';//登录页
 import Dp from './pages/dp';//详情页
 import Cart from './pages/cart';//购物车页
@@ -33,8 +33,8 @@ class App extends Component {
       image2: 'image/6.jpg',
       isok: false
     }, {
-      name: 'qdlb',
-      path: '/qdlb',
+      name: 'cart',
+      path: '/cart',
       text: '清单列表',
       image1: 'image/3.jpg',
       image2: 'image/7.jpg',
@@ -101,7 +101,6 @@ class App extends Component {
             <Switch>
               <Route path='/ddky' component={Ddky} />
               <Route path='/ddsc' component={Ddsc} />
-              <Route path='/qdlb' component={Qdlb} />
               <Route path='/wd' component={Wd} />
               <Route path='/pct' component={Pct} />
               <Route path='/ddkypct/:name' component={DdkyPct} />

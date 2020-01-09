@@ -1,13 +1,17 @@
 import React, { Component } from "react";//引入库
 import "../css/pct.css";//引入css
 import axios from 'axios';
+import { Button } from "antd"
 class Pct extends Component {
     // 初始化
     state = {
         arr: [],
+        arr1: [],
+        arr2: [],
         xiaolu: false,
-        show: false,
-        shuju: this.props.match.params.name
+        show: true,
+        shuju: this.props.match.params.name,
+        xianshi: false
     }
 
     async componentDidMount() {
@@ -15,10 +19,19 @@ class Pct extends Component {
         let { data } = await axios.get('http://localhost:1911/login/ddky', {
             params: aa
         })
+        let data1 = await axios.get('http://localhost:1911/login/ddks', {
+            params: aa
+        })
+        let data2 = await axios.get('http://localhost:1911/login/ddks', {
+            params: aa
+        })
+
         this.setState({
             arr: data,
+            arr1: data1.data,
+            arr2: data2.data,
             xiaolu: true,
-            show: data.length > 0 ? true : false
+            show: data.length || data1.data.length || data2.data.length2 > 0 ? true : false
         })
     }
     gaishu = (ev) => {
@@ -26,13 +39,36 @@ class Pct extends Component {
             shuju: ev.target.value
         })
     }
+    handleScrollTop = () => {
+        let aa = setInterval(() => {
+            this.title.scrollTo(0, this.title.scrollTop / 5)
+            if (this.title.scrollTop <= 0) {
+                clearInterval(aa)
+            }
+        }, 200);
+    }
+    haha = () => {
+        if (this.title.scrollTop > this.box.offsetHeight) {
+            this.setState({
+                xianshi: true
+            })
+        }
+        else {
+            this.setState({
+                xianshi: false
+            })
+        }
+    }
     // 渲染
     render() {
+        let { arr, arr1, arr2 } = this.state;
+        const { size } = this.state;
         return (
             <>
+                <Button type="primary" shape="circle" icon="up" size={size} onClick={this.handleScrollTop} style={this.state.xianshi ? { display: 'block' } : { display: 'none' }} />
                 <div className='xiaolu' style={this.state.xiaolu ? { display: 'none' } : { display: 'block' }}><img src='/image/timg.gif' /></div>
                 <div className='xixi' style={this.state.show ? { display: 'none' } : { display: 'block' }}>没有找到该商品</div>
-                <section id="Pct">
+                <section id="Pct" >
                     {/* 头部 */}
 
                     <header className="header_cl">
@@ -49,7 +85,7 @@ class Pct extends Component {
                     </header>
 
                     {/* 内容 */}
-                    <main className="boxs">
+                    <main className="boxs" ref={(ele) => this.box = ele} onScroll={this.haha} >
                         <div className="navList_in">
                             <ol className="ol">
                                 <li className="lio">默认</li>
@@ -58,13 +94,127 @@ class Pct extends Component {
                             </ol>
                         </div>
                         <div className="item_one">
-                            <div className="items_s">
+                            <div className="items_s" ref={(ele) => this.title = ele}>
 
 
                                 {
+                                    arr.map((item, idx) => (
+                                        <dl className="cl" key={idx}>
+                                            <dt className="fl">
+                                                <img src={item.imgurl} className="z_img" />
+                                            </dt>
+                                            <dd className="goodsInfo_fr">
+                                                <h3 className="h3">
+                                                    <span className="sign">28分钟</span>
+                                                    {item.name}
+                                                </h3>
+                                                <p className="zhuzhi_info">
+                                                    {item.shop}
+                                                </p>
+                                                <p className="other2">
+                                                    {item.liang}
+                                                </p>
+                                                <div className="goods_buyBox">
+                                                    <div className="aboutLeft">
+                                                        <p className="setmeal">
+                                                            {item.price}
+                                                        </p>
+                                                        <p className="sales">
+                                                            {item.setmeal}
+                                                        </p>
+                                                    </div>
+                                                    < img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAACfUExURUxpcexLS+xFRelFRelFRP9VVetGRulFROpFRelFROlFRP9MTOpFRepFROlFROtHROlFROlFRfBLS+pFRP9VVelFRP///+1nZvzr6+1qafzp6fWurulKSfCCgfrV1f319f79/fGLiupQT+tcW/jHx+tVVPnMzO93dvvd3e5vb/vh4Pa6ufzm5uxhYPSgoPe/vv3y8vSnpvOamf74+PKTkmBE4BQAAAAVdFJOUwAbN8v5A2bmXvbsCnzb8k6vjxG3CVdyowAAAAHXSURBVHjapdZpd6owEAbg1AWEKqvvtIrsouCu7f//be255jbBRDken8/MSTITZsIUU9cPJ/ZgYE9C352yDsHIsyCxvFHA7nsfO1A443emNzRMaJnGkGm89XFX/40peiYeMHvsxsjCQ9bo5nt0akX0LHSyetJ5TaCb+XfyYR/AkbI6xkP9/9k18GtFRNkaDxm8vtcNFeWKVh2butZ8DC6mFFjOVZuowD9j9itwwJVEZZGSDl/aCdolSClG8aHKifaiGB7+JHSAVkY8HR5jU6lmES2hsycqefWmzIWQ0w4Kng3OZT6EhrIFNM6UgPNZCKEg+oDGkiJwIZtAcqIYGp+Ug5swG+hKUyUtbLMBJFvaQrWWjjZoB1wogepCNUSAreRPcZTWtdnkpkIVJEU5W8eHjHKIQ4eQLDJqUOWXc3RcJbtTRlfJAiKtPmQ7ylGTkM7r1fFbqqbPXKVE+XIbHb7zdbOvoHD55VOvn4pfPua10/QVzxRiS95tD1vUpLFpdbPAgaSK6rkiAucErSbQbSy3GW49P8WQRF9JedNmmAHJhiiF0BCJn8EQrfJuwEwK6A91zbjZfcaQnNOkEs34uXb/7EB5bWR1D8XXxm73YH/y6fDS4+Tp588PcLqdUFOb62QAAAAASUVORK5CYII="
+                                                        className="cars" />
+                                                </div>
+                                                <div className="prootiomBox2">
+                                                    <div className="fls">
+                                                        <span className="promotion">
+                                                            满68减18
+                                                            </span>
+                                                    </div>
+                                                    <div className="fls">
+                                                        <span className="promotion">
+                                                            满68减18
+                                                            </span>
+                                                    </div>
+                                                    <div className="fls">
+                                                        <span className="promotion">
+                                                            满68减18
+                                                            </span>
+                                                    </div>
+                                                </div>
 
-                                    this.state.arr.map((item, idx) => (
+                                                <div className="shopname">
+                                                    <span className="ckspsan">
+                                                        {item.smallimgs}
+                                                    </span>
+                                                </div>
 
+                                            </dd>
+                                        </dl>
+
+                                    ))
+
+                                }  {
+                                    arr1.map((item, idx) => (
+                                        <dl className="cl" key={idx}>
+                                            <dt className="fl">
+                                                <img src={item.imgurl} className="z_img" />
+                                            </dt>
+                                            <dd className="goodsInfo_fr">
+                                                <h3 className="h3">
+                                                    <span className="sign">28分钟</span>
+                                                    {item.name}
+                                                </h3>
+                                                <p className="zhuzhi_info">
+                                                    {item.shop}
+                                                </p>
+                                                <p className="other2">
+                                                    {item.liang}
+                                                </p>
+                                                <div className="goods_buyBox">
+                                                    <div className="aboutLeft">
+                                                        <p className="setmeal">
+                                                            {item.price}
+                                                        </p>
+                                                        <p className="sales">
+                                                            {item.setmeal}
+                                                        </p>
+                                                    </div>
+                                                    < img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAACfUExURUxpcexLS+xFRelFRelFRP9VVetGRulFROpFRelFROlFRP9MTOpFRepFROlFROtHROlFROlFRfBLS+pFRP9VVelFRP///+1nZvzr6+1qafzp6fWurulKSfCCgfrV1f319f79/fGLiupQT+tcW/jHx+tVVPnMzO93dvvd3e5vb/vh4Pa6ufzm5uxhYPSgoPe/vv3y8vSnpvOamf74+PKTkmBE4BQAAAAVdFJOUwAbN8v5A2bmXvbsCnzb8k6vjxG3CVdyowAAAAHXSURBVHjapdZpd6owEAbg1AWEKqvvtIrsouCu7f//be255jbBRDken8/MSTITZsIUU9cPJ/ZgYE9C352yDsHIsyCxvFHA7nsfO1A443emNzRMaJnGkGm89XFX/40peiYeMHvsxsjCQ9bo5nt0akX0LHSyetJ5TaCb+XfyYR/AkbI6xkP9/9k18GtFRNkaDxm8vtcNFeWKVh2butZ8DC6mFFjOVZuowD9j9itwwJVEZZGSDl/aCdolSClG8aHKifaiGB7+JHSAVkY8HR5jU6lmES2hsycqefWmzIWQ0w4Kng3OZT6EhrIFNM6UgPNZCKEg+oDGkiJwIZtAcqIYGp+Ug5swG+hKUyUtbLMBJFvaQrWWjjZoB1wogepCNUSAreRPcZTWtdnkpkIVJEU5W8eHjHKIQ4eQLDJqUOWXc3RcJbtTRlfJAiKtPmQ7ylGTkM7r1fFbqqbPXKVE+XIbHb7zdbOvoHD55VOvn4pfPua10/QVzxRiS95tD1vUpLFpdbPAgaSK6rkiAucErSbQbSy3GW49P8WQRF9JedNmmAHJhiiF0BCJn8EQrfJuwEwK6A91zbjZfcaQnNOkEs34uXb/7EB5bWR1D8XXxm73YH/y6fDS4+Tp588PcLqdUFOb62QAAAAASUVORK5CYII="
+                                                        className="cars" />
+                                                </div>
+                                                <div className="prootiomBox2">
+                                                    <div className="fls">
+                                                        <span className="promotion">
+                                                            满68减18
+                                                            </span>
+                                                    </div>
+                                                    <div className="fls">
+                                                        <span className="promotion">
+                                                            满68减18
+                                                            </span>
+                                                    </div>
+                                                    <div className="fls">
+                                                        <span className="promotion">
+                                                            满68减18
+                                                            </span>
+                                                    </div>
+                                                </div>
+
+                                                <div className="shopname">
+                                                    <span className="ckspsan">
+                                                        {item.smallimgs}
+                                                    </span>
+                                                </div>
+
+                                            </dd>
+                                        </dl>
+
+                                    ))
+
+                                }  {
+                                    arr2.map((item, idx) => (
                                         <dl className="cl" key={idx}>
                                             <dt className="fl">
                                                 <img src={item.imgurl} className="z_img" />
