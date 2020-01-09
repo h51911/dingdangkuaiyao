@@ -326,17 +326,17 @@
 /* 底部 */
 .footer{
     height: 1rem;
-    background-color: #fff;
+    position: absolute;
     bottom: 0;
+    background: transparent;
+    color: transparent;
     text-align: center;
-    color: #666;
-    background: #ffff;
     display: flex;
     flex-direction: row;
     margin-bottom: 0;
+    z-index: 2;
 }
 .footer .footerBoxFl{
-    -webkit-transform: translateX(-3.75rem);
     bottom: 0;
     text-align: center;
     color: #666;

@@ -290,7 +290,7 @@ class Ddsc extends Component {
                     indexlb ? indexlb[0].map((item, idx) => (
                             
                     <div className="b2cdrugbox" key={idx} onClick={()=>{
-                        history.push('/ddscxq/'+item)
+                        history.push('/dp/'+item)
                     }}>
                         <div className="imgListBox">
                             <img src={item.nxjkurl} alt="" className="imgPreBox"/>
