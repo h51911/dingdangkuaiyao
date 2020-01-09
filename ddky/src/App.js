@@ -11,8 +11,9 @@ import Reg from './pages/reg';
 import Pct from './pages/pct';
 import DdkyPct from './pages/ddkypct';
 import Login from './pages/login';
-
-
+import Login from './pages/login';//登录页
+import Dp from './pages/dp';//详情页
+import Cart from './pages/cart';//购物车页
 
 class App extends Component {
   state = {
@@ -104,13 +105,15 @@ class App extends Component {
               <Route path='/wd' component={Wd} />
               <Route path='/pct' component={Pct} />
               <Route path='/ddkypct/:name' component={DdkyPct} />
+              <Route path='/ddscxq' component={Ddscxq} />
               <Route path='/reg' component={Reg} />
               <Route path='/login' component={Login} />
+              <Route path='/dp' component={Dp} />
+              <Route path='/cart' component={Cart} />
               <Redirect to="/ddky" />
             </Switch>
           </div>
-          <div className='bottom'
-          >
+          <div className='bottom' style={this.props.location.pathname == "/dp" ? { display: 'none' } : { display: 'block' }}>
             <ul>
               {this.state.menu.map((item, inx) => {
                 return (

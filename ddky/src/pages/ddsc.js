@@ -8,30 +8,61 @@ class Ddsc extends Component {
     state={
         data:{
 
-        }
+        },
+        daojishi:0
 
     }
 
    async componentDidMount(){
+       let date=new Date();
+       
+       let shi = (date.getHours())*60*60;
+       let fen = (date.getMinutes())*60;
+       let miao = date.getSeconds();
+        let daojishi=shi+fen+miao;
 
+        this.setState({
+           daojishi
+
+        })
+        // console.log(this.state.daojishi)
         let {data} = await axios.get("http://localhost:1911/login/scsuoyou");
     //    console.log(data[0])
         this.setState({
                 data:data[0]
 
         })
-         console.log(this.state.data);
+
+
+        setInterval(() => {
+            let xian = (this.state.daojishi) - 1;
+            this.setState({
+                daojishi: xian
+            })
+        }, 1000);
+        
+    }
+    PrefixZero(num, n) {
+        return ((Array(n).join(0) + num).slice(-n));
     }
 
+  
 
     // buynow(){
 
     //     console.log(this.props);
     // }
     render() {
+        
         let {miaosha,pinpaizhuanqu,indexlb}=this.state.data;
+       let {daojishi}= this.state;
+       let daojishi1=daojishi;
+       let shi = this.PrefixZero((Math.floor(daojishi1 / 3600)), 2);
+        let fen = this.PrefixZero((Math.floor((daojishi1 - (shi * 3600)) / 60)), 2);
+       let miao = this.PrefixZero(((daojishi1 - ((shi * 3600) + (fen * 60)))), 2);
+        
         let {history}=this.props;
-        console.log(this.props);
+      
         return (
             <>
                 <div className="box">
@@ -101,20 +132,48 @@ class Ddsc extends Component {
 
             <div className="main2">
                 <div className="main2-1">
-                    <img src="https://img.ddky.com/c/cms/temp/20191112/1573524106331_216_252.jpg" alt=""/>
-                    <img src="https://img.ddky.com/c/cms/temp/20191123/1574501760060_216_252.jpg" alt=""/>
-                    <img src="https://img.ddky.com/c/cms/temp/20191011/1570775807773_216_252.jpg" alt=""/>
-                    <img src="https://img.ddky.com/c/cms/temp/20191011/1570775822234_216_252.jpg" alt=""/>
-                    <img src="https://img.ddky.com/c/cms/temp/20191011/1570792013133_216_252.jpg" alt=""/>
-                    <img src="https://img.ddky.com/c/cms/temp/20190628/1561687452768_216_252.jpg" alt=""/>
-                    <img src="https://img.ddky.com/c/cms/temp/20190628/1561691530711_216_252.jpg" alt=""/>
-                    <img src="https://img.ddky.com/c/cms/temp/20190813/1565680344127_216_252.jpg" alt=""/>
-                    <img src="https://img.ddky.com/c/cms/temp/20191011/1570775840587_216_252.jpg" alt=""/>
-                    <img src="https://img.ddky.com/c/cms/temp/20191011/1570792032169_216_252.jpg" alt=""/>
-                    <img src="https://img.ddky.com/c/cms/temp/20191011/1570775847004_216_252.jpg" alt=""/>
-                    <img src="https://img.ddky.com/c/cms/temp/20190813/1565680307399_216_252.jpg" alt=""/>
-                    <img src="https://img.ddky.com/c/cms/temp/20191011/1570792021422_216_252.jpg" alt=""/>
-                    <img src="https://img.ddky.com/c/cms/temp/20190628/1561687568434_216_252.jpg" alt=""/>
+                    <img src="https://img.ddky.com/c/cms/temp/20191112/1573524106331_216_252.jpg" alt="" onClick={()=>{
+                        history.push('/ddscxq/')
+                    }}/>
+                    <img src="https://img.ddky.com/c/cms/temp/20191123/1574501760060_216_252.jpg" alt="" onClick={()=>{
+                        history.push('/ddscxq/')
+                    }}/>
+                    <img src="https://img.ddky.com/c/cms/temp/20191011/1570775807773_216_252.jpg" alt="" onClick={()=>{
+                        history.push('/ddscxq/')
+                    }}/>
+                    <img src="https://img.ddky.com/c/cms/temp/20191011/1570775822234_216_252.jpg" alt="" onClick={()=>{
+                        history.push('/ddscxq/')
+                    }}/>
+                    <img src="https://img.ddky.com/c/cms/temp/20191011/1570792013133_216_252.jpg" alt="" onClick={()=>{
+                        history.push('/ddscxq/')
+                    }}/>
+                    <img src="https://img.ddky.com/c/cms/temp/20190628/1561687452768_216_252.jpg" alt="" onClick={()=>{
+                        history.push('/ddscxq/')
+                    }}/>
+                    <img src="https://img.ddky.com/c/cms/temp/20190628/1561691530711_216_252.jpg" alt="" onClick={()=>{
+                        history.push('/ddscxq/')
+                    }}/>
+                    <img src="https://img.ddky.com/c/cms/temp/20190813/1565680344127_216_252.jpg" alt="" onClick={()=>{
+                        history.push('/ddscxq/')
+                    }}/>
+                    <img src="https://img.ddky.com/c/cms/temp/20191011/1570775840587_216_252.jpg" alt="" onClick={()=>{
+                        history.push('/ddscxq/')
+                    }}/>
+                    <img src="https://img.ddky.com/c/cms/temp/20191011/1570792032169_216_252.jpg" alt="" onClick={()=>{
+                        history.push('/ddscxq/')
+                    }}/>
+                    <img src="https://img.ddky.com/c/cms/temp/20191011/1570775847004_216_252.jpg" alt="" onClick={()=>{
+                        history.push('/ddscxq/')
+                    }}/>
+                    <img src="https://img.ddky.com/c/cms/temp/20190813/1565680307399_216_252.jpg" alt="" onClick={()=>{
+                        history.push('/ddscxq/')
+                    }}/>
+                    <img src="https://img.ddky.com/c/cms/temp/20191011/1570792021422_216_252.jpg" alt="" onClick={()=>{
+                        history.push('/ddscxq/')
+                    }}/>
+                    <img src="https://img.ddky.com/c/cms/temp/20190628/1561687568434_216_252.jpg" alt="" onClick={()=>{
+                        history.push('/ddscxq/')
+                    }}/>
                 </div>
             </div>
 
@@ -124,9 +183,16 @@ class Ddsc extends Component {
                         <div className="timer">
                             <div className="countdown">
                                 <p className="timermiaosha">秒杀</p>
-                                <span>23</span> 时
-                                <span>22</span> 分
-                                <span>43</span> 秒
+
+
+                                {/* {
+                                    
+                                     daojishi
+                                    
+                                } */}
+                            <span>{shi}</span> 时
+                            <span>{fen}</span> 分
+                            <span>{miao}</span> 秒
                             </div>
                         </div>
                         <div className="main3-1a">
@@ -213,16 +279,18 @@ class Ddsc extends Component {
                             <span>前列腺</span>
                         </li>
                     </ul>
+                    
                 </div>
                 <div className="imgList">
 
                 <div className="nxjk">
                 {
+                    
                     // console.log(indexlb[0])
                     indexlb ? indexlb[0].map((item, idx) => (
                             
                     <div className="b2cdrugbox" key={idx} onClick={()=>{
-                        history.push('/pct/'+item)
+                        history.push('/dp/'+item)
                     }}>
                         <div className="imgListBox">
                             <img src={item.nxjkurl} alt="" className="imgPreBox"/>
@@ -248,6 +316,7 @@ class Ddsc extends Component {
                     </div>
 
                   )): ''
+                  
                   }
             </div>
 
