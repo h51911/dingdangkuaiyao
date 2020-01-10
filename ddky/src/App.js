@@ -14,10 +14,13 @@ import DdkyPct from './pages/ddkypct';
 import Login from './pages/login';//登录页
 import Dp from './pages/dp';//详情页
 import Cart from './pages/cart';//购物车页
-
+import { connect } from 'react-redux';
+import axios from 'axios';
+import { Badge } from "antd"
 class App extends Component {
   state = {
     current: "/ddky",
+    biaoqian: "cart",
     menu: [{
       name: 'ddky',
       path: '/ddky',
@@ -48,7 +51,7 @@ class App extends Component {
       isok: false
     }]
   }
-  componentDidMount() {
+  async componentDidMount() {
     let aa = this.state.menu.map(item => {
       if (item.path === this.props.location.pathname) {
         item.isok = true;
@@ -57,7 +60,15 @@ class App extends Component {
     })
     this.setState({
       menu: aa
+    });
+    let { data } = await axios.get("http://localhost:1911/login/ddkycart", {
+      params: this.props.state.zhanghao
     })
+    let action = {
+      type: "shujuku",
+      payload: data
+    }
+    this.props.dispatch(action);
   }
   qiehuan = (inx, path) => {
     this.props.history.push(path);
@@ -113,10 +124,14 @@ class App extends Component {
             </Switch>
           </div>
           <div className='bottom' style={this.props.location.pathname == "/dp" ? { display: 'none' } : { display: 'block' }}>
+
             <ul>
               {this.state.menu.map((item, inx) => {
                 return (
-                  <li key={item.path} onClick={this.qiehuan.bind(null, inx, item.path)}><div className='yingchang'><p><img src={item.isok ? item.image2 : item.image1} /></p><p style={item.isok ? { color: "red" } : { color: " #585858" }}>{item.text}</p></div></li>
+                  <li key={item.path} onClick={this.qiehuan.bind(null, inx, item.path)}  >
+                    <div className='yingchang'><p><img src={item.isok ? item.image2 : item.image1} /></p><p style={item.isok ? { color: "red" } : { color: " #585858" }}>{item.text}</p></div> <Badge count={this.props.state.arr.length} overflowCount={99} style={this.state.biaoqian == item.name ? { display: "block" } : { display: "none" }} >
+                      <a href="#" className="head-example" />
+                    </Badge></li>
                 )
               })}
             </ul>
@@ -126,5 +141,9 @@ class App extends Component {
     )
   }
 }
+const haha = state => ({
+  state
+})
+App = connect(haha)(App);
 App = withRouter(App);
 export default App

@@ -1,12 +1,21 @@
 .qingkong{
-   bottom: 1rem;
+    position: fixed;
+    bottom: .98rem;
+    right: .2rem;
+    z-index: 102;
     margin-right: 5rem;
 }
 .jiesuan{
-    bottom: 1rem;
+    position: fixed;
+    bottom: .98rem;
+    right: .2rem;
+    z-index: 102;
 }
 .zongjia{
-    bottom: 1rem;
+    position: fixed;
+    bottom:.98rem;
+    right: .2rem;
+    z-index: 102;
     right: 28%;
 }
 .shenlie{
@@ -15,4 +24,27 @@
 		display:-webkit-box;
 		-webkit-line-clamp:2;
 		-webkit-box-orient:vertical;
+}
+.fanhui{
+    width: 100%;
+    height: .9rem;
+    display: flex;
+}
+.fanhui p{
+    width: .5rem;
+    height: .5rem;
+    border-radius: 50%;
+    background: #000;
+    color: #fff;
+    text-align: center;
+   margin-top: .2rem;
+   margin-left: .2rem;
+   line-height: .5rem;
+   font-weight: 900;
+   font-size: 16px;
+}
+.fanhui h2{
+    margin-left: 35%;
+    line-height: .8rem;
+    font-size: 16px;
 }

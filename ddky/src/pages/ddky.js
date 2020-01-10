@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import '../css/ddky.css';
-import { Carousel } from 'antd';
+import { Carousel, message } from 'antd';
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
+import { connect } from 'react-redux';
 class Ddky extends Component {
     state = {
         arrs: [
@@ -216,6 +217,87 @@ class Ddky extends Component {
             this.nav.scrollTo(0, this.title5.offsetTop)
         }
     }
+    tiaozhuan = (item) => {
+
+        let action = {
+            type: 'xqysj',
+            payload: {
+                xurl: item.imgurl,
+                xname: item.name,
+                xtitle: item.shop,
+                xliang: item.liang,
+                xjiage: item.price,
+                xxiangliang: item.setmeal,
+                uid: item.uid
+            }
+        }
+        this.props.dispatch(action);
+        this.props.history.push("/dp");
+    }
+    gouwu = async (items, ev) => {
+        ev.stopPropagation();
+        console.log(this.props)
+        let aa = this.props.state.arr.filter(item => { return item.uid == items.uid });
+        // console.log(aa);
+        if (aa.length) {
+            let { data } = await axios.get('http://localhost:1911/login/ddkyjia', {
+                params: {
+                    name: this.props.zhanghao,
+                    value: aa[0].num + 1,
+                    id: aa[0].uid
+                }
+            })
+
+            if (data) {
+                message.success('添加成功');
+            }
+            let action = {
+                type: "xiugai",
+                payload: {
+                    id: aa[0].uid,
+                    value: aa[0].num + 1
+                }
+            }
+            this.props.dispatch(action);
+        } else {
+            let aa = await axios.get('http://localhost:1911/login/ddkyzhen', {
+                params: {
+                    usename: this.props.state.zhanghao,
+                    imgurl: items.imgurl,
+                    uid: items.uid,
+                    name: items.name,
+                    shop: items.shop,
+                    price: items.price,
+                    setmeal: items.setmeal,
+                    liang: items.liang,
+                    num: 1
+                }
+            })
+
+            if (aa) {
+                message.success('添加成功');
+                let action = {
+                    type: "tianjia",
+                    payload: {
+                        usename: this.props.state.zhanghao,
+                        imgurl: items.imgurl,
+                        uid: items.uid,
+                        name: items.name,
+                        shop: items.shop,
+                        price: items.price,
+                        setmeal: items.setmeal,
+                        liang: items.liang,
+                        num: 1
+                    }
+                }
+                this.props.dispatch(action);
+            }
+
+        }
+    }
+    componentWillUnmount() {
+        console.log(this.nav.scrollTop)
+    }
     render() {
         return (
             <>
@@ -328,7 +410,7 @@ class Ddky extends Component {
                         <div className='ganmao' ref={(ele) => this.title1 = ele}>
                             {this.state.ganmao.map((item, inx) => {
                                 return (
-                                    <div className='goodss' key={inx}>
+                                    <div className='goodss' key={inx} onClick={this.tiaozhuan.bind(null, item)}>
                                         <div className='goods'>
                                             <img src={item.imgurl} />
                                         </div>
@@ -344,7 +426,7 @@ class Ddky extends Component {
                                             </p>
                                             <div className='down'>
                                                 <span className='spec'>￥42.80</span><del>￥49.40</del>
-                                                <img src='/image/y6fDS4_Tp588PcLqdUFOb62QAAAAASUVORK5CYII_.png' />
+                                                <img src='/image/y6fDS4_Tp588PcLqdUFOb62QAAAAASUVORK5CYII_.png' onClick={this.gouwu.bind(null, item)} />
                                             </div>
                                         </div>
                                     </div>
@@ -354,7 +436,7 @@ class Ddky extends Component {
                         <div className='zirun' ref={(ele) => this.title2 = ele}>
                             {this.state.zirun.map((item, inx) => {
                                 return (
-                                    <div className='goodss' key={inx}>
+                                    <div className='goodss' key={inx} onClick={this.tiaozhuan.bind(null, item)} >
                                         <div className='goods'>
                                             <img src={item.imgurl} />
                                         </div>
@@ -370,7 +452,7 @@ class Ddky extends Component {
                                             </p>
                                             <div className='down'>
                                                 <span className='spec'>￥42.80</span><del>￥49.40</del>
-                                                <img src='/image/y6fDS4_Tp588PcLqdUFOb62QAAAAASUVORK5CYII_.png' />
+                                                <img src='/image/y6fDS4_Tp588PcLqdUFOb62QAAAAASUVORK5CYII_.png' onClick={this.gouwu.bind(null, item)} />
                                             </div>
                                         </div>
                                     </div>
@@ -380,7 +462,7 @@ class Ddky extends Component {
                         <div className='nanxing' ref={(ele) => this.title3 = ele}>
                             {this.state.nanxing.map((item, inx) => {
                                 return (
-                                    <div className='goodss' key={inx}>
+                                    <div className='goodss' key={inx} onClick={this.tiaozhuan.bind(null, item)}>
                                         <div className='goods'>
                                             <img src={item.imgurl} />
                                         </div>
@@ -396,7 +478,7 @@ class Ddky extends Component {
                                             </p>
                                             <div className='down'>
                                                 <span className='spec'>￥42.80</span><del>￥49.40</del>
-                                                <img src='/image/y6fDS4_Tp588PcLqdUFOb62QAAAAASUVORK5CYII_.png' />
+                                                <img src='/image/y6fDS4_Tp588PcLqdUFOb62QAAAAASUVORK5CYII_.png' onClick={this.gouwu.bind(null, item)} />
                                             </div>
                                         </div>
                                     </div>
@@ -406,7 +488,7 @@ class Ddky extends Component {
                         <div className='qingqu' ref={(ele) => this.title4 = ele}>
                             {this.state.qingqu.map((item, inx) => {
                                 return (
-                                    <div className='goodss' key={inx} >
+                                    <div className='goodss' key={inx} onClick={this.tiaozhuan.bind(null, item)}>
                                         <div className='goods'>
                                             <img src={item.imgurl} />
                                         </div>
@@ -422,17 +504,17 @@ class Ddky extends Component {
                                             </p>
                                             <div className='down'>
                                                 <span className='spec'>￥42.80</span><del>￥49.40</del>
-                                                <img src='/image/y6fDS4_Tp588PcLqdUFOb62QAAAAASUVORK5CYII_.png' />
+                                                <img src='/image/y6fDS4_Tp588PcLqdUFOb62QAAAAASUVORK5CYII_.png' onClick={this.gouwu.bind(null, item)} />
                                             </div>
                                         </div>
                                     </div>
                                 )
                             })}
                         </div>
-                        <div className='nvxing' ref={(ele) => this.title5 = ele}>
+                        <div className='nvxing' ref={(ele) => this.title5 = ele}  >
                             {this.state.nvxing.map((item, inx) => {
                                 return (
-                                    <div className='goodss' key={inx}>
+                                    <div className='goodss' key={inx} onClick={this.tiaozhuan.bind(null, item)}>
                                         <div className='goods'>
                                             <img src={item.imgurl} />
                                         </div>
@@ -448,7 +530,7 @@ class Ddky extends Component {
                                             </p>
                                             <div className='down'>
                                                 <span className='spec'>￥42.80</span><del>￥49.40</del>
-                                                <img src='/image/y6fDS4_Tp588PcLqdUFOb62QAAAAASUVORK5CYII_.png' />
+                                                <img src='/image/y6fDS4_Tp588PcLqdUFOb62QAAAAASUVORK5CYII_.png' onClick={this.gouwu.bind(null, item)} />
                                             </div>
                                         </div>
                                     </div>
@@ -462,5 +544,9 @@ class Ddky extends Component {
         )
     }
 }
+const mapStateToProps = state => ({
+    state
+})
+Ddky = connect(mapStateToProps)(Ddky);
 Ddky = withRouter(Ddky);
 export default Ddky;
