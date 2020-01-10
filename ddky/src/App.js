@@ -5,9 +5,12 @@ import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import Ddky from './pages/ddky';
 import Ddsc from './pages/ddsc';
 import Qdlb from './pages/qdlb';
-import Wd from './pages/wd';//我的
-import Reg from './pages/reg';//注册页
-import Pct from './pages/pct';//列表页
+import Wd from './pages/wd';
+import 'antd/dist/antd.css'
+import Reg from './pages/reg';
+import Pct from './pages/pct';
+import Ddscxq from './pages/ddscxq'
+import DdkyPct from './pages/ddkypct';
 import Login from './pages/login';//登录页
 import Dp from './pages/dp';//详情页
 import Cart from './pages/cart';//购物车页
@@ -30,8 +33,8 @@ class App extends Component {
       image2: 'image/6.jpg',
       isok: false
     }, {
-      name: 'qdlb',
-      path: '/qdlb',
+      name: 'cart',
+      path: '/cart',
       text: '清单列表',
       image1: 'image/3.jpg',
       image2: 'image/7.jpg',
@@ -57,7 +60,8 @@ class App extends Component {
     })
   }
   qiehuan = (inx, path) => {
-    this.props.history.push(path)
+    this.props.history.push(path);
+
     let aa = this.state.menu.map((item, idx) => {
       if (inx === idx) {
         item.isok = true;
@@ -71,17 +75,24 @@ class App extends Component {
       menu: aa
     })
   }
-   componentDidMount() {
-     let aa = this.state.menu.map(item => {
-       if (item.path === this.props.location.pathname) {
-         item.isok = true;
-       }
-       return item;
-     })
-     this.setState({
-       menu: aa
-     })
-   }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.location.pathname != this.props.location.pathname) {
+      let aa = this.state.menu.map(item => {
+        if (item.path === this.props.location.pathname) {
+          item.isok = true;
+        } else {
+          item.isok = false;
+        }
+        return item;
+      })
+
+      this.setState({
+        menu: aa
+      })
+    }
+  }
+
   render() {
     return (
       <>
@@ -90,9 +101,10 @@ class App extends Component {
             <Switch>
               <Route path='/ddky' component={Ddky} />
               <Route path='/ddsc' component={Ddsc} />
-              <Route path='/qdlb' component={Qdlb} />
               <Route path='/wd' component={Wd} />
               <Route path='/pct' component={Pct} />
+              <Route path='/ddkypct/:name' component={DdkyPct} />
+              <Route path='/ddscxq' component={Ddscxq} />
               <Route path='/reg' component={Reg} />
               <Route path='/login' component={Login} />
               <Route path='/dp' component={Dp} />

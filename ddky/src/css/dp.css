@@ -21,8 +21,20 @@
     display: flex;
     flex-direction: row;
     border-bottom: 1px solid #ddd;
+    position: relative;
 }
+.houtui {
+    width: .6rem;
+    height: .6rem;
+    /* background: #e94544; */
+    left: .2rem;
+    top:0 ;
+    bottom: 0;
+    margin: auto auto;
 
+    border-radius: 50%;
+
+}
 .Header .Tabs{
     height: 100%;
     margin: 0 2.1rem;
@@ -326,17 +338,18 @@
 /* 底部 */
 .footer{
     height: 1rem;
-    background-color: #fff;
+    position: absolute;
     bottom: 0;
+    background: transparent;
+    color: transparent;
     text-align: center;
-    color: #666;
-    background: #ffff;
     display: flex;
     flex-direction: row;
     margin-bottom: 0;
+    z-index: 999;
 }
 .footer .footerBoxFl{
-    -webkit-transform: translateX(-3.75rem);
+    /* transform: translateX(-3.75rem) !important; */
     bottom: 0;
     text-align: center;
     color: #666;
@@ -346,6 +359,7 @@
     position: absolute;
     left: 50%;
     margin-bottom: 0;
+    z-index: 9999;
 }
 .footerBoxFl>.li2{
     width: 30%;

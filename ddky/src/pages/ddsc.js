@@ -1,17 +1,23 @@
 import React, { Component } from 'react';
 import '../css/ddsc.css';
-import { Carousel } from 'antd';
+import {Carousel,message,Button} from 'antd';
 import 'antd/dist/antd.css';
 import axios from 'axios';
+import {connect} from 'react-redux';
+
+let daojishi=null;
 class Ddsc extends Component {
 
     state={
         data:{
 
         },
-        daojishi:0
+        daojishi:0,
+        tishi:true
 
     }
+
+    
 
    async componentDidMount(){
        let date=new Date();
@@ -19,50 +25,73 @@ class Ddsc extends Component {
        let shi = (date.getHours())*60*60;
        let fen = (date.getMinutes())*60;
        let miao = date.getSeconds();
-        let daojishi=shi+fen+miao;
+        daojishi=shi+fen+miao;
 
-        this.setState({
-           daojishi
+        // this.setState({
+        //    daojishi
 
-        })
+        // })
         // console.log(this.state.daojishi)
         let {data} = await axios.get("http://localhost:1911/login/scsuoyou");
-    //    console.log(data[0])
+       console.log(data[0])
         this.setState({
                 data:data[0]
 
         })
 
 
-        setInterval(() => {
-            let xian = (this.state.daojishi) - 1;
-            this.setState({
-                daojishi: xian
-            })
+      let guanbi=setInterval(() => {
+            daojishi--;
+              let daojishi1 = daojishi;
+              let shi = this.PrefixZero((Math.floor(daojishi1 / 3600)), 2);
+              let fen = this.PrefixZero((Math.floor((daojishi1 - (shi * 3600)) / 60)), 2);
+              let miao = this.PrefixZero(((daojishi1 - ((shi * 3600) + (fen * 60)))), 2);
+
+              if (document.getElementById('shi')){
+                    document.getElementById('shi').innerHTML = shi
+                    document.getElementById('fen').innerHTML = fen
+                    document.getElementById('miao').innerHTML = miao
+                                    
+              }else{
+                  clearInterval(guanbi)
+              }
+            
         }, 1000);
         
+    }
+    xqy=(item)=>{
+    let action={
+        type:'xqysj',
+        payload:item
+    }
+    this.props.dispatch(action);
+    let aa= "/dp"
+    this.props.history.push(aa);
+
+    }
+     warning = () => {
+        console.log('点');
+        if(this.state.tishi){
+            message.info('暂未开放噢')
+            console.log('neng')
+        }
+    }
+    miaosha(){
+        message.info('还没到时间')
     }
     PrefixZero(num, n) {
         return ((Array(n).join(0) + num).slice(-n));
     }
-
-  
-
-    // buynow(){
-
-    //     console.log(this.props);
-    // }
     render() {
         
         let {miaosha,pinpaizhuanqu,indexlb}=this.state.data;
-       let {daojishi}= this.state;
-       let daojishi1=daojishi;
-       let shi = this.PrefixZero((Math.floor(daojishi1 / 3600)), 2);
-        let fen = this.PrefixZero((Math.floor((daojishi1 - (shi * 3600)) / 60)), 2);
-       let miao = this.PrefixZero(((daojishi1 - ((shi * 3600) + (fen * 60)))), 2);
+    //    let {daojishi}= this.state;
+    //    let daojishi1=daojishi;
+    //    let shi = this.PrefixZero((Math.floor(daojishi1 / 3600)), 2);
+    //     let fen = this.PrefixZero((Math.floor((daojishi1 - (shi * 3600)) / 60)), 2);
+    //    let miao = this.PrefixZero(((daojishi1 - ((shi * 3600) + (fen * 60)))), 2);
         
         let {history}=this.props;
-      
         return (
             <>
                 <div className="box">
@@ -79,100 +108,102 @@ class Ddsc extends Component {
                                 <input type="text" className="search-input1" placeholder="搜索"/>
                                 <img className="search-img1"
                                     src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAACOElEQVRIS83Wv28TMRQH8O9zfnRJ06GZkGBh4KfEwl+AxNAJENChRWJBiqpcQs6liNEjovSuhIuqSCxIlKEVokwMSGxsLEj8HBhgYEqHXLO0ufihE00jaHpx0iTixjvbH9vv+fkIHZ5KpZKo13cuC0GXmHEewJHdZr+I8F5rfpVKJTey2WyjU/+od/TvR8fxrjDzIhGOR3VkxnciWpDSetkLugcqpUQ6nblPhDvMTET4yCyexOPNN7FY7Gc4aLPZPBYEsYtE+hYzzhIRM+Oh71fvKaW0CbwHOo73AOAFZt4RQsharbpy0CDh5CYmMnNaa4eIkgAtSmndNQbDbSTCC611Qwiasu38W5POrrtyQevGayFEghlXTbaXdhPkSxgzIrJs2yqbYK02ruvlmNkLY5pKJU91SyRaWnp8nQhrYcxqtc1zprFogX+2d/JDGFNmTM/P59cjs9R1vWfMPAuIopS5R72srtXWccq3Ab1MRKu2bd2IBB3H+wrwiXiczxQKhc/9gKVS6XQQ0CeAvklpnewG+gCPj42J8VwuV+8HLJfLqe1tvQXQlpRW+r8DR7ulI0+akR+LkR/8MKP+Lm2JKdueG15pax/ewxRv/ADwzvc3byqlAqP7sP/ricOr6ygAAdCa71dno9BDX8AAXwMw015VNLoPDDv28ouhlIqn05lVgKdN0I5gr+WtF3QgYDhBU3RgoCk6UNAEHTjYDR0KeDCK50MD96McCEEzQwXb6ORTIbBRLObXfwMOWbgMaYofjQAAAABJRU5ErkJggg=="
-                                    alt=""/>
+                                    alt="" onClick={()=>{
+                                    history.push('/ddscxq/')
+                    }}/>
                             </div>
                         </div>
                     </header>
-                    <main>
+                    <main className="main0">
             <div className="lunbo">
                 <Carousel autoplay>
                     <div>
-                    < img src = "https://img.ddky.com/c/cms/temp/20191225/1577271987660_1080_345.jpg"
-                    alt = "" / >
+                    <img src="https://img.ddky.com/c/cms/temp/20191225/1577271987660_1080_345.jpg"/>
                     </div>
                     <div>
-                    < img src = "https://img.ddky.com/c/cms/temp/20200106/1578276582900_1080_345.jpg" / >
+                    <img src="https://img.ddky.com/c/cms/temp/20200106/1578276582900_1080_345.jpg"/>
                     </div>
                      <div>
-                    < img src = "https://img.ddky.com/c/cms/temp/20191225/1577244371624_1080_345.jpg" / >
+                    <img src="https://img.ddky.com/c/cms/temp/20191225/1577244371624_1080_345.jpg"/>
                     </div>
                      <div>
-                    < img src = "https://img.ddky.com/c/cms/temp/20200103/1578028253658_1080_345.jpg" / >
+                    <img src="https://img.ddky.com/c/cms/temp/20200103/1578028253658_1080_345.jpg"/>
                     </div>
                      <div>
-                    < img src = "https://img.ddky.com/c/cms/temp/20200103/1578020897997_1080_345.jpg" / >
+                    <img src="https://img.ddky.com/c/cms/temp/20200103/1578020897997_1080_345.jpg"/>
                     </div>
                      <div>
-                    < img src = "https://img.ddky.com/c/cms/temp/20200102/1577959295113_1080_345.jpg" / >
+                    <img src="https://img.ddky.com/c/cms/temp/20200102/1577959295113_1080_345.jpg"/>
                     </div>
                      <div>
-                    < img src = "https://img.ddky.com/c/cms/temp/20191227/1577423237571_1080_345.jpg" / >
+                    <img src="https://img.ddky.com/c/cms/temp/20191227/1577423237571_1080_345.jpg"/>
                     </div>
                      <div>
-                    < img src = "https://img.ddky.com/c/cms/temp/20191231/1577781337023_1080_345.jpg" / >
+                    <img src="https://img.ddky.com/c/cms/temp/20191231/1577781337023_1080_345.jpg"/>
                     </div>
                  </Carousel>
+                 
 
                 
             </div>
             <div className="main1">
                 <div className="advicebox">
-                    <img src="https://img.ddky.com/c/cms/temp/20190911/1568195178317_270_252.jpg" alt=""/>
-                    <img src="https://img.ddky.com/c/cms/temp/20190911/1568195199372_270_252.jpg" alt=""/>
-                    <img src="https://img.ddky.com/c/cms/temp/20191228/1577520817744_270_252.jpg" alt=""/>
-                    <img src="https://img.ddky.com/c/cms/temp/20190911/1568195093878_270_252.jpg" alt=""/>
+                    <img src="https://img.ddky.com/c/cms/temp/20190911/1568195178317_270_252.jpg" alt="" onClick={this.warning}/>
+                    <img src="https://img.ddky.com/c/cms/temp/20190911/1568195199372_270_252.jpg" alt="" onClick={this.warning}/>
+                    <img src="https://img.ddky.com/c/cms/temp/20191228/1577520817744_270_252.jpg" alt="" onClick={this.warning}/>
+                    <img src="https://img.ddky.com/c/cms/temp/20190911/1568195093878_270_252.jpg" alt="" onClick={this.warning}/>
                 </div>
                 <div className="advicebox">
-                    <img src="https://img.ddky.com/c/cms/temp/20191231/1577792150154_270_252.jpg" alt=""/>
-                    <img src="https://img.ddky.com/c/cms/temp/20191108/1573178662412_270_252.jpg" alt=""/>
-                    <img src="https://img.ddky.com/c/cms/temp/20200106/1578276528091_270_252.jpg" alt=""/>
-                    <img src="https://img.ddky.com/c/cms/temp/20200106/1578276530105_270_252.jpg" alt=""/>
+                    <img src="https://img.ddky.com/c/cms/temp/20191231/1577792150154_270_252.jpg" alt="" onClick={this.warning}/>
+                    <img src="https://img.ddky.com/c/cms/temp/20191108/1573178662412_270_252.jpg" alt="" onClick={this.warning}/>
+                    <img src="https://img.ddky.com/c/cms/temp/20200106/1578276528091_270_252.jpg" alt="" onClick={this.warning}/>
+                    <img src="https://img.ddky.com/c/cms/temp/20200106/1578276530105_270_252.jpg" alt="" onClick={this.warning}/>
                 </div>
             </div>
 
             <div className="main2">
                 <div className="main2-1">
                     <img src="https://img.ddky.com/c/cms/temp/20191112/1573524106331_216_252.jpg" alt="" onClick={()=>{
-                        history.push('/pct/')
+                        history.push('/ddscxq/')
                     }}/>
                     <img src="https://img.ddky.com/c/cms/temp/20191123/1574501760060_216_252.jpg" alt="" onClick={()=>{
-                        history.push('/pct/')
+                        history.push('/ddscxq/')
                     }}/>
                     <img src="https://img.ddky.com/c/cms/temp/20191011/1570775807773_216_252.jpg" alt="" onClick={()=>{
-                        history.push('/pct/')
+                        history.push('/ddscxq/')
                     }}/>
                     <img src="https://img.ddky.com/c/cms/temp/20191011/1570775822234_216_252.jpg" alt="" onClick={()=>{
-                        history.push('/pct/')
+                        history.push('/ddscxq/')
                     }}/>
                     <img src="https://img.ddky.com/c/cms/temp/20191011/1570792013133_216_252.jpg" alt="" onClick={()=>{
-                        history.push('/pct/')
+                        history.push('/ddscxq/')
                     }}/>
                     <img src="https://img.ddky.com/c/cms/temp/20190628/1561687452768_216_252.jpg" alt="" onClick={()=>{
-                        history.push('/pct/')
+                        history.push('/ddscxq/')
                     }}/>
                     <img src="https://img.ddky.com/c/cms/temp/20190628/1561691530711_216_252.jpg" alt="" onClick={()=>{
-                        history.push('/pct/')
+                        history.push('/ddscxq/')
                     }}/>
                     <img src="https://img.ddky.com/c/cms/temp/20190813/1565680344127_216_252.jpg" alt="" onClick={()=>{
-                        history.push('/pct/')
+                        history.push('/ddscxq/')
                     }}/>
                     <img src="https://img.ddky.com/c/cms/temp/20191011/1570775840587_216_252.jpg" alt="" onClick={()=>{
-                        history.push('/pct/')
+                        history.push('/ddscxq/')
                     }}/>
                     <img src="https://img.ddky.com/c/cms/temp/20191011/1570792032169_216_252.jpg" alt="" onClick={()=>{
-                        history.push('/pct/')
+                        history.push('/ddscxq/')
                     }}/>
                     <img src="https://img.ddky.com/c/cms/temp/20191011/1570775847004_216_252.jpg" alt="" onClick={()=>{
-                        history.push('/pct/')
+                        history.push('/ddscxq/')
                     }}/>
                     <img src="https://img.ddky.com/c/cms/temp/20190813/1565680307399_216_252.jpg" alt="" onClick={()=>{
-                        history.push('/pct/')
+                        history.push('/ddscxq/')
                     }}/>
                     <img src="https://img.ddky.com/c/cms/temp/20191011/1570792021422_216_252.jpg" alt="" onClick={()=>{
-                        history.push('/pct/')
+                        history.push('/ddscxq/')
                     }}/>
                     <img src="https://img.ddky.com/c/cms/temp/20190628/1561687568434_216_252.jpg" alt="" onClick={()=>{
-                        history.push('/pct/')
+                        history.push('/ddscxq/')
                     }}/>
                 </div>
             </div>
@@ -190,15 +221,15 @@ class Ddsc extends Component {
                                      daojishi
                                     
                                 } */}
-                            <span>{shi}</span> 时
-                            <span>{fen}</span> 分
-                            <span>{miao}</span> 秒
+                            <span id='shi'></span> 时
+                            <span id='fen'></span> 分
+                            <span id='miao'></span> 秒
                             </div>
                         </div>
                         <div className="main3-1a">
                             {
                                 miaosha ? miaosha.map((item, idx) => (
-                                    <div className="main3-1a1" key={idx}>
+                                    <div className="main3-1a1" key={idx} onClick={this.miaosha}>
                                         <img src={item.miaoshaurl}
                                         alt="" />
                                         <p className="main3-1a1m">{item.miaoshabiaoti}</p>
@@ -286,12 +317,26 @@ class Ddsc extends Component {
                 <div className="nxjk">
                 {
                     
+
+                        // nxjkjuan: "立省44.40元"
+                        // nxjkname: "滋阴补肾益精 阴阳同补治疗肾虚"
+                        // nxjktitle: "肾阴亏组包"
+                        // nxjkurl: "https://img.ddky.com/c/cms/temp/20180116/1516086634926_336_248.jpg"
+                        // nxjkxianjia: "￥207.00"
+                        // nxjkyuanjia: "￥251.40"
+
+
                     // console.log(indexlb[0])
                     indexlb ? indexlb[0].map((item, idx) => (
                             
-                    <div className="b2cdrugbox" key={idx} onClick={()=>{
-                        history.push('/pct/'+item)
-                    }}>
+                    <div className="b2cdrugbox" key={idx} onClick={this.xqy.bind(this,{
+                        xurl:item.nxjkurl,
+                        xname:item.nxjkname,
+                        xtitle:item.nxjktitle,
+                        xliang:'6g×10袋',
+                        xjiage:item.nxjkxianjia,
+                        xxiangliang: '月销2253'
+                    })}>
                         <div className="imgListBox">
                             <img src={item.nxjkurl} alt="" className="imgPreBox"/>
                             <div className="infoBox">
@@ -323,7 +368,14 @@ class Ddsc extends Component {
             <div className="rxtj">
                 {
                     indexlb ? indexlb[1].map((item, idx) => (
-                    <div className="b2cdrugbox" key={idx}>
+                    <div className="b2cdrugbox" key={idx} onClick={this.xqy.bind(this,{
+                        xurl:item.rxtjurl,
+                        xname:item.rxtjname,
+                        xtitle:item.rxtjtitle,
+                        xliang:'6g×10袋',
+                        xjiage:item.rxtjxianjia,
+                        xxiangliang: '月销2253'
+                    })}>
                         <div className="imgListBox">
 
                             <img src={item.rxtjurl} alt="" className="imgPreBox"/>
@@ -358,7 +410,14 @@ class Ddsc extends Component {
             <div className="qqyp">
                 {
                     indexlb ? indexlb[2].map((item, idx) => (
-                    <div className="b2cdrugbox" key={idx}>
+                    <div className="b2cdrugbox" key={idx} onClick={this.xqy.bind(this,{
+                        xurl:item.qqypurl,
+                        xname:item.qqypname,
+                        xtitle:item.qqyptitle,
+                        xliang:'6g×10袋',
+                        xjiage:item.qqypxianjia,
+                        xxiangliang: '月销2253'
+                    })}>
                         <div className="imgListBox">
 
                             <img src={item.qqypurl} alt="" className="imgPreBox"/>
@@ -393,7 +452,14 @@ class Ddsc extends Component {
             <div className="yybj">
                 {
                     indexlb ? indexlb[3].map((item, idx) => (
-                    <div className="b2cdrugbox" key={idx}>
+                    <div className="b2cdrugbox" key={idx} onClick={this.xqy.bind(this,{
+                        xurl:item.yybjurl,
+                        xname:item.yybjname,
+                        xtitle:item.yybjtitle,
+                        xliang:'6g×10袋',
+                        xjiage:item.yybjxianjia,
+                        xxiangliang: '月销2253'
+                    })}>
                         <div className="imgListBox">
 
                             <img src={item.yybjurl} alt="" className="imgPreBox"/>
@@ -428,7 +494,14 @@ class Ddsc extends Component {
              <div className="byyy">
                 {
                     indexlb ? indexlb[4].map((item, idx) => (
-                    <div className="b2cdrugbox" key={idx}>
+                    <div className="b2cdrugbox" key={idx} onClick={this.xqy.bind(this,{
+                        xurl:item.byyyurl,
+                        xname:item.byyyname,
+                        xtitle:item.byyytitle,
+                        xliang:'6g×10袋',
+                        xjiage:item.byyyxianjia,
+                        xxiangliang: '月销2253'
+                    })}>
                         <div className="imgListBox">
 
                             <img src={item.byyyurl} alt="" className="imgPreBox"/>
@@ -463,7 +536,14 @@ class Ddsc extends Component {
             <div className="mbtl">
                 {
                     indexlb ? indexlb[5].map((item, idx) => (
-                    <div className="b2cdrugbox" key={idx}>
+                    <div className="b2cdrugbox" key={idx} onClick={this.xqy.bind(this,{
+                        xurl:item.mbtlurl,
+                        xname:item.mbtlname,
+                        xtitle:item.mbtltitle,
+                        xliang:'6g×10袋',
+                        xjiage:item.mbtlxianjia,
+                        xxiangliang: '月销2253'
+                    })}>
                         <div className="imgListBox">
 
                             <img src={item.mbtlurl} alt="" className="imgPreBox"/>
@@ -498,7 +578,14 @@ class Ddsc extends Component {
             <div className="etjk">
                 {
                     indexlb ? indexlb[6].map((item, idx) => (
-                    <div className="b2cdrugbox" key={idx}>
+                    <div className="b2cdrugbox" key={idx} onClick={this.xqy.bind(this,{
+                        xurl:item.etjkurl,
+                        xname:item.etjkname,
+                        xtitle:item.etjktitle,
+                        xliang:'6g×10袋',
+                        xjiage:item.etjkxianjia,
+                        xxiangliang: '月销2253'
+                    })}>
                         <div className="imgListBox">
 
                             <img src={item.etjkurl} alt="" className="imgPreBox"/>
@@ -533,7 +620,14 @@ class Ddsc extends Component {
             <div className="hc">
                 {
                     indexlb ? indexlb[7].map((item, idx) => (
-                    <div className="b2cdrugbox" key={idx}>
+                    <div className="b2cdrugbox" key={idx} onClick={this.xqy.bind(this,{
+                        xurl:item.hcurl,
+                        xname:item.hcname,
+                        xtitle:item.hctitle,
+                        xliang:'6g×10袋',
+                        xjiage:item.hcxianjia,
+                        xxiangliang: '月销2253'
+                    })}>
                         <div className="imgListBox">
 
                             <img src={item.hcurl} alt="" className="imgPreBox"/>
@@ -568,7 +662,14 @@ class Ddsc extends Component {
             <div className="qlx">
                 {
                     indexlb ? indexlb[8].map((item, idx) => (
-                    <div className="b2cdrugbox" key={idx}>
+                    <div className="b2cdrugbox" key={idx} onClick={this.xqy.bind(this,{
+                        xurl:item.qlxurl,
+                        xname:item.qlxname,
+                        xtitle:item.qlxtitle,
+                        xliang:'6g×10袋',
+                        xjiage:item.qlxxianjia,
+                        xxiangliang: '月销2253'
+                    })}>
                         <div className="imgListBox">
 
                             <img src={item.qlxurl} alt="" className="imgPreBox"/>
@@ -601,15 +702,19 @@ class Ddsc extends Component {
                   }
             </div> 
 
-
-                </div>
+             </div>
             </div>
         </main>
                 </div>
+
             </>
         )
     }
 }
+const quan = function (state) {
 
+    return state;
+}
+Ddsc = connect(quan)(Ddsc)
 
 export default Ddsc
