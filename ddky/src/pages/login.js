@@ -32,7 +32,7 @@ class Login extends Component{
     LoginBtn = ()=>{
         let name = this.state.users;//用户
         let password = this.state.pws;//密码
-        let keep = 1;//由于没有七天免登录 只有默认60秒免登录
+        let keep = 1;//由于没有七天免登录 只有默认60*60秒免登录
         if(name && password){
             console.log(name,password);
             let zc=Qs.stringify({name,password,keep})
