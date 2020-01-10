@@ -33,7 +33,7 @@ class Ddsc extends Component {
         // })
         // console.log(this.state.daojishi)
         let {data} = await axios.get("http://localhost:1911/login/scsuoyou");
-       console.log(data[0])
+    //    console.log(data[0])
         this.setState({
                 data:data[0]
 
@@ -69,11 +69,16 @@ class Ddsc extends Component {
     this.props.history.push(aa);
 
     }
+
+    houtai=()=>{
+
+        this.props.history.push('/adminlogin')
+    }
      warning = () => {
-        console.log('点');
+        // console.log('点');
         if(this.state.tishi){
             message.info('暂未开放噢')
-            console.log('neng')
+            // console.log('neng')
         }
     }
     miaosha(){
@@ -213,7 +218,7 @@ class Ddsc extends Component {
                     <div className="main3-1">
                         <div className="timer">
                             <div className="countdown">
-                                <p className="timermiaosha">秒杀</p>
+                                <p className="timermiaosha" onClick={this.houtai}>秒杀</p>
 
 
                                 {/* {

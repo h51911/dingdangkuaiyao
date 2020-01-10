@@ -1,0 +1,39 @@
+.loginBg{
+    height: 100%;
+    width: 100%;
+    background:#eeeeee;
+    position: fixed;
+    z-index: 1;
+}
+
+.ant-layout{
+    width: 450px;
+    height: 300px;
+}
+.Longbox{
+    width: 280px;
+    height: 300px;
+    position: relative;
+    top: 25%;
+    left: 37%;
+}
+.Longbox h2{
+    width: 100%;
+    text-align: center;
+    font-weight: 700;
+    margin-bottom: 50px;
+    font-size: 22px;
+}
+.ant-btn{
+    bottom:0;
+    position:relative;
+    right: 0;
+}
+.indexts{
+    float: left;
+    font-size: 14px;
+}
+.indexs{
+    float: right;
+    font-size: 14px;
+}

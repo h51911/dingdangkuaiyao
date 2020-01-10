@@ -12,13 +12,7 @@ import {connect} from 'react-redux';
 class Dp extends Component{
         state={
             chushishuju:{}
-
-        
     }
-
-
-
-
 async componentDidMount() {
     
    if(this.props.xqysja.xurl){

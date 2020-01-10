@@ -2,7 +2,7 @@ import React,{Component} from "react";//库
 import "../css/login.css";//引入css
 import {withRouter} from "react-router-dom";//获取高阶组件
 import axios from "axios";//引入axios
-import Qs from "qs";//引入4位随机数  只会调用一次
+import Qs from "qs";
 class Login extends Component{
     constructor(){//初始化
         super();

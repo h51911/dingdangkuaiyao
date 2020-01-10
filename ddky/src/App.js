@@ -11,6 +11,8 @@ import Reg from './pages/reg';
 import Pct from './pages/pct';
 import Ddscxq from './pages/ddscxq'
 import DdkyPct from './pages/ddkypct';
+import Houtaihome from './pages/houtaihome';
+import Adminlogin from './pages/adminlogin';
 import Login from './pages/login';//登录页
 import Dp from './pages/dp';//详情页
 import Cart from './pages/cart';//购物车页
@@ -105,6 +107,8 @@ class App extends Component {
               <Route path='/pct' component={Pct} />
               <Route path='/ddkypct/:name' component={DdkyPct} />
               <Route path='/ddscxq' component={Ddscxq} />
+              <Route path='/houtaihome' component={Houtaihome} />
+              <Route path='/adminlogin' component={Adminlogin} />
               <Route path='/reg' component={Reg} />
               <Route path='/login' component={Login} />
               <Route path='/dp' component={Dp} />

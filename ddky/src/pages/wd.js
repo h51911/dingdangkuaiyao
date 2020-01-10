@@ -80,7 +80,7 @@ class Wd extends Component{
         let token  = localStorage.getItem("authorization");//获取手机号的值
         // // let user = $.md5(usernamesgVal);
         // let zc=Qs.stringify({token})
-        console.log(zc);
+        // console.log(zc);
         if(token){
             //     axios.post("http://localhost:1911/verify",zc
             // )
