@@ -9,12 +9,12 @@
     position: relative;
     text-align: left;
 }
-.ant-btn{
+/* .ant-btn{
     position: fixed;
     bottom: 1.5rem;
     right: .2rem;
     z-index: 102;
-}
+} */
 /* 头部 */
 .header_cl {
     width: 100%;

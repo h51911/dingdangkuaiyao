@@ -1,7 +1,9 @@
 import React, { Component } from "react";//引入库
 import "../css/pct.css";//引入css
 import axios from 'axios';
-import { Button } from "antd"
+import { Button, message } from "antd";
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 class Pct extends Component {
     // 初始化
     state = {
@@ -34,6 +36,9 @@ class Pct extends Component {
             show: data.length || data1.data.length || data2.data.length2 > 0 ? true : false
         })
     }
+    gotu = () => {
+        this.props.history.push('/home')
+    }
     gaishu = (ev) => {
         this.setState({
             shuju: ev.target.value
@@ -59,6 +64,83 @@ class Pct extends Component {
             })
         }
     }
+    tiaozhuan = (item) => {
+        let action = {
+            type: 'xqysj',
+            payload: {
+                xurl: item.imgurl,
+                xname: item.name,
+                xtitle: item.shop,
+                xliang: item.liang,
+                xjiage: item.price,
+                xxiangliang: item.setmeal,
+                uid: item.uid
+            }
+        }
+        this.props.dispatch(action);
+        this.props.history.push("/dp");
+    }
+    gouwu = async (items, ev) => {
+        ev.stopPropagation();
+        console.log(this.props)
+        let aa = this.props.state.arr.filter(item => { return item.uid == items.uid });
+        // console.log(aa);
+        if (aa.length) {
+            let { data } = await axios.get('http://localhost:1911/login/ddkyjia', {
+                params: {
+                    name: this.props.zhanghao,
+                    value: aa[0].num + 1,
+                    id: aa[0].uid
+                }
+            })
+
+            if (data) {
+                message.success('添加成功');
+            }
+            let action = {
+                type: "xiugai",
+                payload: {
+                    id: aa[0].uid,
+                    value: aa[0].num + 1
+                }
+            }
+            this.props.dispatch(action);
+        } else {
+            let aa = await axios.get('http://localhost:1911/login/ddkyzhen', {
+                params: {
+                    usename: this.props.state.zhanghao,
+                    imgurl: items.imgurl,
+                    uid: items.uid,
+                    name: items.name,
+                    shop: items.shop,
+                    price: items.price,
+                    setmeal: items.setmeal,
+                    liang: items.liang,
+                    num: 1
+                }
+            })
+
+            if (aa) {
+                message.success('添加成功');
+                let action = {
+                    type: "tianjia",
+                    payload: {
+                        usename: this.props.state.zhanghao,
+                        imgurl: items.imgurl,
+                        uid: items.uid,
+                        name: items.name,
+                        shop: items.shop,
+                        price: items.price,
+                        setmeal: items.setmeal,
+                        liang: items.liang,
+                        num: 1
+                    }
+                }
+                this.props.dispatch(action);
+            }
+
+        }
+    }
     // 渲染
     render() {
         let { arr, arr1, arr2 } = this.state;
@@ -73,7 +155,7 @@ class Pct extends Component {
 
                     <header className="header_cl">
                         <div className="home">
-                            <img src="image/pct1.png" className="pct1" />
+                            <img src="image/pct1.png" className="pct1" onClick={this.gotu} />
                         </div>
                         <div className="headerLeft ">
                             <img src="image/icon_search.png" className="serch" />
@@ -99,7 +181,7 @@ class Pct extends Component {
 
                                 {
                                     arr.map((item, idx) => (
-                                        <dl className="cl" key={idx}>
+                                        <dl className="cl" key={idx} onClick={this.tiaozhuan.bind(null, item)}>
                                             <dt className="fl">
                                                 <img src={item.imgurl} className="z_img" />
                                             </dt>
@@ -123,24 +205,24 @@ class Pct extends Component {
                                                             {item.setmeal}
                                                         </p>
                                                     </div>
-                                                    < img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAACfUExURUxpcexLS+xFRelFRelFRP9VVetGRulFROpFRelFROlFRP9MTOpFRepFROlFROtHROlFROlFRfBLS+pFRP9VVelFRP///+1nZvzr6+1qafzp6fWurulKSfCCgfrV1f319f79/fGLiupQT+tcW/jHx+tVVPnMzO93dvvd3e5vb/vh4Pa6ufzm5uxhYPSgoPe/vv3y8vSnpvOamf74+PKTkmBE4BQAAAAVdFJOUwAbN8v5A2bmXvbsCnzb8k6vjxG3CVdyowAAAAHXSURBVHjapdZpd6owEAbg1AWEKqvvtIrsouCu7f//be255jbBRDken8/MSTITZsIUU9cPJ/ZgYE9C352yDsHIsyCxvFHA7nsfO1A443emNzRMaJnGkGm89XFX/40peiYeMHvsxsjCQ9bo5nt0akX0LHSyetJ5TaCb+XfyYR/AkbI6xkP9/9k18GtFRNkaDxm8vtcNFeWKVh2butZ8DC6mFFjOVZuowD9j9itwwJVEZZGSDl/aCdolSClG8aHKifaiGB7+JHSAVkY8HR5jU6lmES2hsycqefWmzIWQ0w4Kng3OZT6EhrIFNM6UgPNZCKEg+oDGkiJwIZtAcqIYGp+Ug5swG+hKUyUtbLMBJFvaQrWWjjZoB1wogepCNUSAreRPcZTWtdnkpkIVJEU5W8eHjHKIQ4eQLDJqUOWXc3RcJbtTRlfJAiKtPmQ7ylGTkM7r1fFbqqbPXKVE+XIbHb7zdbOvoHD55VOvn4pfPua10/QVzxRiS95tD1vUpLFpdbPAgaSK6rkiAucErSbQbSy3GW49P8WQRF9JedNmmAHJhiiF0BCJn8EQrfJuwEwK6A91zbjZfcaQnNOkEs34uXb/7EB5bWR1D8XXxm73YH/y6fDS4+Tp588PcLqdUFOb62QAAAAASUVORK5CYII="
+                                                    < img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAACfUExURUxpcexLS+xFRelFRelFRP9VVetGRulFROpFRelFROlFRP9MTOpFRepFROlFROtHROlFROlFRfBLS+pFRP9VVelFRP///+1nZvzr6+1qafzp6fWurulKSfCCgfrV1f319f79/fGLiupQT+tcW/jHx+tVVPnMzO93dvvd3e5vb/vh4Pa6ufzm5uxhYPSgoPe/vv3y8vSnpvOamf74+PKTkmBE4BQAAAAVdFJOUwAbN8v5A2bmXvbsCnzb8k6vjxG3CVdyowAAAAHXSURBVHjapdZpd6owEAbg1AWEKqvvtIrsouCu7f//be255jbBRDken8/MSTITZsIUU9cPJ/ZgYE9C352yDsHIsyCxvFHA7nsfO1A443emNzRMaJnGkGm89XFX/40peiYeMHvsxsjCQ9bo5nt0akX0LHSyetJ5TaCb+XfyYR/AkbI6xkP9/9k18GtFRNkaDxm8vtcNFeWKVh2butZ8DC6mFFjOVZuowD9j9itwwJVEZZGSDl/aCdolSClG8aHKifaiGB7+JHSAVkY8HR5jU6lmES2hsycqefWmzIWQ0w4Kng3OZT6EhrIFNM6UgPNZCKEg+oDGkiJwIZtAcqIYGp+Ug5swG+hKUyUtbLMBJFvaQrWWjjZoB1wogepCNUSAreRPcZTWtdnkpkIVJEU5W8eHjHKIQ4eQLDJqUOWXc3RcJbtTRlfJAiKtPmQ7ylGTkM7r1fFbqqbPXKVE+XIbHb7zdbOvoHD55VOvn4pfPua10/QVzxRiS95tD1vUpLFpdbPAgaSK6rkiAucErSbQbSy3GW49P8WQRF9JedNmmAHJhiiF0BCJn8EQrfJuwEwK6A91zbjZfcaQnNOkEs34uXb/7EB5bWR1D8XXxm73YH/y6fDS4+Tp588PcLqdUFOb62QAAAAASUVORK5CYII=" onClick={this.gouwu.bind(null, item)}
                                                         className="cars" />
                                                 </div>
                                                 <div className="prootiomBox2">
                                                     <div className="fls">
                                                         <span className="promotion">
                                                             满68减18
-                                                            </span>
+                                                    </span>
                                                     </div>
                                                     <div className="fls">
                                                         <span className="promotion">
                                                             满68减18
-                                                            </span>
+                                                    </span>
                                                     </div>
                                                     <div className="fls">
                                                         <span className="promotion">
                                                             满68减18
-                                                            </span>
+                                                    </span>
                                                     </div>
                                                 </div>
 
@@ -157,7 +239,7 @@ class Pct extends Component {
 
                                 }  {
                                     arr1.map((item, idx) => (
-                                        <dl className="cl" key={idx}>
+                                        <dl className="cl" key={idx} onClick={this.tiaozhuan.bind(null, item)}>
                                             <dt className="fl">
                                                 <img src={item.imgurl} className="z_img" />
                                             </dt>
@@ -182,23 +264,23 @@ class Pct extends Component {
                                                         </p>
                                                     </div>
                                                     < img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAACfUExURUxpcexLS+xFRelFRelFRP9VVetGRulFROpFRelFROlFRP9MTOpFRepFROlFROtHROlFROlFRfBLS+pFRP9VVelFRP///+1nZvzr6+1qafzp6fWurulKSfCCgfrV1f319f79/fGLiupQT+tcW/jHx+tVVPnMzO93dvvd3e5vb/vh4Pa6ufzm5uxhYPSgoPe/vv3y8vSnpvOamf74+PKTkmBE4BQAAAAVdFJOUwAbN8v5A2bmXvbsCnzb8k6vjxG3CVdyowAAAAHXSURBVHjapdZpd6owEAbg1AWEKqvvtIrsouCu7f//be255jbBRDken8/MSTITZsIUU9cPJ/ZgYE9C352yDsHIsyCxvFHA7nsfO1A443emNzRMaJnGkGm89XFX/40peiYeMHvsxsjCQ9bo5nt0akX0LHSyetJ5TaCb+XfyYR/AkbI6xkP9/9k18GtFRNkaDxm8vtcNFeWKVh2butZ8DC6mFFjOVZuowD9j9itwwJVEZZGSDl/aCdolSClG8aHKifaiGB7+JHSAVkY8HR5jU6lmES2hsycqefWmzIWQ0w4Kng3OZT6EhrIFNM6UgPNZCKEg+oDGkiJwIZtAcqIYGp+Ug5swG+hKUyUtbLMBJFvaQrWWjjZoB1wogepCNUSAreRPcZTWtdnkpkIVJEU5W8eHjHKIQ4eQLDJqUOWXc3RcJbtTRlfJAiKtPmQ7ylGTkM7r1fFbqqbPXKVE+XIbHb7zdbOvoHD55VOvn4pfPua10/QVzxRiS95tD1vUpLFpdbPAgaSK6rkiAucErSbQbSy3GW49P8WQRF9JedNmmAHJhiiF0BCJn8EQrfJuwEwK6A91zbjZfcaQnNOkEs34uXb/7EB5bWR1D8XXxm73YH/y6fDS4+Tp588PcLqdUFOb62QAAAAASUVORK5CYII="
-                                                        className="cars" />
+                                                        className="cars" onClick={this.gouwu.bind(null, item)} />
                                                 </div>
                                                 <div className="prootiomBox2">
                                                     <div className="fls">
                                                         <span className="promotion">
                                                             满68减18
-                                                            </span>
+                                                    </span>
                                                     </div>
                                                     <div className="fls">
                                                         <span className="promotion">
                                                             满68减18
-                                                            </span>
+                                                    </span>
                                                     </div>
                                                     <div className="fls">
                                                         <span className="promotion">
                                                             满68减18
-                                                            </span>
+                                                    </span>
                                                     </div>
                                                 </div>
 
@@ -215,7 +297,7 @@ class Pct extends Component {
 
                                 }  {
                                     arr2.map((item, idx) => (
-                                        <dl className="cl" key={idx}>
+                                        <dl className="cl" key={idx} onClick={this.tiaozhuan.bind(null, item)}>
                                             <dt className="fl">
                                                 <img src={item.imgurl} className="z_img" />
                                             </dt>
@@ -240,23 +322,23 @@ class Pct extends Component {
                                                         </p>
                                                     </div>
                                                     < img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAACfUExURUxpcexLS+xFRelFRelFRP9VVetGRulFROpFRelFROlFRP9MTOpFRepFROlFROtHROlFROlFRfBLS+pFRP9VVelFRP///+1nZvzr6+1qafzp6fWurulKSfCCgfrV1f319f79/fGLiupQT+tcW/jHx+tVVPnMzO93dvvd3e5vb/vh4Pa6ufzm5uxhYPSgoPe/vv3y8vSnpvOamf74+PKTkmBE4BQAAAAVdFJOUwAbN8v5A2bmXvbsCnzb8k6vjxG3CVdyowAAAAHXSURBVHjapdZpd6owEAbg1AWEKqvvtIrsouCu7f//be255jbBRDken8/MSTITZsIUU9cPJ/ZgYE9C352yDsHIsyCxvFHA7nsfO1A443emNzRMaJnGkGm89XFX/40peiYeMHvsxsjCQ9bo5nt0akX0LHSyetJ5TaCb+XfyYR/AkbI6xkP9/9k18GtFRNkaDxm8vtcNFeWKVh2butZ8DC6mFFjOVZuowD9j9itwwJVEZZGSDl/aCdolSClG8aHKifaiGB7+JHSAVkY8HR5jU6lmES2hsycqefWmzIWQ0w4Kng3OZT6EhrIFNM6UgPNZCKEg+oDGkiJwIZtAcqIYGp+Ug5swG+hKUyUtbLMBJFvaQrWWjjZoB1wogepCNUSAreRPcZTWtdnkpkIVJEU5W8eHjHKIQ4eQLDJqUOWXc3RcJbtTRlfJAiKtPmQ7ylGTkM7r1fFbqqbPXKVE+XIbHb7zdbOvoHD55VOvn4pfPua10/QVzxRiS95tD1vUpLFpdbPAgaSK6rkiAucErSbQbSy3GW49P8WQRF9JedNmmAHJhiiF0BCJn8EQrfJuwEwK6A91zbjZfcaQnNOkEs34uXb/7EB5bWR1D8XXxm73YH/y6fDS4+Tp588PcLqdUFOb62QAAAAASUVORK5CYII="
-                                                        className="cars" />
+                                                        className="cars" onClick={this.gouwu.bind(null, item)} />
                                                 </div>
                                                 <div className="prootiomBox2">
                                                     <div className="fls">
                                                         <span className="promotion">
                                                             满68减18
-                                                            </span>
+                                                    </span>
                                                     </div>
                                                     <div className="fls">
                                                         <span className="promotion">
                                                             满68减18
-                                                            </span>
+                                                    </span>
                                                     </div>
                                                     <div className="fls">
                                                         <span className="promotion">
                                                             满68减18
-                                                            </span>
+                                                    </span>
                                                     </div>
                                                 </div>
 
@@ -283,7 +365,11 @@ class Pct extends Component {
     }
 
 }
-
+const mapStateToProps = state => ({
+    state
+})
+Pct = connect(mapStateToProps)(Pct);
+Pct = withRouter(Pct);
 export default Pct;
 
 

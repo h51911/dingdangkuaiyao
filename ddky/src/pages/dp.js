@@ -1,58 +1,126 @@
-
-import React,{Component} from "react";//引入库
+import React, { Component } from "react";//引入库
 import "../css/清除默认样式.css";//引入base
 import "../css/dp.css";//引入css
 import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
-import { Icon } from 'antd';
-import {connect} from 'react-redux';
-
-
+import { connect } from 'react-redux';
+import axios from 'axios';
+import { message, Icon } from 'antd'
 
 //详情页
-class Dp extends Component{
-        state={
-            chushishuju:{}
+class Dp extends Component {
+    state = {
+        chushishuju: {}
+
+
     }
-async componentDidMount() {
-    
-   if(this.props.xqysja.xurl){
-        let bb = await this.props.xqysja
-        bb = JSON.stringify(bb);
-        localStorage.setItem('xqsp', bb)
-   }
 
-    console.log(this.props.xqysja);
-    let pan=localStorage.getItem('xqsp');
-    console.log(pan);
-    if (!(pan =='{}')) {
-        let shuju=JSON.parse(pan);
-        this.setState({
 
-            chushishuju: shuju
-        })
-    }else{
-        let aa = await this.props.xqysja
-        aa=JSON.stringify(aa);
-        localStorage.setItem('xqsp',aa)
-        let shuju = JSON.parse(aa);
-         this.setState({
 
-             chushishuju: shuju
-         })
+
+    async componentDidMount() {
+
+        if (this.props.xqysja.xurl) {
+            let bb = await this.props.xqysja
+            bb = JSON.stringify(bb);
+            localStorage.setItem('xqsp', bb)
+        }
+
+        console.log(this.props.xqysja);
+        let pan = localStorage.getItem('xqsp');
+        console.log(pan);
+        if (!(pan == '{}')) {
+            let shuju = JSON.parse(pan);
+            this.setState({
+
+                chushishuju: shuju
+            })
+        } else {
+            let aa = await this.props.xqysja
+            aa = JSON.stringify(aa);
+            localStorage.setItem('xqsp', aa)
+            let shuju = JSON.parse(aa);
+            this.setState({
+
+                chushishuju: shuju
+            })
+        }
+
+        console.log(this.state);
     }
-   
-    console.log(this.state);
-}
 
-huitui=()=>{
+    huitui = () => {
 
-    this.props.history.goBack();
-}
+        this.props.history.goBack();
+    }
+    jiacart = async () => {
 
-    render(){
+        let data = JSON.parse(localStorage.getItem('xqsp'));
+        // console.log(data);
+        // console.log(this.props);
+        let aa = this.props.arr.filter(item => { return item.uid == data.uid });
+        // console.log(aa);
+        if (aa.length) {
+            let { data } = await axios.get('http://localhost:1911/login/ddkyjia', {
+                params: {
+                    name: this.props.zhanghao,
+                    value: aa[0].num + 1,
+                    id: aa[0].uid
+                }
+            })
 
-        let {xjiage,xliang,xname,xtitle,xurl,xxiangliang} =this.state.chushishuju
-        return(
+            if (data) {
+                message.success('添加成功');
+            }
+            let action = {
+                type: "xiugai",
+                payload: {
+                    id: aa[0].uid,
+                    value: aa[0].num + 1
+                }
+            }
+            this.props.dispatch(action);
+        } else {
+            console.log(1)
+            let aa = await axios.get('http://localhost:1911/login/ddkyzhen', {
+                params: {
+                    usename: this.props.zhanghao,
+                    imgurl: data.xurl,
+                    uid: data.uid,
+                    name: data.xname,
+                    shop: data.xtitle,
+                    price: data.xjiage,
+                    setmeal: data.xxiangliang,
+                    liang: data.xliang,
+                    num: 1
+                }
+            })
+
+            if (aa) {
+                message.success('添加成功');
+                console.log(2);
+                let action = {
+                    type: "tianjia",
+                    payload: {
+                        usename: this.props.zhanghao,
+                        imgurl: data.xurl,
+                        uid: data.uid,
+                        name: data.xname,
+                        shop: data.xtitle,
+                        price: data.xjiage,
+                        setmeal: data.xxiangliang,
+                        liang: data.xliang,
+                        num: 1
+                    }
+                }
+                this.props.dispatch(action);
+            }
+
+        }
+    }
+    render() {
+
+        let { xjiage, xliang, xname, xtitle, xurl, xxiangliang } = this.state.chushishuju
+        return (
             <section id="app_Content">
                 {/* 头部 */}
                 <header className="topBox">
@@ -68,40 +136,40 @@ huitui=()=>{
 
                         <div className="Navs">
                             <div className="navsIcon">
-                                <img src="image/dp1.png"  className="Icont" />
+                                <img src="image/dp1.png" className="Icont" />
                             </div>
                         </div>
                     </div>
                 </header>
 
-               {/* 内容 */}
-               <main className="Content">
+                {/* 内容 */}
+                <main className="Content">
                     {/* 轮播图 */}
                     <div className="bannerBox">
-                            <div className="Slider">
-                                <img src={xurl} className="Wrapper" />
-                            </div>
+                        <div className="Slider">
+                            <img src={xurl} className="Wrapper" />
+                        </div>
                     </div>
 
                     <div className="Ul_all">
                         <h1 className="goods_Name">
                             <span className="sign">28分钟</span>
-                            {xname}    
+                            {xname}
                         </h1>
 
                         <div className="Zhuzhi">
                             <p className="zhuzhi_Info">
-                            {xtitle}
+                                {xtitle}
                             </p>
                             <p className="goods_State">
-                            图文详情
+                                图文详情
                             </p>
                         </div>
                         <p className="other">
-                                <span>
+                            <span>
                                 216丸;
                                 </span>
-                                <span>
+                            <span>
                                 新老包装随机发货；
                                 </span>
                         </p>
@@ -109,14 +177,14 @@ huitui=()=>{
                         <div className="Moneybox">
                             <div>
                                 <p className="Money">
-                                    
-                                <span>{xjiage}</span>
+
+                                    <span>{xjiage}</span>
                                 </p>
                                 <p className="Sales">
-                                {xxiangliang}
+                                    {xxiangliang}
                                 </p>
                             </div>
-                           
+
                         </div>
                     </div>
 
@@ -155,20 +223,20 @@ huitui=()=>{
 
                     <div className="Favourable">
                         <p className="fl">
-                        好评度
+                            好评度
                             <span className="red_col">
-                            100%
+                                100%
                             </span>
                         </p>
                         <p className="Comment">
                             <span>3207条评价</span>
-                            <img src="https://img.ddky.com/c/wap/images/ddky2/rightMore.png"  />
+                            <img src="https://img.ddky.com/c/wap/images/ddky2/rightMore.png" />
                         </p>
                     </div>
-               </main>
-               
-               <footer className="footer">
-                   <ul className="footerBoxFl">
+                </main>
+
+                <footer className="footer">
+                    <ul className="footerBoxFl">
                         <li className="li2">
                             <img src="https://img.ddky.com/c/wap/images/ddky2/wo.png" />
                             <p>药师指导</p>
@@ -177,11 +245,11 @@ huitui=()=>{
                             <img src="https://img.ddky.com/c/wap/images/ddky2/cart2.png" />
                             <p>清单列表</p>
                         </li>
-                        <li className="add_car">
+                        <li className="add_car" onClick={this.jiacart.bind(null)}>
                             加入清单
                         </li>
-                   </ul>
-               </footer>
+                    </ul>
+                </footer>
 
             </section>
         )
