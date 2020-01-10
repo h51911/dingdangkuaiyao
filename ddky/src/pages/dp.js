@@ -3,21 +3,69 @@ import React,{Component} from "react";//引入库
 import "../css/清除默认样式.css";//引入base
 import "../css/dp.css";//引入css
 import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
-import { Carousel } from 'antd';
+import { Icon } from 'antd';
+import {connect} from 'react-redux';
 
 
 
 //详情页
 class Dp extends Component{
-    constructor(){//初始化
-        super();
-    };
+        state={
+            chushishuju:{}
+
+        
+    }
+
+
+
+
+async componentDidMount() {
+    
+   if(this.props.xqysja.xurl){
+        let bb = await this.props.xqysja
+        bb = JSON.stringify(bb);
+        localStorage.setItem('xqsp', bb)
+   }
+
+    console.log(this.props.xqysja);
+    let pan=localStorage.getItem('xqsp');
+    console.log(pan);
+    if (!(pan =='{}')) {
+        let shuju=JSON.parse(pan);
+        this.setState({
+
+            chushishuju: shuju
+        })
+    }else{
+        let aa = await this.props.xqysja
+        aa=JSON.stringify(aa);
+        localStorage.setItem('xqsp',aa)
+        let shuju = JSON.parse(aa);
+         this.setState({
+
+             chushishuju: shuju
+         })
+    }
+   
+    console.log(this.state);
+}
+
+huitui=()=>{
+
+    this.props.history.goBack();
+}
+
     render(){
+
+        let {xjiage,xliang,xname,xtitle,xurl,xxiangliang} =this.state.chushishuju
         return(
             <section id="app_Content">
                 {/* 头部 */}
                 <header className="topBox">
                     <div className="Header">
+                        <div className="houtui" onClick={this.huitui}>
+                            <Icon type="left" />
+                        </div>
                         <ul className="Tabs">
                             <li className="itemSt">商品</li>
                             <li className="itemSt">详情</li>
@@ -36,25 +84,20 @@ class Dp extends Component{
                <main className="Content">
                     {/* 轮播图 */}
                     <div className="bannerBox">
-                        <Carousel autoplay>
                             <div className="Slider">
-                                <img src="image/x_1.jpg" className="Wrapper" />
+                                <img src={xurl} className="Wrapper" />
                             </div>
-                            <div className="Slider">
-                                <img src="image/x_1.jpg" className="Wrapper" />
-                            </div>
-                        </Carousel>
                     </div>
 
                     <div className="Ul_all">
                         <h1 className="goods_Name">
                             <span className="sign">28分钟</span>
-                            [仁和]六味地黄丸(浓缩丸)    
+                            {xname}    
                         </h1>
 
                         <div className="Zhuzhi">
                             <p className="zhuzhi_Info">
-                            滋阴补肾。用于肾阴亏损，头晕耳鸣，腰膝酸软，骨蒸潮热，盗汗遗精。
+                            {xtitle}
                             </p>
                             <p className="goods_State">
                             图文详情
@@ -72,11 +115,11 @@ class Dp extends Component{
                         <div className="Moneybox">
                             <div>
                                 <p className="Money">
-                                    ¥
-                                    <span>13.50</span>
+                                    
+                                <span>{xjiage}</span>
                                 </p>
                                 <p className="Sales">
-                                月售 11918 笔
+                                {xxiangliang}
                                 </p>
                             </div>
                            
@@ -151,5 +194,9 @@ class Dp extends Component{
     }
 
 }
+const quan = function (state) {
 
+    return state;
+}
+Dp = connect(quan)(Dp)
 export default Dp;

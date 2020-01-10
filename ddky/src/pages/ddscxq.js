@@ -1,31 +1,116 @@
 import React,{Component} from "react";//引入库
-import "../css/pct.css";//引入css
+import "../css/ddscxq.css";//引入css
 import axios from 'axios';
-class Pct extends Component{
+import {connect} from 'react-redux'
+
+import { Spin, Alert } from 'antd';
+class ddscxq extends Component{
     // 初始化
     state = {
         data: {
 
-        }
+        },
+        panduan:0,
+        ddscfl: ['男科用药', '妇科用药', '慢病用药', '儿童用药', '养生花茶', '营养保健', '性福生活', '个人护理', '家用器械', '皮肤用药'],
+        jiazai:false
 
     }
 async componentDidMount() {
 
     let {
         data
-    } = await axios.get("http://localhost:1911/login/lbsuoyou");
+    } = await axios.get("http://localhost:1911/login/ddsclbsuoyou");
     //    console.log(data[0])
     this.setState({
         data: data[0]
 
     })
-    console.log(this.state.data);
+    console.log(this.state.data)
+    this.state.jiazai = true;
+}
+
+xqy=({item})=>{
+    // item=item.toString();
+   
+    let action={
+        type:'xqysj',
+        payload:item
+    }
+    this.props.dispatch(action);
+    // console.log(this.props)
+    this.props.history.push('/dp/');
+
+}
+componentDidUpdate(){
+this.state.jiazai = true;
+setTimeout(() => {
+    this.setState({
+        jiazai: false
+
+    })
+}, 1800);
+}
+ddscxqqiehuan(index){
+        this.setState({
+            panduan: index
+        })
+
+        
 }
     // 渲染
     render(){
-        let {xiagqing}=this.state.data;
+        // this.state.jiazai=true;
+        
+        let {
+            nankeyongyao,
+            fukeyongyao,
+            manbingyongyao,
+            ertongyongyao,
+            yangshenghuacha,
+            yingyangbaojian,
+            xingfushenghuo,
+            gerenhuli,
+            jiayongqixie,
+            pifuyongyao
+        } = this.state.data;
+        let xiagqing = nankeyongyao;
+       let {ddscfl,panduan}= this.state;
+
+      switch(panduan){
+        case 0:
+            xiagqing = nankeyongyao
+            break;
+        case 1:
+            xiagqing = fukeyongyao
+            break;
+        case 2:
+            xiagqing = manbingyongyao
+        break;
+        case 3:
+            xiagqing = ertongyongyao
+        break;
+        case 4:
+            xiagqing = yangshenghuacha
+        break;
+        case 5:
+            xiagqing = yingyangbaojian
+        break;
+        case 6:
+            xiagqing = xingfushenghuo
+        break;
+        case 7:
+            xiagqing = gerenhuli
+        break;
+        case 8:
+            xiagqing = jiayongqixie
+        break;
+        case 9:
+            xiagqing = pifuyongyao
+        break;
+      }
         return(
             <section id="Pct">
+                <Spin tip = "Loading..." spinning={this.state.jiazai}>
                 {/* 头部 */}
                 <header className="header_cl">
                     <div className="home">
@@ -42,6 +127,16 @@ async componentDidMount() {
 
                 {/* 内容 */}
                 <main className="boxs">
+                    <div className="qie">
+                        < div className="qie1" >
+                            {
+                                ddscfl.map((item,index)=>(
+                                <div className={this.state.panduan==index ? 'qi aa' : 'qi'} onClick={this.ddscxqqiehuan.bind(this,index)} key={index}>{item}</div>
+                                ))
+                            }
+                        </div>
+
+                    </div>
                     <div className="navList_in">
                         <ol className="ol">
                             <li className="lio">默认</li>
@@ -57,7 +152,7 @@ async componentDidMount() {
                     // console.log(indexlb[0])
                     xiagqing ? xiagqing.map((item, idx) => (
                             
-                    <dl className="cl" key={idx}>
+                    <dl className="cl" key={idx} onClick={this.xqy.bind(this,{item})}>
                                 <dt className="fl">
                                     <img src={item.xurl} className="z_img"/>
                                 </dt>
@@ -111,19 +206,27 @@ async componentDidMount() {
                                 </dd>
                             </dl>
 
-                  )):''
+                  )): ''
+                  
                   }
                         </div>
                     </div>
 
                 </main>
-
+              </Spin>
             </section>
         )
     }
 
 }
 
-export default Pct;
+const quan=function(state){
+
+    return state;
+}
+
+
+ddscxq = connect(quan)(ddscxq)
+export default ddscxq;
 
 
