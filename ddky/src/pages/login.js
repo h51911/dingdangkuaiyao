@@ -1,88 +1,95 @@
-import React,{Component} from "react";//库
+import React, { Component } from "react";//库
 import "../css/login.css";//引入css
-import {withRouter} from "react-router-dom";//获取高阶组件
+import { withRouter } from "react-router-dom";//获取高阶组件
 import axios from "axios";//引入axios
 import Qs from "qs";
 import { message } from 'antd';
-import {connect} from 'react-redux'
-class Login extends Component{
-    constructor(){//初始化
+import { connect } from 'react-redux'
+class Login extends Component {
+    constructor() {//初始化
         super();
 
         this.state = {
-            users:"",
-            pws:"",
+            users: "",
+            pws: "",
         }
 
         this.btns = this.btns.bind(this);//修正this指向
     }
-    
-    btns(){
+
+    btns() {
         this.props.history.push("./reg");
     }
-    phone = (ev)=>{
+    phone = (ev) => {
         this.setState({
-            users:ev.target.value,
+            users: ev.target.value,
         })
     }
     pw = (ev) => {
         this.setState({
-            pws:ev.target.value,
+            pws: ev.target.value,
         })
     }
     //点击登录
-    LoginBtn = ()=>{
+    LoginBtn = async () => {
         let name = this.state.users;//用户
         let password = this.state.pws;//密码
         let keep = 1;//由于没有七天免登录 只有默认60*60秒免登录
-        if(name && password){
-            console.log(name,password);
-            let zc=Qs.stringify({name,password,keep})
-               axios.post("http://localhost:1911/login/logins",zc).then(({data})=>{
-                   console.log(data);
-                    if(data.code){
-                        console.log('登录成功');
+        if (name && password) {
+          
+            let zc = Qs.stringify({ name, password, keep })
+            axios.post("http://localhost:1911/login/logins", zc).then(({ data }) => {
+         
+                if (data.code) {
+              
 
-                        let action = {
-                            type: 'dlzt',
-                            payload: name
-                        }
-                        this.props.dispatch(action);
-                        console.log(this.props)
-
-                        let url =localStorage.getItem('tologin');
-                        localStorage.setItem('authorization',data.authorization);
-                        this.setCookie("names",name)
-                        this.props.history.push(url);
-                        localStorage.removeItem('tologin');
-                        // if(data.data.authorization){
-                        //     //获取跳转的路径
-                        //     let url = localStorage.getItem("name");
-                        //     if(url){
-                        //         //把这个证书存进去
-                        //         localStorage.setItem('authorization',data.data.authorization);
-                        //         this.setCookie("names",name)
-                        //         this.props.history.push(url);
-                        //     }else{
-                        //         //把这个证书存进去
-                        //         localStorage.setItem('authorization',data.data.authorization);
-                        //         this.setCookie("names",name)
-                        //         this.props.history.push("/wd");
-                        //     }
-                        // }
-                    } else{
-                        message.warning('登录失败')
-
+                    let action = {
+                        type: 'dlzt',
+                        payload: name
                     }
-                   
-               })
-        }else{
+                    this.props.dispatch(action);
+                    let url = localStorage.getItem('tologin');
+                    localStorage.setItem('authorization', data.authorization);
+                    this.setCookie("names", name)
+                    this.props.history.push(url);
+                    localStorage.removeItem('tologin');
+                    // if(data.data.authorization){
+                    //     //获取跳转的路径
+                    //     let url = localStorage.getItem("name");
+                    //     if(url){
+                    //         //把这个证书存进去
+                    //         localStorage.setItem('authorization',data.data.authorization);
+                    //         this.setCookie("names",name)
+                    //         this.props.history.push(url);
+                    //     }else{
+                    //         //把这个证书存进去
+                    //         localStorage.setItem('authorization',data.data.authorization);
+                    //         this.setCookie("names",name)
+                    //         this.props.history.push("/wd");
+                    //     }
+                    // }
+                } else {
+                    message.warning('登录失败')
+
+                }
+
+            })
+          
+            let { data } = await axios.get("http://localhost:1911/login/ddkycart", {
+                params: name
+            })
+            let action = {
+                type: "shujuku",
+                payload: data
+            }
+            this.props.dispatch(action);
+        } else {
             alert("请完善信息")
         }
     }
 
     //设置cookie
-    setCookie = (key, val, iDay)=>{
+    setCookie = (key, val, iDay) => {
         //key键名,val键值,iDay失效时间
         var str = key + '=' + val + ';path=/';
         if (iDay) {
@@ -92,47 +99,47 @@ class Login extends Component{
         }
         document.cookie = str;
     }
-   
 
-    render(){
-        return(
+
+    render() {
+        return (
             <div className="header_content">
                 <div className="login_header">
-                <a>密码登录</a>
+                    <a>密码登录</a>
                     <a>快速登录</a>
-                  
+
                 </div>
-                
+
                 <div className="login_box fls" >
                     <div className="input_group">
                         <div className="input_item">
-                            <input type="number" placeholder="请输入手机号" className="ipt" 
+                            <input type="number" placeholder="请输入手机号" className="ipt"
                             />
                         </div>
                         <div className="input_item">
-                            <input type="number" placeholder="请输入图形验证码" className="ipt" 
-                            
-                            
+                            <input type="number" placeholder="请输入图形验证码" className="ipt"
+
+
                             />
-                            <img src="image/icon-font.png" className="ig" /> 
+                            <img src="image/icon-font.png" className="ig" />
                         </div>
                         <div className="input_item">
                             <input type="number" placeholder="验证码" className="ipt" />
-                           <span className="input_code">
-                               获取验证码
+                            <span className="input_code">
+                                获取验证码
                            </span>
                         </div>
 
-                           {/* 阅读 */}
+                        {/* 阅读 */}
                         <div className="agreement">
-                            <img src="image/oval_active.png" className="agreeimg1"/>
+                            <img src="image/oval_active.png" className="agreeimg1" />
                             <p className="agreeimg2">
-                            我已认真阅读，理解并同意 
-                                <a  className="agreeimg3">
-                                《叮当快药用户协议》
+                                我已认真阅读，理解并同意
+                                <a className="agreeimg3">
+                                    《叮当快药用户协议》
                                 </a>
-                                <a  className="agreeimg3">
-                                《叮当快药用户协议》
+                                <a className="agreeimg3">
+                                    《叮当快药用户协议》
                                 </a>
                             </p>
                         </div>
@@ -148,35 +155,35 @@ class Login extends Component{
                             <p className="voice_verify">
                                 <span className="verify_code">收不到验证码？请使用 </span>
                                 <span className="verify_voice">
-                            免费语音获取
+                                    免费语音获取
                                 </span>
                             </p>
                         </div>
 
                     </div>
                 </div>
-            
+
                 <div className="login_box " >
                     <div className="input_group">
                         <div className="input_item">
                             <input type="number" placeholder="请输入手机号" className="ipt"
-                            onChange={this.phone} value={this.state.users} />
+                                onChange={this.phone} value={this.state.users} />
                         </div>
                         <div className="input_item">
-                            <input type="number" placeholder="请输入密码" className="ipt" 
-                            
-                            onChange={this.pw} value={this.state.pws}/>
+                            <input type="number" placeholder="请输入密码" className="ipt"
+
+                                onChange={this.pw} value={this.state.pws} />
                         </div>
-                           {/* 阅读 */}
+                        {/* 阅读 */}
                         <div className="agreement">
-                            <img src="image/oval_active.png" className="agreeimg1"/>
+                            <img src="image/oval_active.png" className="agreeimg1" />
                             <p className="agreeimg2">
-                            我已认真阅读，理解并同意 
-                                <a  className="agreeimg3">
-                                《叮当快药用户协议》
+                                我已认真阅读，理解并同意
+                                <a className="agreeimg3">
+                                    《叮当快药用户协议》
                                 </a>
-                                <a  className="agreeimg3">
-                                《叮当快药用户协议》
+                                <a className="agreeimg3">
+                                    《叮当快药用户协议》
                                 </a>
                             </p>
                         </div>
@@ -190,16 +197,16 @@ class Login extends Component{
                                 注册
                             </p>
                             <p className="voice_verify">
-                               <a className="a1">
-                                   忘记密码？
+                                <a className="a1">
+                                    忘记密码？
                                </a>
                             </p>
                         </div>
 
                     </div>
                 </div>
-            
-            
+
+
             </div>
         )
     }

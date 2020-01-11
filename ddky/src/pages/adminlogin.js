@@ -22,7 +22,7 @@ class Adminlogin extends React.Component{
         if (name && password) {
             let zc=Qs.stringify({name,password})
            let {data}= await axios.post("http://localhost:1911/login/adminlogin",zc)
-           console.log(data);
+     
            if(data[0]){
                message.success('登录成功');
                localStorage.setItem('adminlogin',name)

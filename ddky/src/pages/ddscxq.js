@@ -25,7 +25,7 @@ async componentDidMount() {
         data: data[0]
 
     })
-    console.log(this.state.data)
+
     this.state.jiazai = true;
 }
 

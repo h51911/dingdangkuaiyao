@@ -9,14 +9,16 @@ class Cart extends Component {
         num: 0
     }
     componentWillMount() {
-        if (this.props.state.zhanghao) {
+        if (this.props.state.zhanghao || document.cookie.slice(6)) {
+    
         } else {
-            localStorage.setItem('tologin','/cart');
+            localStorage.setItem('tologin', '/cart');
             this.props.history.push('/login')
         }
 
     }
     changeQty = async (id, value) => {
+
         let { data } = await axios.get("http://localhost:1911/login/ddkyjia", {
             params: {
                 id,
@@ -32,7 +34,7 @@ class Cart extends Component {
                     value
                 }
             }
-            // console.log(this.props)
+   
             this.props.dispatch(action)
         }
     }
@@ -54,7 +56,7 @@ class Cart extends Component {
                     uid: item.uid
                 }
             }
-            // console.log(this.props)
+    
             this.props.dispatch(action)
         }
     }
@@ -83,7 +85,7 @@ class Cart extends Component {
 
             },
             onCancel() {
-                console.log('取消');
+         
             },
         });
     }

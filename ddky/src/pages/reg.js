@@ -48,10 +48,10 @@ class Reg extends Component{
         let password = this.state.password;
         let affirmgs = this.state.affirmg;
         if(name && password && affirmgs){
-            console.log(name,password);
+      
             let zc=Qs.stringify({name,password})
                axios.post("http://localhost:1911/login/reg",zc).then((data)=>{
-                   console.log(data);
+         
                    if(data.data.code == 1){
                         this.props.history.push("/login");
                    }
@@ -123,7 +123,7 @@ class Reg extends Component{
         let val1 = this.state.auth_codeg * 1;//输入框验证码
         let val2 = this.state.graph * 1;//图形验证码
         if(val1 == val2){
-            console.log(88)
+        
         }else{
             alert("验证不正确");
             return;
