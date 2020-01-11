@@ -1,6 +1,6 @@
 let initState = {
     xqysja: {},
-    zhanghao: 'mxl123',
+    zhanghao: '',
     arr: []
 }
 const reducer = function (state = initState, { type, payload }) {
@@ -27,6 +27,13 @@ const reducer = function (state = initState, { type, payload }) {
             ...state,
             arr
         }
+    }
+    if(type=='dlzt'){
+        return {
+            ...state,
+            zhanghao: payload
+        }
+
     }
     if (type == 'tianjia') {
         return {
