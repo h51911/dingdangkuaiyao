@@ -1,12 +1,87 @@
-import React from 'react';
+import React from "react"; //引入库
+import ReactDOM from "react-dom";//引入dom功能
+import "../../css/an.css";
+import { Form, Input, Button,message} from 'antd';
+import "../../css/清除默认样式.css";
+import axios from 'axios';
+//后台登录页面
 
-class Xgmm extends React.Component{
-    render(){
+import Qs from "qs";
+
+class Xgmm extends React.Component {
+    constructor(){
+        super();
+        this.state={
+            name:'',
+            password:''
+        }
+    }
+   yhmb=(ev)=>{
+        this.setState({
+
+            name:ev.target.value
+        })
+
+   }
+   mmb=(ev)=>{
+        this.setState({
+            password:ev.target.value
+        })
+
+   }
+   tianjia= async()=>{
+
+        let name=this.state.name;
+        let password = this.state.password;
+      
+        if(name && password){
+            let zc=Qs.stringify({name,password})
+          let {data}= await axios.post("http://localhost:1911/login/mmxg", zc)
+            console.log(data.result.n)
+            if(data.result.n){
+                message.success('修改成功')
+            }else{
+                message.error('请输入正确的用户名');
+            }
+        }else{
+            message.error('请完善添加信息');
+        }
+    
+   }
+    render() {
+
         return (
-            <h1>修改密码</h1>
-        )
+            <div className="breadcrumb">
+                <div className="homes">
+                    <a href="" className="pagest">主页</a>
+                </div>
+
+                <div className="mains">
+                    <div className="guan">重置密码</div>
+                    <div className="widget-title">
+                        <em>添加新用户</em>
+                    </div>
+
+                        <div className="controls">
+                            <Form id="ant-f">
+                                <Form.Item label="用户名">
+                                    <Input placeholder="请输入用户名" value={this.state.name} onChange={this.yhmb}/>
+                                </Form.Item>
+                                <Form.Item label="密码" >
+                                    <Input placeholder="请输入密码" value={this.state.password} onChange={this.mmb}/>
+                                </Form.Item>
+                                
+                                <Form.Item>
+                                    <Button type="primary" onClick={this.tianjia}>添加</Button>
+                                </Form.Item>
+                            </Form>
+                        </div>
+                </div>
+
+            </div>
+        )   
     }
 
 }
-
+ 
 export default Xgmm;

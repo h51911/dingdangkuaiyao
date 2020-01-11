@@ -5,7 +5,6 @@ import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import Yhgl from './admin/yhgl';
 import Tjxyh from './admin/tjxyh';
 import Xgmm from './admin/xgmm';
-import Ddxxb from './admin/ddxxb';
 const { Panel } = Collapse;
 
 class Houtaihome extends React.Component {
@@ -78,7 +77,6 @@ class Houtaihome extends React.Component {
                                 <Route path='/houtaihome/yhgl' component={Yhgl} />
                                 <Route path='/houtaihome/tjxyh' component={Tjxyh} />
                                 <Route path='/houtaihome/xgmm' component={Xgmm} />
-                                <Route path='/houtaihome/ddxxb' component={Ddxxb} />
                                 <Redirect to="/houtaihome/yhgl" />
                             </Switch>
                         </div>
