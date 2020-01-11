@@ -11,6 +11,7 @@ class Cart extends Component {
     componentWillMount() {
         if (this.props.state.zhanghao) {
         } else {
+            localStorage.setItem('tologin','/cart');
             this.props.history.push('/login')
         }
 

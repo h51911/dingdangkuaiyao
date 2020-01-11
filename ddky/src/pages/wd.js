@@ -1,12 +1,15 @@
 import React,{Component} from 'react';
+import {withRouter} from "react-router-dom";//获取高阶组件
 import '../css/wd.css';
-
-
+// import axios from "axios";//引入axios
+// import Qs from "qs";//引入4位随机数  只会调用一次
 
 class Wd extends Component{
         constructor(){
             super();
             this.state = {
+                cookits : "",//cookie
+                mySpan:"block",//span节点
                 //我的订单
                 orderFrom:[
                     {
@@ -50,7 +53,58 @@ class Wd extends Component{
             ]
 
             }
+
+            this.btns = this.btns.bind(this);//修正bts的this指向
+        };
+    
+    //点击进行跳转
+    btns(){
+        this.props.history.push("./login")
+    };
+      
+    //获取cookie
+    getCookie = (key)=>{
+        //传键名，返回对应键值 
+        var str = document.cookie;
+        var arr = str.split('; ');
+        for (var ele of arr) {
+            var arr2 = ele.split('=');
+            if (key == arr2[0]) {
+                return arr2[1];
+            }
         }
+    }
+
+    //初始化
+    componentDidMount(){
+        let token  = localStorage.getItem("authorization");//获取手机号的值
+        // // let user = $.md5(usernamesgVal);
+        // let zc=Qs.stringify({token})
+        // console.log(zc);
+        if(token){
+            //     axios.post("http://localhost:1911/verify",zc
+            // )
+            // .then((data)=>{
+            //     console.log(data)
+            //     if(data.data.code==1){
+            //         alert("用户有token，可以免登录")
+            //         return;
+            //     }
+            // })
+            //获取cookie
+            let getCookieWd = this.getCookie("names");
+            if(getCookieWd){
+                this.setState({
+                    cookits:getCookieWd,
+                    mySpan:"none",
+                });
+                
+            }
+        }   
+       
+      
+    }
+   
 
       render(){
         let {orderFrom,tool} = this.state;//解构
@@ -63,10 +117,13 @@ class Wd extends Component{
                     <header className="header">
                         <div className="headcont">
                             <img src="image/regLogin.png" className="imgs"/>
-                            <p className="nologin">
-                                <span>注册</span>
-                                /
-                                <span>登录</span>
+                            <p className="nologin" onClick={this.btns}>
+                                    <em className="spanto" style={{display:this.state.mySpan}}>
+                                        <span>注册</span>
+                                        /
+                                        <span>登录</span>
+                                    </em>
+                                    <span>{this.state.cookits}</span>
                             </p>
                             <div className="membercenterBox">
                                 <p className="yaoshi">
@@ -145,6 +202,6 @@ class Wd extends Component{
     }
 }
 
-
+Wd = withRouter(Wd);
 
 export default Wd;

@@ -4,7 +4,7 @@ import "../css/dp.css";//引入css
 import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
 import { connect } from 'react-redux';
 import axios from 'axios';
-import { message } from 'antd'
+import { message, Icon } from 'antd'
 
 //详情页
 class Dp extends Component {
@@ -48,55 +48,42 @@ class Dp extends Component {
         console.log(this.state);
     }
 
+    huitui = () => {
+
+        this.props.history.goBack();
+    }
     jiacart = async () => {
 
         let data = JSON.parse(localStorage.getItem('xqsp'));
         // console.log(data);
         // console.log(this.props);
-        let aa = this.props.arr.filter(item => { return item.uid == data.uid });
-        // console.log(aa);
-        if (aa.length) {
-            let { data } = await axios.get('http://localhost:1911/login/ddkyjia', {
-                params: {
-                    name: this.props.zhanghao,
-                    value: aa[0].num + 1,
-                    id: aa[0].uid
-                }
-            })
+        if (this.props.zhanghao) {
+            let aa = this.props.arr.filter(item => { return item.uid == data.uid });
+            // console.log(aa);
+            if (aa.length) {
+                let { data } = await axios.get('http://localhost:1911/login/ddkyjia', {
+                    params: {
+                        name: this.props.zhanghao,
+                        value: aa[0].num + 1,
+                        id: aa[0].uid
+                    }
+                })
 
-            if (data) {
-                message.success('添加成功');
-            }
-            let action = {
-                type: "xiugai",
-                payload: {
-                    id: aa[0].uid,
-                    value: aa[0].num + 1
+                if (data) {
+                    message.success('添加成功');
                 }
-            }
-            this.props.dispatch(action);
-        } else {
-            console.log(1)
-            let aa = await axios.get('http://localhost:1911/login/ddkyzhen', {
-                params: {
-                    usename: this.props.zhanghao,
-                    imgurl: data.xurl,
-                    uid: data.uid,
-                    name: data.xname,
-                    shop: data.xtitle,
-                    price: data.xjiage,
-                    setmeal: data.xxiangliang,
-                    liang: data.xliang,
-                    num: 1
-                }
-            })
-
-            if (aa) {
-                message.success('添加成功');
-                console.log(2);
                 let action = {
-                    type: "tianjia",
+                    type: "xiugai",
                     payload: {
+                        id: aa[0].uid,
+                        value: aa[0].num + 1
+                    }
+                }
+                this.props.dispatch(action);
+            } else {
+                console.log(1)
+                let aa = await axios.get('http://localhost:1911/login/ddkyzhen', {
+                    params: {
                         usename: this.props.zhanghao,
                         imgurl: data.xurl,
                         uid: data.uid,
@@ -107,10 +94,31 @@ class Dp extends Component {
                         liang: data.xliang,
                         num: 1
                     }
-                }
-                this.props.dispatch(action);
-            }
+                })
 
+                if (aa) {
+                    message.success('添加成功');
+                    console.log(2);
+                    let action = {
+                        type: "tianjia",
+                        payload: {
+                            usename: this.props.zhanghao,
+                            imgurl: data.xurl,
+                            uid: data.uid,
+                            name: data.xname,
+                            shop: data.xtitle,
+                            price: data.xjiage,
+                            setmeal: data.xxiangliang,
+                            liang: data.xliang,
+                            num: 1
+                        }
+                    }
+                    this.props.dispatch(action);
+                }
+
+            }
+        } else {
+            message.error('请先登录');
         }
     }
     render() {
@@ -121,6 +129,9 @@ class Dp extends Component {
                 {/* 头部 */}
                 <header className="topBox">
                     <div className="Header">
+                        <div className="houtui" onClick={this.huitui}>
+                            <Icon type="left" />
+                        </div>
                         <ul className="Tabs">
                             <li className="itemSt">商品</li>
                             <li className="itemSt">详情</li>
