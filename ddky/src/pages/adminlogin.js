@@ -15,20 +15,40 @@ class Adminlogin extends React.Component{
             pws:"",
         }
     }
-   login=()=>{
+   login = async () => {
         let name = this.state.users; //用户
         let password = this.state.pws; //密码
 
         if (name && password) {
             let zc=Qs.stringify({name,password})
-            axios.post("http://localhost:1911/login/adminlogin", zc)
+           let {data}= await axios.post("http://localhost:1911/login/adminlogin",zc)
+           console.log(data);
+           if(data[0]){
+               message.success('登录成功');
+               localStorage.setItem('adminlogin',name)
+               this.props.history.push('/houtaihome');
+           }else{
+
+             message.error('账号或密码错误');
+           }
         }else{
             message.error('请完善登录信息');
 
         }
    }
-    
+   userss=(ev)=>{
+    this.setState({
 
+        users:ev.target.value
+    })
+   }
+    
+pwss = (ev) => {
+    this.setState({
+
+        pws: ev.target.value
+    })
+}
     render() {
        
         return (
@@ -39,18 +59,27 @@ class Adminlogin extends React.Component{
                         <Form  className="login-form">
                         <Form.Item>
                             <Input
-                            placeholder="Username"
+                            placeholder = "Username"
+                            value = {
+                                this.state.users
+                            } onChange={this.userss}
                             />
               
                         </Form.Item>
                         <Form.Item>
                             <Input
                             type="password"
-                            placeholder="Password"
+                            placeholder = "Password"
+                            value = {
+                                this.state.pws
+                            }
+                            onChange = {
+                                this.pwss
+                            }
                             />
                 
                         </Form.Item>
-                        <Button type="primary" className="login-form-button indexts" onClick={this.login}>
+                        <Button type="text" className="login-form-button indexts" onClick={this.login}>
                         登录
                         </Button>
                         <Button type="password" className="login-form-button indexs" >

@@ -3,6 +3,8 @@ import "../css/login.css";//引入css
 import {withRouter} from "react-router-dom";//获取高阶组件
 import axios from "axios";//引入axios
 import Qs from "qs";
+import { message } from 'antd';
+import {connect} from 'react-redux'
 class Login extends Component{
     constructor(){//初始化
         super();
@@ -36,24 +38,42 @@ class Login extends Component{
         if(name && password){
             console.log(name,password);
             let zc=Qs.stringify({name,password,keep})
-               axios.post("http://localhost:1911/login/logins",zc).then((data)=>{
-                   if(data.data.code == 1){
-                        if(data.data.authorization){
-                            //获取跳转的路径
-                            let url = localStorage.getItem("name");
-                            if(url){
-                                //把这个证书存进去
-                                localStorage.setItem('authorization',data.data.authorization);
-                                this.setCookie("names",name)
-                                this.props.history.push(url);
-                            }else{
-                                //把这个证书存进去
-                                localStorage.setItem('authorization',data.data.authorization);
-                                this.setCookie("names",name)
-                                this.props.history.push("/wd");
-                            }
+               axios.post("http://localhost:1911/login/logins",zc).then(({data})=>{
+                   console.log(data);
+                    if(data.code){
+                        console.log('登录成功');
+
+                        let action = {
+                            type: 'dlzt',
+                            payload: name
                         }
-                    }  
+                        this.props.dispatch(action);
+                        console.log(this.props)
+
+                        let url =localStorage.getItem('tologin');
+                        localStorage.setItem('authorization',data.authorization);
+                        this.setCookie("names",name)
+                        this.props.history.push(url);
+                        localStorage.removeItem('tologin');
+                        // if(data.data.authorization){
+                        //     //获取跳转的路径
+                        //     let url = localStorage.getItem("name");
+                        //     if(url){
+                        //         //把这个证书存进去
+                        //         localStorage.setItem('authorization',data.data.authorization);
+                        //         this.setCookie("names",name)
+                        //         this.props.history.push(url);
+                        //     }else{
+                        //         //把这个证书存进去
+                        //         localStorage.setItem('authorization',data.data.authorization);
+                        //         this.setCookie("names",name)
+                        //         this.props.history.push("/wd");
+                        //     }
+                        // }
+                    } else{
+                        message.warning('登录失败')
+
+                    }
                    
                })
         }else{
@@ -185,5 +205,10 @@ class Login extends Component{
     }
 }
 
+const quan = function (state) {
+
+    return state;
+}
+Login = connect(quan)(Login)
 Login = withRouter(Login);
 export default Login;

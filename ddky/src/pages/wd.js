@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import {withRouter} from "react-router-dom";//获取高阶组件
 import '../css/wd.css';
+import {connect} from 'react-redux'
 // import axios from "axios";//引入axios
 // import Qs from "qs";//引入4位随机数  只会调用一次
 
@@ -9,7 +10,9 @@ class Wd extends Component{
             super();
             this.state = {
                 cookits : "",//cookie
-                mySpan:"block",//span节点
+                mySpan:"none",//span节点,
+                exit:"",
+                nobl:"",
                 //我的订单
                 orderFrom:[
                     {
@@ -59,6 +62,7 @@ class Wd extends Component{
     
     //点击进行跳转
     btns(){
+        localStorage.setItem('tologin','/wd');
         this.props.history.push("./login")
     };
       
@@ -75,35 +79,61 @@ class Wd extends Component{
         }
     }
 
-    //初始化
     componentDidMount(){
-        let token  = localStorage.getItem("authorization");//获取手机号的值
-        // // let user = $.md5(usernamesgVal);
-        // let zc=Qs.stringify({token})
-        // console.log(zc);
+         this.setState({
+                mySpan:"block",
+                nobl:"none"
+
+       })
+        let token  = localStorage.getItem("authorization");
         if(token){
-            //     axios.post("http://localhost:1911/verify",zc
-            // )
-            // .then((data)=>{
-            //     console.log(data)
-            //     if(data.data.code==1){
-            //         alert("用户有token，可以免登录")
-            //         return;
-            //     }
-            // })
             //获取cookie
             let getCookieWd = this.getCookie("names");
             if(getCookieWd){
                 this.setState({
                     cookits:getCookieWd,
                     mySpan:"none",
+                    nobl:"block"
                 });
-                
+            }else{
+                this.setState({
+                    exit:"btnspan",
+                    nobl:"none",
+                })
             }
         }   
-       
-      
     }
+       //设置cookie
+    setCookie = (key, val, iDay)=>{
+        //key键名,val键值,iDay失效时间
+        var str = key + '=' + val + ';path=/';
+        if (iDay) {
+            var date = new Date();
+            date.setDate(date.getDate() + iDay);
+            str += ';expires=' + date;//如果有这个参数就设置失效时间
+        }
+        document.cookie = str;
+    }
+   
+    removeCookie = (key)=>{
+        this.setCookie(key, '', -1);
+    }
+   //点击
+   btnspan=()=>{
+        let action = {
+            type: 'dlzt',
+            payload: ''
+        }
+        this.props.dispatch(action);
+
+       this.setState({
+                mySpan:"block",
+                nobl:"none",
+cookits:null
+       })
+        this.removeCookie("names");
+        
+   }
    
 
       render(){
@@ -117,13 +147,23 @@ class Wd extends Component{
                     <header className="header">
                         <div className="headcont">
                             <img src="image/regLogin.png" className="imgs"/>
-                            <p className="nologin" onClick={this.btns}>
-                                    <em className="spanto" style={{display:this.state.mySpan}}>
+                            <p className="nologin">
+                                    <em className="spanto" 
+                                    onClick={this.btns} 
+                                    style={{display:this.state.mySpan}}>
                                         <span>注册</span>
                                         /
                                         <span>登录</span>
                                     </em>
-                                    <span>{this.state.cookits}</span>
+                                    <span >
+                                        {this.state.cookits}
+                                   
+                                        <em onClick={this.btnspan} 
+                                        className="exit"
+                                            style={{display:this.state.nobl}}>
+                                           <br/> 退出
+                                        </em>
+                                    </span>
                             </p>
                             <div className="membercenterBox">
                                 <p className="yaoshi">
@@ -201,7 +241,7 @@ class Wd extends Component{
         )
     }
 }
-
+Wd = connect()(Wd)
 Wd = withRouter(Wd);
 
 export default Wd;

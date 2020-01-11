@@ -206,4 +206,12 @@ ul li{
       text-indent: .1rem;
       font-weight: 700;
       display: inline-block;
+<<<<<<< HEAD
+=======
+}
+
+.nologin .exit{
+      cursor: pointer;
+      line-height: .466667rem
+>>>>>>> 67b56031352c56d8d9f89a7ba11398737ed39699
 }

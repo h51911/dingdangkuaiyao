@@ -10,9 +10,39 @@ const { Panel } = Collapse;
 
 class Houtaihome extends React.Component {
 
+    state={
+        admin:null,
+        dt:null
+    }
 
+    componentDidMount(){
+      
+
+       this.setState({
+        admin: localStorage.getItem('adminlogin')
+
+       })
+  if(this.state.admin){
+           this.setState({
+               dt: '登录'
+           })
+        }else{
+            
+           this.setState({
+               dt: '退出登录'
+               
+           })
+        }
+    }
     qiehuan(path){
          this.props.history.push(path);
+    }
+    tuichu=()=>{
+        localStorage.removeItem('adminlogin')
+        this.setState({
+            admin: null
+        });   
+        this.props.history.push('/adminlogin')
     }
     render(){
         return (
@@ -23,10 +53,10 @@ class Houtaihome extends React.Component {
                         <h1>叮当快药后台管理系统</h1>
                         <div className="dingr">
                             <div className="dingrl">
-                                <p>欢迎你,admin</p>
+                                <p>欢迎你,{this.state.admin}</p>
                             </div>
-                            <div className="dingrr">
-                                <p>退出登录</p>
+                            <div className="dingrr" onClick={this.tuichu}>
+                                <p>{this.state.dt}</p>
                             </div>
                         </div>
                     </div>
