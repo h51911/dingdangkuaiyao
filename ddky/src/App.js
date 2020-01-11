@@ -63,14 +63,19 @@ class App extends Component {
     this.setState({
       menu: aa
     });
-    let { data } = await axios.get("http://localhost:1911/login/ddkycart", {
-      params: this.props.state.zhanghao
-    })
     let action = {
+      type: "dlzt",
+      payload: (document.cookie).slice(6)
+    }
+    this.props.dispatch(action);
+    let { data } = await axios.get("http://localhost:1911/login/ddkycart", {
+      params: document.cookie.slice(6)
+    })
+    let actions = {
       type: "shujuku",
       payload: data
     }
-    this.props.dispatch(action);
+    this.props.dispatch(actions);
   }
   qiehuan = (inx, path) => {
     this.props.history.push(path);

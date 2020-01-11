@@ -25,9 +25,8 @@ class Dp extends Component {
             localStorage.setItem('xqsp', bb)
         }
 
-        console.log(this.props.xqysja);
         let pan = localStorage.getItem('xqsp');
-        console.log(pan);
+
         if (!(pan == '{}')) {
             let shuju = JSON.parse(pan);
             this.setState({
@@ -45,7 +44,7 @@ class Dp extends Component {
             })
         }
 
-        console.log(this.state);
+    
     }
 
     huitui = () => {
@@ -55,11 +54,8 @@ class Dp extends Component {
     jiacart = async () => {
 
         let data = JSON.parse(localStorage.getItem('xqsp'));
-        // console.log(data);
-        // console.log(this.props);
         if (this.props.zhanghao) {
             let aa = this.props.arr.filter(item => { return item.uid == data.uid });
-            // console.log(aa);
             if (aa.length) {
                 let { data } = await axios.get('http://localhost:1911/login/ddkyjia', {
                     params: {
@@ -81,7 +77,7 @@ class Dp extends Component {
                 }
                 this.props.dispatch(action);
             } else {
-                console.log(1)
+
                 let aa = await axios.get('http://localhost:1911/login/ddkyzhen', {
                     params: {
                         usename: this.props.zhanghao,
@@ -98,7 +94,7 @@ class Dp extends Component {
 
                 if (aa) {
                     message.success('添加成功');
-                    console.log(2);
+
                     let action = {
                         type: "tianjia",
                         payload: {
@@ -119,6 +115,7 @@ class Dp extends Component {
             }
         } else {
             message.error('请先登录');
+            
         }
     }
     render() {

@@ -242,7 +242,7 @@ class Ddky extends Component {
         ev.stopPropagation();
         if (this.props.state.zhanghao) {
             let aa = this.props.state.arr.filter(item => { return item.uid == items.uid });
-            // console.log(aa);
+   
             if (aa.length) {
                 let { data } = await axios.get('http://localhost:1911/login/ddkyjia', {
                     params: {
