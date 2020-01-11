@@ -124,6 +124,10 @@ class Ddky extends Component {
         this.setState({
             nvxing: data
         })
+        if (this.props.state.stop) {
+            this.nav.scrollTo(0, this.props.state.stop)
+        }
+
     }
     gundong = (ev) => {
         if (ev.target.scrollTop > 0) {
@@ -236,49 +240,32 @@ class Ddky extends Component {
     }
     gouwu = async (items, ev) => {
         ev.stopPropagation();
-        console.log(this.props)
-        let aa = this.props.state.arr.filter(item => { return item.uid == items.uid });
-        // console.log(aa);
-        if (aa.length) {
-            let { data } = await axios.get('http://localhost:1911/login/ddkyjia', {
-                params: {
-                    name: this.props.zhanghao,
-                    value: aa[0].num + 1,
-                    id: aa[0].uid
-                }
-            })
+        if (this.props.state.zhanghao) {
+            let aa = this.props.state.arr.filter(item => { return item.uid == items.uid });
+            // console.log(aa);
+            if (aa.length) {
+                let { data } = await axios.get('http://localhost:1911/login/ddkyjia', {
+                    params: {
+                        name: this.props.zhanghao,
+                        value: aa[0].num + 1,
+                        id: aa[0].uid
+                    }
+                })
 
-            if (data) {
-                message.success('添加成功');
-            }
-            let action = {
-                type: "xiugai",
-                payload: {
-                    id: aa[0].uid,
-                    value: aa[0].num + 1
+                if (data) {
+                    message.success('添加成功');
                 }
-            }
-            this.props.dispatch(action);
-        } else {
-            let aa = await axios.get('http://localhost:1911/login/ddkyzhen', {
-                params: {
-                    usename: this.props.state.zhanghao,
-                    imgurl: items.imgurl,
-                    uid: items.uid,
-                    name: items.name,
-                    shop: items.shop,
-                    price: items.price,
-                    setmeal: items.setmeal,
-                    liang: items.liang,
-                    num: 1
-                }
-            })
-
-            if (aa) {
-                message.success('添加成功');
                 let action = {
-                    type: "tianjia",
+                    type: "xiugai",
                     payload: {
+                        id: aa[0].uid,
+                        value: aa[0].num + 1
+                    }
+                }
+                this.props.dispatch(action);
+            } else {
+                let aa = await axios.get('http://localhost:1911/login/ddkyzhen', {
+                    params: {
                         usename: this.props.state.zhanghao,
                         imgurl: items.imgurl,
                         uid: items.uid,
@@ -289,14 +276,41 @@ class Ddky extends Component {
                         liang: items.liang,
                         num: 1
                     }
-                }
-                this.props.dispatch(action);
-            }
+                })
 
+                if (aa) {
+                    message.success('添加成功');
+                    let action = {
+                        type: "tianjia",
+                        payload: {
+                            usename: this.props.state.zhanghao,
+                            imgurl: items.imgurl,
+                            uid: items.uid,
+                            name: items.name,
+                            shop: items.shop,
+                            price: items.price,
+                            setmeal: items.setmeal,
+                            liang: items.liang,
+                            num: 1
+                        }
+                    }
+                    this.props.dispatch(action);
+                }
+
+            }
+        }
+        else {
+            message.error('请先登录');
         }
     }
     componentWillUnmount() {
-        console.log(this.nav.scrollTop)
+        let action = {
+            type: 'cun',
+            payload: {
+                stop: this.nav.scrollTop
+            }
+        }
+        this.props.dispatch(action)
     }
     render() {
         return (

@@ -9,12 +9,13 @@
     position: relative;
     text-align: left;
 }
-/* .ant-btn{
-    position: fixed;
-    bottom: 1.5rem;
-    right: .2rem;
-    z-index: 102;
-} */
+
+.huidao{
+    position: fixed !important;
+    bottom: 1.5rem !important;
+    right: .2rem !important;
+    z-index: 102 !important;
+}
 /* 头部 */
 .header_cl {
     width: 100%;
@@ -95,8 +96,14 @@
     top: .9rem !important;
     z-index: 1;
 }
+.buyiy {
+    width: 100%;
+    position: fixed;
+    top: .9rem !important;
+    z-index: 1;
+}
 
-.navList_in .ol {
+.buyiy .ol {
     overflow: hidden;
     display: -webkit-box;
     background-color: #fff;

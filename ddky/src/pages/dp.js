@@ -57,50 +57,33 @@ class Dp extends Component {
         let data = JSON.parse(localStorage.getItem('xqsp'));
         // console.log(data);
         // console.log(this.props);
-        let aa = this.props.arr.filter(item => { return item.uid == data.uid });
-        // console.log(aa);
-        if (aa.length) {
-            let { data } = await axios.get('http://localhost:1911/login/ddkyjia', {
-                params: {
-                    name: this.props.zhanghao,
-                    value: aa[0].num + 1,
-                    id: aa[0].uid
-                }
-            })
+        if (this.props.zhanghao) {
+            let aa = this.props.arr.filter(item => { return item.uid == data.uid });
+            // console.log(aa);
+            if (aa.length) {
+                let { data } = await axios.get('http://localhost:1911/login/ddkyjia', {
+                    params: {
+                        name: this.props.zhanghao,
+                        value: aa[0].num + 1,
+                        id: aa[0].uid
+                    }
+                })
 
-            if (data) {
-                message.success('添加成功');
-            }
-            let action = {
-                type: "xiugai",
-                payload: {
-                    id: aa[0].uid,
-                    value: aa[0].num + 1
+                if (data) {
+                    message.success('添加成功');
                 }
-            }
-            this.props.dispatch(action);
-        } else {
-            console.log(1)
-            let aa = await axios.get('http://localhost:1911/login/ddkyzhen', {
-                params: {
-                    usename: this.props.zhanghao,
-                    imgurl: data.xurl,
-                    uid: data.uid,
-                    name: data.xname,
-                    shop: data.xtitle,
-                    price: data.xjiage,
-                    setmeal: data.xxiangliang,
-                    liang: data.xliang,
-                    num: 1
-                }
-            })
-
-            if (aa) {
-                message.success('添加成功');
-                console.log(2);
                 let action = {
-                    type: "tianjia",
+                    type: "xiugai",
                     payload: {
+                        id: aa[0].uid,
+                        value: aa[0].num + 1
+                    }
+                }
+                this.props.dispatch(action);
+            } else {
+                console.log(1)
+                let aa = await axios.get('http://localhost:1911/login/ddkyzhen', {
+                    params: {
                         usename: this.props.zhanghao,
                         imgurl: data.xurl,
                         uid: data.uid,
@@ -111,10 +94,31 @@ class Dp extends Component {
                         liang: data.xliang,
                         num: 1
                     }
-                }
-                this.props.dispatch(action);
-            }
+                })
 
+                if (aa) {
+                    message.success('添加成功');
+                    console.log(2);
+                    let action = {
+                        type: "tianjia",
+                        payload: {
+                            usename: this.props.zhanghao,
+                            imgurl: data.xurl,
+                            uid: data.uid,
+                            name: data.xname,
+                            shop: data.xtitle,
+                            price: data.xjiage,
+                            setmeal: data.xxiangliang,
+                            liang: data.xliang,
+                            num: 1
+                        }
+                    }
+                    this.props.dispatch(action);
+                }
+
+            }
+        } else {
+            message.error('请先登录');
         }
     }
     render() {

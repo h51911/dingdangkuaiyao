@@ -1,7 +1,8 @@
 let initState = {
     xqysja: {},
     zhanghao: 'mxl123',
-    arr: []
+    arr: [],
+    stop: ''
 }
 const reducer = function (state = initState, { type, payload }) {
     if (type == 'xqysj') {
@@ -47,6 +48,12 @@ const reducer = function (state = initState, { type, payload }) {
         return {
             ...state,
             arr: []
+        }
+    }
+    if (type == "cun") {
+        return {
+            ...state,
+            stop: payload.stop
         }
     }
     else {
