@@ -1,6 +1,6 @@
 let initState = {
     xqysja: {},
-    zhanghao: 'mxl123',
+    zhanghao: '',
     arr: [],
     stop: ''
 }
